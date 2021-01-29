@@ -208,6 +208,212 @@
       
         
   <h2 class="title">
+    <a href="/2019/11/21/sui1/">
+      随笔
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="https://pazulin.github.io" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>井蛙</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-11-21</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/live/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>live</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/live/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>live</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/10/31/armbian-mac/">
+      905盒子装armbian后基本设置
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="https://pazulin.github.io" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>井蛙</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-10-31</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/linux/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>#设置mac</p>
+<p>盒子mac 没有,<br>直接编辑 /etc/network/interfaces 文件，在 iface eth0 inet static 后面添加一行：<br>pre-up ifconfig eth0 hw ether xx:xx:xx:xx:xx:xx（要改成的MAC）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">iface eth0 inet static</span><br><span class="line">pre-up ifconfig eth0 hw ether xx:xx:xx:xx:xx:xx（要改成的MAC）</span><br><span class="line">address 192.168.1.10</span><br><span class="line">netmask 255.255.255.0</span><br><span class="line">gateway 192.168.1.1</span><br></pre></td></tr></table></figure>
+
+<p>对于wifi 也是一样</p>
+<p>另外一种说法 uboot 中设置,不过我试过不行</p>
+<p>/boot/uEnv.ini  </p>
+<p>dtb_name=/dtb/meson-gxl-s905d-phicomm-n1.dtb<br>bootargs=root=LABEL=ROOT_EMMC rootflags=data=writeback rw console=ttyAML0,115200n8 console=tty0 no_cons…………………..<br>ethaddr=42:b8:79:09:d8:ed</p>
+<p>#设置时区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;Asia/Shanghai&quot; &gt; /etc/timezone &amp;&amp; ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
+
+<p>#设置语言环境<br>/etc/environment</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ARCH=arm64</span><br><span class="line">LC_ALL=&quot;en_US.UTF-8&quot;</span><br><span class="line">LANG=&quot;en_US.UTF-8&quot;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>linux</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
     <a href="/2019/10/22/add-rtl8189fs-driver-armbian/">
       add rtl8189fs driver for armbian
     </a>
@@ -1031,210 +1237,6 @@
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/08/13/wr842n-v4-openwrt/">
-      wr842n_v4.4 烧入 openwrt
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    <a href="https://pazulin.github.io" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>井蛙</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-08-13</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/openwrt/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>openwrt</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>wr842n 缩水很严重, 把ram拆下来改成64MB , flash 改成25Q128 16m 版本, 当然,芯片要用编程序写入breed, 然后再焊上去, 结果写入固件后不断重启, 查来查去 ,原来没有烧入art 文件</p>
-<p>art 是无线部分的特性参数的文件,网上做breed的大神有, 我是下载来的,我提供一份把,<a href="/images/art.zip">这里</a> </p>
-<p><a href="https://www.openwrtdl.com/wordpress/arqca-art%e5%a4%a7%e5%90%88%e9%9b%86%e4%b8%8b%e8%bd%bd" target="_blank" rel="noopener">原链接在这里</a></p>
-<p>在breed 中更新qca9533的art文件后,正常启动.</p>
-<p>固件?<br>固件就是opwnwrt 官网固件,我写入是18.XX版本, 我是用来做MTQQ server 的, 所以其他功能没有测试.</p>
-
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/openwrt/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>openwrt</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/08/07/ssmtp-conf/">
-      ssmtp 配置
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    <a href="https://pazulin.github.io" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>井蛙</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-08-07</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/openwrt/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>openwrt</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>ssmtp 是一个简单发邮件工具,</p>
-<p>配置/etc/ssmtp/ssmtp.conf</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line"># /etc/ssmtp.conf -- a config file for sSMTP sendmail.</span><br><span class="line">#</span><br><span class="line"></span><br><span class="line"># The person who gets all mail for userids &lt; 1000</span><br><span class="line"># Make this empty to disable rewriting.</span><br><span class="line">root=robot123456@kaudioxxyyzz.net</span><br><span class="line"></span><br><span class="line"># The place where the mail goes. The actual machine name is required</span><br><span class="line"># no MX records are consulted. Commonly mailhosts are named mail.domain.com</span><br><span class="line"># The example will fit if you are in domain.com and your mailhub is so named.</span><br><span class="line">mailhub=smtp.kaudioxxyyzz.net</span><br><span class="line"></span><br><span class="line"># Example for SMTP port number 2525</span><br><span class="line"># mailhub=mail.your.domain:2525</span><br><span class="line"># Example for SMTP port number 25 (Standard/RFC)</span><br><span class="line"># mailhub=mail.your.domain</span><br><span class="line"># Example for SSL encrypted connection</span><br><span class="line"># mailhub=mail.your.domain:465</span><br><span class="line"></span><br><span class="line"># Where will the mail seem to come from?</span><br><span class="line">rewriteDomain=kaudioxxyyzz.net</span><br><span class="line"></span><br><span class="line"># The full hostname</span><br><span class="line">hostname=kaudioxxyyzz.net</span><br><span class="line"></span><br><span class="line"># Set this to never rewrite the &quot;From:&quot; line (unless not given) and to</span><br><span class="line"># use that address in the &quot;from line&quot; of the envelope.</span><br><span class="line">FromLineOverride=YES</span><br><span class="line"></span><br><span class="line"># Use SSL/TLS to send secure messages to server.</span><br><span class="line">#UseTLS=YES</span><br><span class="line"></span><br><span class="line"># Use SSL/TLS certificate to authenticate against smtp host.</span><br><span class="line">#UseTLSCert=YES</span><br><span class="line"></span><br><span class="line"># Use this RSA certificate.</span><br><span class="line">#TLSCert=/etc/ssl/certs/ssmtp.pem</span><br><span class="line"></span><br><span class="line"># Get enhanced (*really* enhanced) debugging information in the logs</span><br><span class="line"># If you want to have debugging of the config file parsing, move this option</span><br><span class="line"># to the top of the config file and uncomment</span><br><span class="line">#Debug=YES</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">AuthUser=robot1234576@kaudioxxyyzz.net</span><br><span class="line">AuthPass=pw</span><br></pre></td></tr></table></figure>
-
-<p>/etc/ssmtp/revaliases</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># sSMTP aliases</span><br><span class="line">#</span><br><span class="line"># Format:       local_account:outgoing_address:mailhub</span><br><span class="line">#</span><br><span class="line"># Example: root:your_login@your.domain:mailhub.your.domain[:port]</span><br><span class="line"># where [:port] is an optional port number that defaults to 25.</span><br><span class="line"></span><br><span class="line">root:robot1111111@kaudiofdsafasd.net:smtp.kaudioafsdfasdf.net</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/openwrt/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>openwrt</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1431,9 +1433,9 @@
         
           <li><a class="flat-box" title="/categories/openwrt/" href="/categories/openwrt/"><div class='name'>openwrt</div><div class='badge'>(7)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/中医/" href="/categories/中医/"><div class='name'>中医</div><div class='badge'>(2)</div></a></li>
+          <li><a class="flat-box" title="/categories/中医/" href="/categories/中医/"><div class='name'>中医</div><div class='badge'>(3)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/寓言/" href="/categories/寓言/"><div class='name'>寓言</div><div class='badge'>(2)</div></a></li>
+          <li><a class="flat-box" title="/categories/寓言/" href="/categories/寓言/"><div class='name'>寓言</div><div class='badge'>(3)</div></a></li>
         
           <li><a class="flat-box" title="/categories/我的作品/" href="/categories/我的作品/"><div class='name'>我的作品</div><div class='badge'>(1)</div></a></li>
         
@@ -1466,7 +1468,7 @@
 </header>
 
     <div class='content material'>
-      <a href="/tags/AI-armbian/" style="font-size: 14px; color: #999">AI armbian</a> <a href="/tags/OrangePi/" style="font-size: 14px; color: #999">OrangePi</a> <a href="/tags/PC/" style="font-size: 14px; color: #999">PC</a> <a href="/tags/linux/" style="font-size: 24px; color: #555">linux</a> <a href="/tags/live/" style="font-size: 14px; color: #999">live</a> <a href="/tags/nodemcu/" style="font-size: 14px; color: #999">nodemcu</a> <a href="/tags/openwrt/" style="font-size: 24px; color: #555">openwrt</a> <a href="/tags/中医/" style="font-size: 14px; color: #999">中医</a> <a href="/tags/中医-经方/" style="font-size: 14px; color: #999">中医 经方</a> <a href="/tags/寓言/" style="font-size: 19px; color: #777">寓言</a>
+      <a href="/tags/AI-armbian/" style="font-size: 14px; color: #999">AI armbian</a> <a href="/tags/OrangePi/" style="font-size: 14px; color: #999">OrangePi</a> <a href="/tags/PC/" style="font-size: 14px; color: #999">PC</a> <a href="/tags/linux/" style="font-size: 24px; color: #555">linux</a> <a href="/tags/live/" style="font-size: 14px; color: #999">live</a> <a href="/tags/nodemcu/" style="font-size: 14px; color: #999">nodemcu</a> <a href="/tags/openwrt/" style="font-size: 24px; color: #555">openwrt</a> <a href="/tags/中医/" style="font-size: 17.33px; color: #828282">中医</a> <a href="/tags/中医-经方/" style="font-size: 14px; color: #999">中医 经方</a> <a href="/tags/寓言/" style="font-size: 20.67px; color: #6c6c6c">寓言</a>
     </div>
   </section>
 

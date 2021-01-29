@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>矿渣猫盘安装aria2 + ariaNg + nginx | 逍遥游</title>
+  <title>跟施老师学经方心得 | 逍遥游</title>
   
   
 
@@ -259,8 +259,8 @@
         
   
     <h1 class="title">
-      <a href="/2019/09/29/aria2-ariaNg/">
-        矿渣猫盘安装aria2 + ariaNg + nginx
+      <a href="/2021/01/25/xinde/">
+        跟施老师学经方心得
       </a>
     </h1>
   
@@ -289,7 +289,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-09-29</p>
+    <p>2021-01-25</p>
   </a>
 </div>
 
@@ -299,9 +299,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/linux/' rel="nofollow">
+    <a href='/categories/中医/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>linux</p>
+      <p>中医</p>
     </a>
   </div>
 
@@ -341,16 +341,16 @@
 
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
-          <p>利用猫盘做一个下载机,其实也没什么东西要下载,迅雷都可以,干嘛还要做这样一台机呢? 折腾罢了. aria2下载速度远远不如迅雷的,但是还要折腾这个,还是有一点比迅雷好的地方的,就是可以利用晚上时间下载.</p>
-<p>猫盘刷debin系统, 不表.</p>
-<p><a href="https://github.com/hanwckf/build-catdrive/" target="_blank" rel="noopener">fireware在这里</a></p>
-<p>然后apt instll aria2 nginx等组件.</p>
-<p>airaNg 的要手动下载,apt 安装不了.</p>
-<p>重点说配置把,aria2 最重要就是配置文件,这个网上有, 主要事要做一个service加入系统服务中<br>在/etc/systemd/system 下面做一个aira2.service文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Aria2 Service</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">ExecStart=aria2c --enable-rpc=true --input-file=/root/aria2/aria2.session --conf-path=/root/aria2/aria2.conf</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
-
-<p>必须放入/etc/systemd/system中,不要放入user文件夹中 ,会导致退出登录后无法连接到airaNg的问题.</p>
-<p>ariaNg 下载后/var/www/html/下面 ,不要放到其他地方,如果放到其他地方,nginx 要配置,当然如果你会配nginx,当我没说. 我比较懒,就不配了,自己放入,然后就可以访问.</p>
+          <h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><p>我少年时崇尚科学,不肖那些没有根据,玄之又玄的东西. 读书工作都是理工类, 后来偶然看到南怀瑾老师的书,为我打开一扇大门, 发现中华文化之美. 曾经想学道学庄子学佛. 中医是中华文化一部分,自然也想了解一点. 然后因为一些中医养生节目,更加激起自己兴趣, 所以2012年就自学起伤寒论. 不过各种原因, 一年后放弃.</p>
+<p>2年前,自己出现一次严重发烧,病拖了很久,一直没好,看了几个中医,有些情况好一些,有些却更糟糕. 于是索性就重新翻看以前的中医资料,找到倪老师,进而找到施老师. 于是就报名学. </p>
+<h1 id="未见其人-先闻其声"><a href="#未见其人-先闻其声" class="headerlink" title="未见其人,先闻其声"></a>未见其人,先闻其声</h1><p>课程开始都是网课,只听见老师声音, 但是从诊断学的头一两节课起,就觉得与我之前看那些中医视频完全不同感受. 第一次听见有人是这么解释阴阳的, 而且,老师是理工科出身, 对于我们也是学理工的人来说,真的是太对胃口了. 以前最烦那些五行生克, 觉得这些东西都是有需要的时候就挑相生的这个路径来解释 ,有时候呢,就挑相克路径来解释,都没有一个通用规则. 也许这样也有明医,但是这样对人要求太高了,要非常聪明,悟性极高之人才能学好,否则,可能就是庸医. 但是中医要传承下去, 要医病救人,总不能要求每个都是聪明绝顶的人吧? 老师的中医课程打破这些, 很少讲那些玄之又玄东西, 全都是可以看到,可以问到,可以摸到的实际表现,这让普通人,只要用功都可以学.可操作性非常强.</p>
+<p>老师经常开玩笑,说睡不着的时候拿录音档来听,当催眠.但是我没有这种感觉,课程内容密度很大,大脑都是要开足功率来听,怎么可以当催眠? 有时候老师一股劲就在哪里说,我都没反应过来,就说完了, 经常在这种时候,老师会说:”讲得太快啊,再说一次”. 内容密度很大,经常要听一下,暂停一下然后记下来. </p>
+<p>学药证的时候,要尝药,每一个药品都药尝,体会其中的气,味. 这必然都是老师当时学习时候切身体会,觉得这样学才比较好.确实也是, 尝过药后,的确比较容易记住药的特性, 记住一个药如果单单文字性的东西是很难记住的,有了气味,看见实物, 五官调动起来,比较容易记住这个药.</p>
+<p>经过诊断学,药证学,再看汤证学, 发现了一个看伤寒论汤方的一个全新的理解视角,以前自学的时候,看&lt;刘渡舟伤寒论讲稿&gt;,看刘老医师,胡希恕解释汤方,总不能理解. 现在经过老师前面课程,再看汤证学,顿时有一感觉: 原来汤方是这样的. 结合起诊断学,药证学,理解汤方就顺理成章, 也容易记下来,也容易理解其中的加减变化原则. 对比起之前自学时候状态,真有豁然一亮之感.</p>
+<h1 id="感恩"><a href="#感恩" class="headerlink" title="感恩"></a>感恩</h1><p>国庆线下课, 第一次见到老师. 不知道为何, 比起讲药讲诊断, 更喜欢听老师在哪里乱扯,讲故事,讲东讲西,讲修行.而且听老师讲这些时候,老是唤起我以前读南怀瑾老师书时候的一些感受. 几次想跑上去问问老师入定后是什么体会,怎么看虚云大和尚那些神奇的遭遇.</p>
+<p>老师说把自己会都毫无保留教给我们,这点我完全相信. 就看有时候我们问问题水平能去到哪里,问题水平高,越能激发老师讲的更细更深. 最近群里面得一些练习, 让我们有难得实践机会,只有拿出来用才能真学会,就像学一门编程语言,一边用一边学 ,这样是最快学会方法. 纸上谈兵是永远学不会得. 同学不断问,老师不断回答,真的由衷感谢老师不厌其烦的耐心回答.</p>
+<p>老师老说素食,少吃鱼肉奶蛋.听得我耳朵都起茧,听了一两次,我就改过来素食,这不很简单吗?老师怎么老说这个,对我来说青菜豆腐都可以吃得有滋有味, 原来很多人难做到,跟诊的时候一位病人诉苦,说天天素食,没有吃过一口好的. 我心里想:糟糕,病肯定好不了. 身心不一,这相佐的情绪不好, 就算病给治好,过不了多久就再犯.这就是老师口中的业力. 素食这个问题,就算自己的亲人也不会一定听你的劝谏. 对于自己病,气滞痰阻的体质,如果没有跟老师学中医,没有老师叮咛,继续原来习惯,再过几年,不知会变得怎样不可收拾.</p>
+<p>感谢老师,感谢两位这么好助教,感恩这么一班志趣相投同学,报名跟老师学中医, 是我近年最正确的决定, 比起适当时候买房,比起赚钱升职加薪,更让我欣喜,也许是孤独的小船黑夜中看见灯塔之故.</p>
 
         </div>
         
@@ -362,10 +362,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-30T09:41:12+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-01-29T22:13:20+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>最后更新于 Sep 30, 2019</p>
+    <p>最后更新于 Jan 29, 2021</p>
   </a>
 </div>
 
@@ -374,7 +374,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>linux</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/中医/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>中医</p></a></div>
 
 
         
@@ -387,7 +387,7 @@
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://pazulin.github.io/2019/09/29/aria2-ariaNg/&title=矿渣猫盘安装aria2 + ariaNg + nginx | 逍遥游&summary="
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://pazulin.github.io/2021/01/25/xinde/&title=跟施老师学经方心得 | 逍遥游&summary="
           
           >
           
@@ -399,7 +399,7 @@
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://pazulin.github.io/2019/09/29/aria2-ariaNg/&title=矿渣猫盘安装aria2 + ariaNg + nginx | 逍遥游&summary="
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://pazulin.github.io/2021/01/25/xinde/&title=跟施老师学经方心得 | 逍遥游&summary="
           
           >
           
@@ -411,7 +411,7 @@
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://pazulin.github.io/2019/09/29/aria2-ariaNg/&title=矿渣猫盘安装aria2 + ariaNg + nginx | 逍遥游&summary="
+          href="http://service.weibo.com/share/share.php?url=https://pazulin.github.io/2021/01/25/xinde/&title=跟施老师学经方心得 | 逍遥游&summary="
           
           >
           
@@ -435,40 +435,21 @@
         
             <div class="prev-next">
                 
-                    <section class="prev">
-                        <span class="art-item-left">
-                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
-                            <h4>
-                                <a href="/2019/10/08/auto-update-trackerlist/" rel="prev" title="自动更新aria2的tracker list">
-                                  
-                                      自动更新aria2的tracker list
-                                  
-                                </a>
-                            </h4>
-                            
-                                
-                                <h6 class="tags">
-                                    <a class="tag" href="/tags/linux/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>linux</a>
-                                </h6>
-                            
-                        </span>
-                    </section>
-                
                 
                     <section class="next">
                         <span class="art-item-right" aria-hidden="true">
                             <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/2019/09/06/curl-ftps/" rel="prev" title="用curl透过ftps 协议上传文件(vsftpd,ssh)">
+                                <a href="/2020/12/24/shenji1/" rel="prev" title="神迹">
                                     
-                                        用curl透过ftps 协议上传文件(vsftpd,ssh)
+                                        神迹
                                     
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/openwrt/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>openwrt</a>
+                                    <a class="tag" href="/tags/寓言/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>寓言</a>
                                 </h6>
                             
                         </span>
@@ -499,7 +480,7 @@
 
   <script>
     window.subData = {
-      title: '矿渣猫盘安装aria2 + ariaNg + nginx',
+      title: '跟施老师学经方心得',
       tools: true
     }
   </script>
@@ -563,6 +544,20 @@
           
           
             
+  <section class='widget toc-wrapper'>
+    
+<header class='material'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class='content material'>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#缘起"><span class="toc-text">缘起</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#未见其人-先闻其声"><span class="toc-text">未见其人,先闻其声</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#感恩"><span class="toc-text">感恩</span></a></li></ol>
+    </div>
+  </section>
+
 
           
         

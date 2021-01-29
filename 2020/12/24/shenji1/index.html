@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>矿渣猫盘安装aria2 + ariaNg + nginx | 逍遥游</title>
+  <title>神迹 | 逍遥游</title>
   
   
 
@@ -259,8 +259,8 @@
         
   
     <h1 class="title">
-      <a href="/2019/09/29/aria2-ariaNg/">
-        矿渣猫盘安装aria2 + ariaNg + nginx
+      <a href="/2020/12/24/shenji1/">
+        神迹
       </a>
     </h1>
   
@@ -289,7 +289,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-09-29</p>
+    <p>2020-12-24</p>
   </a>
 </div>
 
@@ -299,9 +299,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/linux/' rel="nofollow">
+    <a href='/categories/寓言/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>linux</p>
+      <p>寓言</p>
     </a>
   </div>
 
@@ -341,16 +341,20 @@
 
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
-          <p>利用猫盘做一个下载机,其实也没什么东西要下载,迅雷都可以,干嘛还要做这样一台机呢? 折腾罢了. aria2下载速度远远不如迅雷的,但是还要折腾这个,还是有一点比迅雷好的地方的,就是可以利用晚上时间下载.</p>
-<p>猫盘刷debin系统, 不表.</p>
-<p><a href="https://github.com/hanwckf/build-catdrive/" target="_blank" rel="noopener">fireware在这里</a></p>
-<p>然后apt instll aria2 nginx等组件.</p>
-<p>airaNg 的要手动下载,apt 安装不了.</p>
-<p>重点说配置把,aria2 最重要就是配置文件,这个网上有, 主要事要做一个service加入系统服务中<br>在/etc/systemd/system 下面做一个aira2.service文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Aria2 Service</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">ExecStart=aria2c --enable-rpc=true --input-file=/root/aria2/aria2.session --conf-path=/root/aria2/aria2.conf</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
-
-<p>必须放入/etc/systemd/system中,不要放入user文件夹中 ,会导致退出登录后无法连接到airaNg的问题.</p>
-<p>ariaNg 下载后/var/www/html/下面 ,不要放到其他地方,如果放到其他地方,nginx 要配置,当然如果你会配nginx,当我没说. 我比较懒,就不配了,自己放入,然后就可以访问.</p>
+          <p>神迹<br>东势王朝倒塌后第三天，救难人员从扭曲变形的钢筋水泥中，救出钟永祥先生，被困数十个小时，重见天日的那一刻，他不仅神情镇定，身体状况仍十分良好;更令人惊讶的是：他并没有灰头土脸，甚至还可以称得上是相当“干净”!钟先生被救出后，他告诉大家一段遭遇，这件事传出后，众人莫不啧啧称奇。</p>
+<p>故事得从钟先生一位远亲来访谈起。钟先生是广东人，他的亲戚远道来台探亲，身为主人的，当然热情款待。几天后，远亲整装离台，临行前，除了感谢之外，还特别告诉钟先生：“你们家的客房很清凉，睡起来好舒服，有时你也可以睡睡看。”</p>
+<p>钟先生平常都睡在主卧室，那天钟太太到台中看儿子，他想起远亲的那番话，于是当晚便改睡在客房。</p>
+<p>睡眠正甜时，突然大地一阵撼动。钟先生家住六楼，他感觉家里似乎向下坠落，真乎?梦乎?房屋四壁好像被什么东西挤压，就快碎裂般。</p>
+<p>可是刹那间，他看见好几个全身散发金色、而且光头的人，用手撑住他头顶上那片即将倾倒的墙，同时，又有几个人压在他身上，感觉好像是在护著他的身体一般。</p>
+<p>他心想：“三更半夜，为什么有这么多人在我房间?”猛然回神，发现四处漆黑，他问：“你们是什么人?”用手挥动，却发现杳无人迹。</p>
+<p>这时，他摸摸身旁，吓了一跳，墙壁倾斜，他正处在中间的小空隙中。由于平日笃信佛法，钟先生马上想到：“刚刚一定是菩萨来救我!”于是端坐起来，就在墙与地之间的小缝中专心念佛。</p>
+<p>三天过去，如果一般人陷于瓦砾中，必定觉得度日如年，身心逼恼。但是钟先生说：“我只有一心念佛、念观世音菩萨的名号，全然不管身在何处，反倒觉得自己很快就被救出来了。”</p>
+<p>被救出后，钟先生才知道，东势王朝五楼以下陷落坍平，六楼变成一楼，而他家除了客房一角仍有空隙外，其他房间早已挤成一团。</p>
+<p>同样是东势灾民的刘春珠师姐听说钟先生的事迹后，她特地去拜访。之前，她就风闻钟先生为人乐善好施，是一位医术高明的中医师，也专精针灸，平常若有贫穷患者求诊，他就分文不收。</p>
+<p>刘师姐到钟先生的诊所，说明来意，钟先生知道她也是佛弟子，就告诉她更多奇迹。钟先生的诊所是一栋四楼建筑，四楼是佛堂，供奉三尊佛像，有释迦世尊及观世音菩萨，都是瓷器所造。地震后，佛像震落地上，不可思议，竟完好如初。</p>
+<p>一、二、三楼都有书柜，奇特的事情发生了。钟先生行医多年，略有积蓄，在两岸开放探亲后，他重返广东故居，听人说某古寺倾倒荒废，他便独力资助寺院重建，此寺名为“绵洋寺”(位于福建省)。寺院落成时，他拍了许多照片当做纪念，这些照片就分别贴在书柜的玻璃上。</p>
+<p>钟先生告诉刘师姐：“所有书柜材质一模一样，地震时所有的书柜倒了一地，但是，只要是贴著绵洋寺照片的柜子，完全没事，其他的柜子，玻璃碎落一地。”</p>
+<p>这次大地震，钟永祥先生见证了佛菩萨的神迹，他说：感谢佛菩萨保佑，今后要更努力行善!</p>
 
         </div>
         
@@ -362,10 +366,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-30T09:41:12+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-12-24T16:49:02+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>最后更新于 Sep 30, 2019</p>
+    <p>最后更新于 Dec 24, 2020</p>
   </a>
 </div>
 
@@ -374,7 +378,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>linux</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/寓言/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>寓言</p></a></div>
 
 
         
@@ -387,7 +391,7 @@
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://pazulin.github.io/2019/09/29/aria2-ariaNg/&title=矿渣猫盘安装aria2 + ariaNg + nginx | 逍遥游&summary="
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://pazulin.github.io/2020/12/24/shenji1/&title=神迹 | 逍遥游&summary="
           
           >
           
@@ -399,7 +403,7 @@
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://pazulin.github.io/2019/09/29/aria2-ariaNg/&title=矿渣猫盘安装aria2 + ariaNg + nginx | 逍遥游&summary="
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://pazulin.github.io/2020/12/24/shenji1/&title=神迹 | 逍遥游&summary="
           
           >
           
@@ -411,7 +415,7 @@
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://pazulin.github.io/2019/09/29/aria2-ariaNg/&title=矿渣猫盘安装aria2 + ariaNg + nginx | 逍遥游&summary="
+          href="http://service.weibo.com/share/share.php?url=https://pazulin.github.io/2020/12/24/shenji1/&title=神迹 | 逍遥游&summary="
           
           >
           
@@ -439,16 +443,16 @@
                         <span class="art-item-left">
                             <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
                             <h4>
-                                <a href="/2019/10/08/auto-update-trackerlist/" rel="prev" title="自动更新aria2的tracker list">
+                                <a href="/2021/01/25/xinde/" rel="prev" title="跟施老师学经方心得">
                                   
-                                      自动更新aria2的tracker list
+                                      跟施老师学经方心得
                                   
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/linux/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>linux</a>
+                                    <a class="tag" href="/tags/中医/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>中医</a>
                                 </h6>
                             
                         </span>
@@ -459,16 +463,16 @@
                         <span class="art-item-right" aria-hidden="true">
                             <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/2019/09/06/curl-ftps/" rel="prev" title="用curl透过ftps 协议上传文件(vsftpd,ssh)">
+                                <a href="/2020/12/10/story-shy/" rel="prev" title="寓言">
                                     
-                                        用curl透过ftps 协议上传文件(vsftpd,ssh)
+                                        寓言
                                     
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/openwrt/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>openwrt</a>
+                                    <a class="tag" href="/tags/寓言/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>寓言</a>
                                 </h6>
                             
                         </span>
@@ -499,7 +503,7 @@
 
   <script>
     window.subData = {
-      title: '矿渣猫盘安装aria2 + ariaNg + nginx',
+      title: '神迹',
       tools: true
     }
   </script>

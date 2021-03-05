@@ -161,7 +161,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="Search" />
+						<input type="text" class="input u-search-input" placeholder="搜索" />
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -266,9 +266,125 @@
         
           
         
+          
+        
       
     
     
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2021/02/20/frp/">
+      frp 内网穿越
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="https://pazulin.github.io" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>井蛙</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2021-02-20</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/linux/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>不废话,直接上流程</p>
+<h1 id="服务区端"><a href="#服务区端" class="headerlink" title="服务区端"></a>服务区端</h1><p>mt7621的cpu的一个路由器 ,跑mipsle的程序,</p>
+<h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><p>这个客户端时一个wr703n的路由器, 用来做mqtt server , 跑mips程序,其中把web控制页面透过frp共享出去. 端口为80 .</p>
+<p>frpc.ini</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = xxx.xxx.com</span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># decide if exit program when first login failed, otherwise continuous relogin to frps</span><br><span class="line"># default is true</span><br><span class="line">login_fail_exit = true</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># auth token</span><br><span class="line">token = xxxxxxxxxxxxx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#[ssh]</span><br><span class="line">#type = tcp</span><br><span class="line">#local_ip = 127.0.0.1</span><br><span class="line">#local_port = 22</span><br><span class="line">#remote_port = 6000</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[tai_web]</span><br><span class="line">type = http</span><br><span class="line">local_port = 80</span><br><span class="line">privilege_mode = true</span><br><span class="line">custom_domains = abc.abc.com</span><br></pre></td></tr></table></figure>
+
+<p>custom_domains = abc.abc.com  这个域名必须域名解析器加上,让其解析到 服务器ip,或者服务器的域名.</p>
+<p>下面自启动进程 </p>
+<p>必须先安装 nohup</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install coreutils-nohup</span><br></pre></td></tr></table></figure>
+
+<p>增加下面这个文件</p>
+<p>/etc/init.d/frpc</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh /etc/rc.common</span><br><span class="line"># Copyright (C) 2006-2011 OpenWrt.org</span><br><span class="line"></span><br><span class="line">START=99</span><br><span class="line"></span><br><span class="line">start() &#123;</span><br><span class="line">        sleep 60; nohup  /root/frp_0.35.1_linux_mips/frpc -c  /root/frp_0.35.1_linux_mips/frpc.ini &gt;/tmp/nohup.out 2&gt;&amp;1 &amp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">stop() &#123;</span><br><span class="line">        kill -9 `ps | grep &apos;/root/frp_0.35.1_linux_mips/frpc&apos; | grep -v &apos;grep&apos; | awk &apos;&#123;print $1&#125;&apos;`</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在/etc/rc.d/ 增加一个链接文件</p>
+<p>ln -s /etc/init.d/frpc /etc/rc.d/S99frpc</p>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>linux</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class='post-wrapper'>
@@ -1151,7 +1267,7 @@
   <section class='widget category'>
     
 <header class='material'>
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
   
     <a class="rightBtn"
     
@@ -1171,7 +1287,7 @@
         
           <li><a class="flat-box" title="/categories/PC/" href="/categories/PC/"><div class='name'>PC</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(7)</div></a></li>
+          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(8)</div></a></li>
         
           <li><a class="flat-box" title="/categories/live/" href="/categories/live/"><div class='name'>live</div><div class='badge'>(1)</div></a></li>
         
@@ -1179,7 +1295,7 @@
         
           <li><a class="flat-box" title="/categories/openwrt/" href="/categories/openwrt/"><div class='name'>openwrt</div><div class='badge'>(7)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/中医/" href="/categories/中医/"><div class='name'>中医</div><div class='badge'>(3)</div></a></li>
+          <li><a class="flat-box" title="/categories/中医/" href="/categories/中医/"><div class='name'>中医</div><div class='badge'>(4)</div></a></li>
         
           <li><a class="flat-box" title="/categories/寓言/" href="/categories/寓言/"><div class='name'>寓言</div><div class='badge'>(3)</div></a></li>
         
@@ -1200,7 +1316,7 @@
   <section class='widget tagcloud'>
     
 <header class='material'>
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
   
     <a class="rightBtn"
     
@@ -1214,7 +1330,7 @@
 </header>
 
     <div class='content material'>
-      <a href="/tags/AI-armbian/" style="font-size: 14px; color: #999">AI armbian</a> <a href="/tags/OrangePi/" style="font-size: 14px; color: #999">OrangePi</a> <a href="/tags/PC/" style="font-size: 14px; color: #999">PC</a> <a href="/tags/linux/" style="font-size: 24px; color: #555">linux</a> <a href="/tags/live/" style="font-size: 14px; color: #999">live</a> <a href="/tags/nodemcu/" style="font-size: 14px; color: #999">nodemcu</a> <a href="/tags/openwrt/" style="font-size: 24px; color: #555">openwrt</a> <a href="/tags/中医/" style="font-size: 17.33px; color: #828282">中医</a> <a href="/tags/中医-经方/" style="font-size: 14px; color: #999">中医 经方</a> <a href="/tags/寓言/" style="font-size: 20.67px; color: #6c6c6c">寓言</a>
+      <a href="/tags/AI-armbian/" style="font-size: 14px; color: #999">AI armbian</a> <a href="/tags/OrangePi/" style="font-size: 14px; color: #999">OrangePi</a> <a href="/tags/PC/" style="font-size: 14px; color: #999">PC</a> <a href="/tags/linux/" style="font-size: 24px; color: #555">linux</a> <a href="/tags/live/" style="font-size: 14px; color: #999">live</a> <a href="/tags/nodemcu/" style="font-size: 14px; color: #999">nodemcu</a> <a href="/tags/openwrt/" style="font-size: 20.67px; color: #6c6c6c">openwrt</a> <a href="/tags/中医/" style="font-size: 17.33px; color: #828282">中医</a> <a href="/tags/中医-经方/" style="font-size: 14px; color: #999">中医 经方</a> <a href="/tags/寓言/" style="font-size: 17.33px; color: #828282">寓言</a>
     </div>
   </section>
 
@@ -1271,19 +1387,19 @@
     </div>
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
-    as theme
+    作为主题
     
-      , 
-      total visits
+      ，
+      总访问量为
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      times
+      次
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -1389,15 +1505,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {

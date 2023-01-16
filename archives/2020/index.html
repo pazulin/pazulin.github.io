@@ -161,7 +161,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="搜索" />
+						<input type="text" class="input u-search-input" placeholder="搜尋" />
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -813,11 +813,21 @@
 <p>准备<br>‘’’<br>sudo apt-get install python-opencv<br>sudo apt-get install python-pip<br>sudo pip install –upgrade git+<a href="https://github.com/Maratyszcza/PeachPy" target="_blank" rel="noopener">https://github.com/Maratyszcza/PeachPy</a><br>sudo pip install –upgrade git+<a href="https://github.com/Maratyszcza/confu" target="_blank" rel="noopener">https://github.com/Maratyszcza/confu</a><br>‘’’</p>
 <p>这个过程会出错，说少这个少那个， 看见少的就安装，用apt install xxxx<br>比如<br>少 No module named ‘setuptools’<br>少wheel</p>
 <p>必须安装下面这个,到底有什么用,不知道,会不会和下面这个重复,不清楚,反正我之前没下载, 后面这个反复编译都出错<br>‘’’<br>sudo apt-get install ninja-build<br>‘’’</p>
-<p>安装编译器,这个过程会下载很多依赖库,可能会出错,出错重新来,<br>‘’’<br>git clone <a href="https://github.com/ninja-build/ninja.git" target="_blank" rel="noopener">https://github.com/ninja-build/ninja.git</a><br>cd ninja<br>git checkout release<br>./configure.py –bootstrap<br>export NINJA_PATH=$PWD<br>‘’’</p>
-<p>下载编译nnpack<br>‘’’<br>git clone <a href="https://github.com/shizukachan/NNPACK" target="_blank" rel="noopener">https://github.com/shizukachan/NNPACK</a><br>cd NNPACK<br>confu setup<br>python ./configure.py –backend auto<br>$NINJA_PATH/ninja</p>
-<p>sudo cp -a lib/* /usr/lib/<br>sudo cp include/nnpack.h /usr/include/<br>sudo cp deps/pthreadpool/include/pthreadpool.h /usr/include/</p>
-<p>‘’’</p>
-<p>下载编译darknet<br>‘’’<br>git clone -b yolov3 <a href="https://github.com/zxzhaixiang/darknet-nnpack" target="_blank" rel="noopener">https://github.com/zxzhaixiang/darknet-nnpack</a><br>cd darknet-nnpack<br>git checkout yolov3<br>make<br>‘’’</p>
+<p>安装编译器,这个过程会下载很多依赖库,可能会出错,出错重新来,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ninja-build/ninja.git</span><br><span class="line">cd ninja</span><br><span class="line">git checkout release</span><br><span class="line">./configure.py --bootstrap</span><br><span class="line">export NINJA_PATH=$PWD</span><br></pre></td></tr></table></figure>
+
+<p>下载编译nnpack</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/shizukachan/NNPACK</span><br><span class="line">cd NNPACK</span><br><span class="line">confu setup</span><br><span class="line">python ./configure.py --backend auto</span><br><span class="line">$NINJA_PATH/ninja</span><br><span class="line"></span><br><span class="line">sudo cp -a lib/* /usr/lib/</span><br><span class="line">sudo cp include/nnpack.h /usr/include/</span><br><span class="line">sudo cp deps/pthreadpool/include/pthreadpool.h /usr/include/</span><br></pre></td></tr></table></figure>
+
+<p>上面经常出错,可以利用cmake来做</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake -G Ninja ..</span><br><span class="line">ninja</span><br></pre></td></tr></table></figure>
+
+<p>然后手动把编译出来的库复制到系统目录  /usr/lib/ , 还有下面的h文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cp include/nnpack.h /usr/include/</span><br><span class="line">sudo cp deps/pthreadpool/include/pthreadpool.h /usr/include/</span><br></pre></td></tr></table></figure>
+
+<p>下载编译darknet</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone -b yolov3 https://github.com/zxzhaixiang/darknet-nnpack</span><br><span class="line">cd darknet-nnpack</span><br><span class="line">git checkout yolov3</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+
 <p>测试 ,运行<br>python rpi_video.py</p>
 <p>不过我得是usb接口摄像头, 要修过,用图片测试是ok得.</p>
 
@@ -1293,7 +1303,7 @@
   <section class='widget category'>
     
 <header class='material'>
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分類</div>
   
     <a class="rightBtn"
     
@@ -1313,7 +1323,7 @@
         
           <li><a class="flat-box" title="/categories/PC/" href="/categories/PC/"><div class='name'>PC</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(8)</div></a></li>
+          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(9)</div></a></li>
         
           <li><a class="flat-box" title="/categories/live/" href="/categories/live/"><div class='name'>live</div><div class='badge'>(1)</div></a></li>
         
@@ -1342,7 +1352,7 @@
   <section class='widget tagcloud'>
     
 <header class='material'>
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;熱門標籤</div>
   
     <a class="rightBtn"
     
@@ -1413,15 +1423,15 @@
     </div>
   
   <br>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
 </div>
   <div>
     本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
-    作为主题
+    作為主題
     
       ，
-      总访问量为
+      總訪問量為
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
       次
     
@@ -1539,15 +1549,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "复制成功";
-  let COPY_FAILURE = "复制失败";
+  let COPY_SUCCESS = "複製成功";
+  let COPY_FAILURE = "複製失敗";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>複製</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {

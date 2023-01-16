@@ -4,11 +4,36 @@
   
     
     <entry>
-      <title>中医试药体会</title>
+      <title>S905盒子安装armbian linux</title>
+      <link href="/2021/03/10/s905Lbox/"/>
+      <url>/2021/03/10/s905Lbox/</url>
+      
+        <content type="html"><![CDATA[<p>过程记下来怕忘记了</p><ol start="0"><li>打开amlogic 烧写软件, 打开Android的镜像.目前比较可行 晶晨S905L-R3300L-V21C-双直播当贝桌面-集成更多遥控适配-解决无线和直播卡顿问题-20180524版.img 这个文件, 打开烧录</li><li>靠近网口的usb (ba860盒子) 口连接到pc</li><li>短接C125 电容 (ba860盒子)</li><li>插入电源,不要松开C125 直到烧写完.</li><li>ttl口接到PC,115200, 启动android. </li><li>插入我之前烧好了一个不记得什么系统的tf卡.</li><li>启动后,输入reboot update.</li><li>搞定后,可以换成armbian的系统卡.</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>中医试药体会1</title>
       <link href="/2021/03/05/try-med/"/>
       <url>/2021/03/05/try-med/</url>
       
-        <content type="html"><![CDATA[<h2 id="下针行间-太冲"><a href="#下针行间-太冲" class="headerlink" title="下针行间,太冲"></a>下针行间,太冲</h2><p>左右脚下针这两个穴位, 左脚下位置对一点, 太冲行针试试,第二脚趾有反应,下针位置片了一点,但是附近都又酸胀感,  右脚下不好,没什么感觉.<br>下完后本来右协有点不舒服, 下完后确实好一点. 第二天, 左甲状腺附近的压痛感也好一些. 右甲状腺附近好一点,但是还是右压痛.</p><h2 id="四逆散"><a href="#四逆散" class="headerlink" title="四逆散"></a>四逆散</h2><p>最近天气冷,手脚都冷, 感觉有点冰, 可能各种问题的原因把.  但是想单独试试四逆散, 柴胡白芍枳实甘草各6g.吃完,今天下午,手终于不想之前那么冷.<br>脚穿袜子,鞋 ,可能不是很明显. 但没有脚很暖的感觉. 手确实是暖.</p>]]></content>
+        <content type="html"><![CDATA[<h2 id="下针行间-太冲"><a href="#下针行间-太冲" class="headerlink" title="下针行间,太冲"></a>下针行间,太冲</h2><p>左右脚下针这两个穴位, 左脚下位置对一点, 太冲行针试试,第二脚趾有反应,下针位置片了一点,但是附近都又酸胀感,  右脚下不好,没什么感觉.<br>下完后本来右协有点不舒服, 下完后确实好一点. 第二天, 左甲状腺附近的压痛感也好一些. 右甲状腺附近好一点,但是还是右压痛.</p><h2 id="四逆散"><a href="#四逆散" class="headerlink" title="四逆散"></a>四逆散</h2><p>最近天气冷,手脚都冷, 感觉有点冰, 可能各种问题的原因把.  但是想单独试试四逆散, 柴胡白芍枳实甘草各6g.吃完,今天下午,手终于不想之前那么冷.<br>脚穿袜子,鞋 ,可能不是很明显. 但没有脚很暖的感觉. 手确实是暖.<br>另外,右边章门压痛很明显, 今天竟然不怎么压痛.</p><h1 id="关于针灸的对侧治疗体会"><a href="#关于针灸的对侧治疗体会" class="headerlink" title="关于针灸的对侧治疗体会"></a>关于针灸的对侧治疗体会</h1><ul><li>之前右协不舒服,针行间, 只针行间,左脚就比右脚有感觉.</li><li>自己左胸不舒服,发现一直以来右脚的公孙位置就一直会痒,会长湿疹之类的,自己肺总有湿痰.</li></ul>]]></content>
       
       
       <categories>
@@ -183,7 +208,7 @@
       <link href="/2020/08/19/yolo-test1/"/>
       <url>/2020/08/19/yolo-test1/</url>
       
-        <content type="html"><![CDATA[<p>这个板子是8核A53的amlogic 的S912 . 不过我看过对比，比起A72的新的树莓4，还是差很多，平均1个A72=4个A53. 树莓4有4个A72.</p><p>树莓4才有0.1T的计算力。 这样算，这个才有0.05T个算力。</p><p>过程写一下。</p><p>准备<br>‘’’<br>sudo apt-get install python-opencv<br>sudo apt-get install python-pip<br>sudo pip install –upgrade git+<a href="https://github.com/Maratyszcza/PeachPy" target="_blank" rel="noopener">https://github.com/Maratyszcza/PeachPy</a><br>sudo pip install –upgrade git+<a href="https://github.com/Maratyszcza/confu" target="_blank" rel="noopener">https://github.com/Maratyszcza/confu</a><br>‘’’</p><p>这个过程会出错，说少这个少那个， 看见少的就安装，用apt install xxxx<br>比如<br>少 No module named ‘setuptools’<br>少wheel</p><p>必须安装下面这个,到底有什么用,不知道,会不会和下面这个重复,不清楚,反正我之前没下载, 后面这个反复编译都出错<br>‘’’<br>sudo apt-get install ninja-build<br>‘’’</p><p>安装编译器,这个过程会下载很多依赖库,可能会出错,出错重新来,<br>‘’’<br>git clone <a href="https://github.com/ninja-build/ninja.git" target="_blank" rel="noopener">https://github.com/ninja-build/ninja.git</a><br>cd ninja<br>git checkout release<br>./configure.py –bootstrap<br>export NINJA_PATH=$PWD<br>‘’’</p><p>下载编译nnpack<br>‘’’<br>git clone <a href="https://github.com/shizukachan/NNPACK" target="_blank" rel="noopener">https://github.com/shizukachan/NNPACK</a><br>cd NNPACK<br>confu setup<br>python ./configure.py –backend auto<br>$NINJA_PATH/ninja</p><p>sudo cp -a lib/* /usr/lib/<br>sudo cp include/nnpack.h /usr/include/<br>sudo cp deps/pthreadpool/include/pthreadpool.h /usr/include/</p><p>‘’’</p><p>下载编译darknet<br>‘’’<br>git clone -b yolov3 <a href="https://github.com/zxzhaixiang/darknet-nnpack" target="_blank" rel="noopener">https://github.com/zxzhaixiang/darknet-nnpack</a><br>cd darknet-nnpack<br>git checkout yolov3<br>make<br>‘’’</p><p>测试 ,运行<br>python rpi_video.py</p><p>不过我得是usb接口摄像头, 要修过,用图片测试是ok得.</p>]]></content>
+        <content type="html"><![CDATA[<p>这个板子是8核A53的amlogic 的S912 . 不过我看过对比，比起A72的新的树莓4，还是差很多，平均1个A72=4个A53. 树莓4有4个A72.</p><p>树莓4才有0.1T的计算力。 这样算，这个才有0.05T个算力。</p><p>过程写一下。</p><p>准备<br>‘’’<br>sudo apt-get install python-opencv<br>sudo apt-get install python-pip<br>sudo pip install –upgrade git+<a href="https://github.com/Maratyszcza/PeachPy" target="_blank" rel="noopener">https://github.com/Maratyszcza/PeachPy</a><br>sudo pip install –upgrade git+<a href="https://github.com/Maratyszcza/confu" target="_blank" rel="noopener">https://github.com/Maratyszcza/confu</a><br>‘’’</p><p>这个过程会出错，说少这个少那个， 看见少的就安装，用apt install xxxx<br>比如<br>少 No module named ‘setuptools’<br>少wheel</p><p>必须安装下面这个,到底有什么用,不知道,会不会和下面这个重复,不清楚,反正我之前没下载, 后面这个反复编译都出错<br>‘’’<br>sudo apt-get install ninja-build<br>‘’’</p><p>安装编译器,这个过程会下载很多依赖库,可能会出错,出错重新来,</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ninja-build/ninja.git</span><br><span class="line">cd ninja</span><br><span class="line">git checkout release</span><br><span class="line">./configure.py --bootstrap</span><br><span class="line">export NINJA_PATH=$PWD</span><br></pre></td></tr></table></figure><p>下载编译nnpack</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/shizukachan/NNPACK</span><br><span class="line">cd NNPACK</span><br><span class="line">confu setup</span><br><span class="line">python ./configure.py --backend auto</span><br><span class="line">$NINJA_PATH/ninja</span><br><span class="line"></span><br><span class="line">sudo cp -a lib/* /usr/lib/</span><br><span class="line">sudo cp include/nnpack.h /usr/include/</span><br><span class="line">sudo cp deps/pthreadpool/include/pthreadpool.h /usr/include/</span><br></pre></td></tr></table></figure><p>上面经常出错,可以利用cmake来做</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake -G Ninja ..</span><br><span class="line">ninja</span><br></pre></td></tr></table></figure><p>然后手动把编译出来的库复制到系统目录  /usr/lib/ , 还有下面的h文件</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cp include/nnpack.h /usr/include/</span><br><span class="line">sudo cp deps/pthreadpool/include/pthreadpool.h /usr/include/</span><br></pre></td></tr></table></figure><p>下载编译darknet</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone -b yolov3 https://github.com/zxzhaixiang/darknet-nnpack</span><br><span class="line">cd darknet-nnpack</span><br><span class="line">git checkout yolov3</span><br><span class="line">make</span><br></pre></td></tr></table></figure><p>测试 ,运行<br>python rpi_video.py</p><p>不过我得是usb接口摄像头, 要修过,用图片测试是ok得.</p>]]></content>
       
       
       <categories>

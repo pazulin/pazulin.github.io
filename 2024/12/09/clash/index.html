@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>用curl透过ftps 协议上传文件(vsftpd,ssh) | 逍遥游</title>
+  <title>Clash配置和docker使用备忘 | 逍遥游</title>
   
   
 
@@ -261,8 +261,8 @@
         
   
     <h1 class="title">
-      <a href="/2019/09/06/curl-ftps/">
-        用curl透过ftps 协议上传文件(vsftpd,ssh)
+      <a href="/2024/12/09/clash/">
+        Clash配置和docker使用备忘
       </a>
     </h1>
   
@@ -291,7 +291,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-09-06</p>
+    <p>2024-12-09</p>
   </a>
 </div>
 
@@ -301,9 +301,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/openwrt/' rel="nofollow">
+    <a href='/categories/linux/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>openwrt</p>
+      <p>linux</p>
     </a>
   </div>
 
@@ -343,17 +343,26 @@
 
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
-          <p>curl 不单单是下载工具,还可以上传,支持众多协议.<br>我有一个摄像头接在ar9331 上面,跑mjpeg-stream,主要是拍照,监控淋花的情况,每天拍一张都两张照片,为什么不用现成的摄像头呢? 其实也可以,不过了,一来做来玩玩,另外一个可以把多年照片存起来,这个还是有点意思.</p>
-<p>不说废话</p>
-<p>在公司内网开内一个ftp服务器, 要端口映射到外网,这里面有点技巧,<br>ftp现在都是加密的,要不然就太不安全. 必须ssh.</p>
-<p>内网ftp服务器vsftpd的设置</p>
-<p>&#x2F;etc&#x2F;vsftpd.conf 关键地方我用中文标记</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br></pre></td><td class="code"><pre><span class="line"># Example config file /etc/vsftpd.conf</span><br><span class="line">#</span><br><span class="line"># The default compiled in settings are fairly paranoid. This sample file</span><br><span class="line"># loosens things up a bit, to make the ftp daemon more usable.</span><br><span class="line"># Please see vsftpd.conf.5 for all compiled in defaults.</span><br><span class="line">#</span><br><span class="line"># READ THIS: This example file is NOT an exhaustive list of vsftpd options.</span><br><span class="line"># Please read the vsftpd.conf.5 manual page to get a full idea of vsftpd&#x27;s</span><br><span class="line"># capabilities.</span><br><span class="line">#</span><br><span class="line">#</span><br><span class="line"># Run standalone?  vsftpd can run either from an inetd or as a standalone</span><br><span class="line"># daemon started from an initscript.</span><br><span class="line">listen=Yes  关闭ipv6 后必须打开这个</span><br><span class="line">#</span><br><span class="line"># This directive enables listening on IPv6 sockets. By default, listening</span><br><span class="line"># on the IPv6 &quot;any&quot; address (::) will accept connections from both IPv6</span><br><span class="line"># and IPv4 clients. It is not necessary to listen on *both* IPv4 and IPv6</span><br><span class="line"># sockets. If you want that (perhaps because you want to listen on specific</span><br><span class="line"># addresses) then you must run two copies of vsftpd with two configuration</span><br><span class="line"># files.</span><br><span class="line">listen_ipv6=No 必须关闭ipv6 ,否则最后传不到实际外网的ip地址</span><br><span class="line">#</span><br><span class="line"># Allow anonymous FTP? (Disabled by default).</span><br><span class="line">anonymous_enable=NO</span><br><span class="line">#</span><br><span class="line"># Uncomment this to allow local users to log in.</span><br><span class="line">local_enable=YES</span><br><span class="line">#</span><br><span class="line"># Uncomment this to enable any form of FTP write command.</span><br><span class="line">write_enable=YES</span><br><span class="line">#</span><br><span class="line"># Default umask for local users is 077. You may wish to change this to 022,</span><br><span class="line"># if your users expect that (022 is used by most other ftpd&#x27;s)</span><br><span class="line">local_umask=022</span><br><span class="line">#</span><br><span class="line"># Uncomment this to allow the anonymous FTP user to upload files. This only</span><br><span class="line"># has an effect if the above global write enable is activated. Also, you will</span><br><span class="line"># obviously need to create a directory writable by the FTP user.</span><br><span class="line">#anon_upload_enable=YES</span><br><span class="line">#</span><br><span class="line"># Uncomment this if you want the anonymous FTP user to be able to create</span><br><span class="line"># new directories.</span><br><span class="line">#anon_mkdir_write_enable=YES</span><br><span class="line">#</span><br><span class="line"># Activate directory messages - messages given to remote users when they</span><br><span class="line"># go into a certain directory.</span><br><span class="line">dirmessage_enable=YES</span><br><span class="line">#</span><br><span class="line"># If enabled, vsftpd will display directory listings with the time</span><br><span class="line"># in  your  local  time  zone.  The default is to display GMT. The</span><br><span class="line"># times returned by the MDTM FTP command are also affected by this</span><br><span class="line"># option.</span><br><span class="line">use_localtime=YES</span><br><span class="line">#</span><br><span class="line"># Activate logging of uploads/downloads.</span><br><span class="line">xferlog_enable=YES</span><br><span class="line">#</span><br><span class="line"># Make sure PORT transfer connections originate from port 20 (ftp-data).</span><br><span class="line">connect_from_port_20=YES</span><br><span class="line">#</span><br><span class="line"># If you want, you can arrange for uploaded anonymous files to be owned by</span><br><span class="line"># a different user. Note! Using &quot;root&quot; for uploaded files is not</span><br><span class="line"># recommended!</span><br><span class="line">#chown_uploads=YES</span><br><span class="line">#chown_username=whoever</span><br><span class="line">#</span><br><span class="line"># You may override where the log file goes if you like. The default is shown</span><br><span class="line"># below.</span><br><span class="line">#xferlog_file=/var/log/vsftpd.log</span><br><span class="line">#</span><br><span class="line"># If you want, you can have your log file in standard ftpd xferlog format.</span><br><span class="line"># Note that the default log file location is /var/log/xferlog in this case.</span><br><span class="line">#xferlog_std_format=YES</span><br><span class="line">#</span><br><span class="line"># You may change the default value for timing out an idle session.</span><br><span class="line">#idle_session_timeout=600</span><br><span class="line">#</span><br><span class="line"># You may change the default value for timing out a data connection.</span><br><span class="line">#data_connection_timeout=120</span><br><span class="line">#</span><br><span class="line"># It is recommended that you define on your system a unique user which the</span><br><span class="line"># ftp server can use as a totally isolated and unprivileged user.</span><br><span class="line">#nopriv_user=ftpsecure</span><br><span class="line">#</span><br><span class="line"># Enable this and the server will recognise asynchronous ABOR requests. Not</span><br><span class="line"># recommended for security (the code is non-trivial). Not enabling it,</span><br><span class="line"># however, may confuse older FTP clients.</span><br><span class="line">#async_abor_enable=YES</span><br><span class="line">#</span><br><span class="line"># By default the server will pretend to allow ASCII mode but in fact ignore</span><br><span class="line"># the request. Turn on the below options to have the server actually do ASCII</span><br><span class="line"># mangling on files when in ASCII mode.</span><br><span class="line"># Beware that on some FTP servers, ASCII support allows a denial of service</span><br><span class="line"># attack (DoS) via the command &quot;SIZE /big/file&quot; in ASCII mode. vsftpd</span><br><span class="line"># predicted this attack and has always been safe, reporting the size of the</span><br><span class="line"># raw file.</span><br><span class="line"># ASCII mangling is a horrible feature of the protocol.</span><br><span class="line">#ascii_upload_enable=YES</span><br><span class="line">#ascii_download_enable=YES</span><br><span class="line">#</span><br><span class="line"># You may fully customise the login banner string:</span><br><span class="line">#ftpd_banner=Welcome to blah FTP service.</span><br><span class="line">#</span><br><span class="line"># You may specify a file of disallowed anonymous e-mail addresses. Apparently</span><br><span class="line"># useful for combatting certain DoS attacks.</span><br><span class="line">#deny_email_enable=YES</span><br><span class="line"># (default follows)</span><br><span class="line">#banned_email_file=/etc/vsftpd.banned_emails</span><br><span class="line">#</span><br><span class="line"># You may restrict local users to their home directories.  See the FAQ for</span><br><span class="line"># the possible risks in this before using chroot_local_user or</span><br><span class="line"># chroot_list_enable below.</span><br><span class="line">#chroot_local_user=YES</span><br><span class="line">#</span><br><span class="line"># You may specify an explicit list of local users to chroot() to their home</span><br><span class="line"># directory. If chroot_local_user is YES, then this list becomes a list of</span><br><span class="line"># users to NOT chroot().</span><br><span class="line"># (Warning! chroot&#x27;ing can be very dangerous. If using chroot, make sure that</span><br><span class="line"># the user does not have write access to the top level directory within the</span><br><span class="line"># chroot)</span><br><span class="line">chroot_local_user=YES</span><br><span class="line">#chroot_list_enable=YES</span><br><span class="line"># (default follows)</span><br><span class="line">chroot_list_file=/etc/vsftpd.chroot_list</span><br><span class="line">#</span><br><span class="line"># You may activate the &quot;-R&quot; option to the builtin ls. This is disabled by</span><br><span class="line"># default to avoid remote users being able to cause excessive I/O on large</span><br><span class="line"># sites. However, some broken FTP clients such as &quot;ncftp&quot; and &quot;mirror&quot; assume</span><br><span class="line"># the presence of the &quot;-R&quot; option, so there is a strong case for enabling it.</span><br><span class="line">#ls_recurse_enable=YES</span><br><span class="line">#</span><br><span class="line"># Customization</span><br><span class="line">#</span><br><span class="line"># Some of vsftpd&#x27;s settings don&#x27;t fit the filesystem layout by</span><br><span class="line"># default.</span><br><span class="line">#</span><br><span class="line"># This option should be the name of a directory which is empty.  Also, the</span><br><span class="line"># directory should not be writable by the ftp user. This directory is used</span><br><span class="line"># as a secure chroot() jail at times vsftpd does not require filesystem</span><br><span class="line"># access.</span><br><span class="line">secure_chroot_dir=/var/run/vsftpd/empty</span><br><span class="line">#</span><br><span class="line"># This string is the name of the PAM service vsftpd will use.</span><br><span class="line">pam_service_name=vsftpd</span><br><span class="line">#</span><br><span class="line"># This option specifies the location of the RSA certificate to use for SSL</span><br><span class="line"># encrypted connections.</span><br><span class="line">rsa_cert_file=/etc/ssl/certs/xxxxx.pem</span><br><span class="line">rsa_private_key_file=/etc/ssl/private/xxxx.key</span><br><span class="line">ssl_enable=Yes</span><br><span class="line">force_local_data_ssl=Yes</span><br><span class="line">force_local_logins_ssl=Yes</span><br><span class="line">ssl_tlsv1=Yes</span><br><span class="line"></span><br><span class="line">#</span><br><span class="line"># Uncomment this to indicate that vsftpd use a utf8 filesystem.</span><br><span class="line">utf8_filesystem=YES</span><br><span class="line"></span><br><span class="line">userlist_enable=Yes</span><br><span class="line">userlist_deny=No</span><br><span class="line">userlist_file=/etc/vsftpd.user_list</span><br><span class="line">allow_writeable_chroot=Yes</span><br><span class="line"></span><br><span class="line">pasv_enable=Yes</span><br><span class="line">listen_port=??? //看需要</span><br><span class="line">pasv_max_port=???? //看需要</span><br><span class="line">pasv_min_port=????  //看需要</span><br><span class="line">pasv_addr_resolve=Yes // 必须用这个 , 否则下面要填实际ip,但是动态ip怎么可能有ip , 这是pasv 模式下,回传给客户段的ip地址,</span><br><span class="line">pasv_address=abc.com // 可以填域名,必须有上面那个yes</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+          <h1 id="linux下面设置环境变量"><a href="#linux下面设置环境变量" class="headerlink" title="linux下面设置环境变量"></a>linux下面设置环境变量</h1><p>包括在windows下面的bash等环境</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>然后把端口映射一下.</p>
-<p>然后利用curl 上传,curl 是支持加密ftp的.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -k --ftp-ssl --ftp-ssl-reqd --ftp-create-dirs -T xxx.jpg -u user:password ftp://abcd.com:1000/</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>-k 是忽略证书检查, 是ftp:&#x2F;&#x2F; 不是ftps.</p>
+<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p>上网桥接<br>docker network inspect bridge</p>
+<p>ip addr show docker0<br>你会看到一个像 172.17.0.1 的地址，这个就是 Docker 容器与主机之间的网桥地址。</p>
+<p>步骤 2：运行 Docker 容器并配置代理<br>你需要将容器的网络流量通过 Clash 代理，可以通过以下几种方式实现：</p>
+<p>方法 1：在容器运行时设置环境变量<br>运行容器时，通过环境变量设置代理：</p>
+<p>bash<br>复制代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export HTTP_PROXY=http://172.17.0.1:7890</span><br><span class="line">export HTTPS_PROXY=http://172.17.0.1:7890</span><br><span class="line">export NO_PROXY=localhost,127.0.0.1</span><br></pre></td></tr></table></figure>
+<p>验证网络连接：</p>
+<p>测试代理是否生效，例如：</p>
+<p>bash<br>复制代码<br>curl <a href="https://www.google.com/">https://www.google.com</a></p>
+<ol>
+<li>使用 Docker Volumes（卷）<br>Docker 卷允许你将容器的数据保存在主机的文件系统上。即使容器被删除，数据仍然保留在卷中。</li>
+</ol>
+<p>创建和使用卷：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --rm -v /path/on/host:/path/in/container node:18 bash</span><br></pre></td></tr></table></figure>
+<p>-v &#x2F;path&#x2F;on&#x2F;host:&#x2F;path&#x2F;in&#x2F;container：这将主机的 &#x2F;path&#x2F;on&#x2F;host 目录与容器的 &#x2F;path&#x2F;in&#x2F;container 目录进行挂载。所有写入 &#x2F;path&#x2F;in&#x2F;container 的数据都会存储在主机的 &#x2F;path&#x2F;on&#x2F;host 目录中。<br>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --rm -v ~/mydata:/data node:18 bash</span><br></pre></td></tr></table></figure>
+<p>在容器中对 &#x2F;data 目录进行的所有更改都将保存在主机的 ~&#x2F;mydata 目录中，即使容器停止或删除，数据也不会丢失。</p>
 
         </div>
         
@@ -365,10 +374,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-09-07T10:47:55+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2024-12-09T18:36:59+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>last updated at Sep 7, 2019</p>
+    <p>last updated at Dec 9, 2024</p>
   </a>
 </div>
 
@@ -377,7 +386,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/openwrt/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>openwrt</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>linux</p></a></div>
 
 
         
@@ -390,7 +399,7 @@
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://pazulin.github.io/2019/09/06/curl-ftps/&title=用curl透过ftps 协议上传文件(vsftpd,ssh) | 逍遥游&summary="
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://pazulin.github.io/2024/12/09/clash/&title=Clash配置和docker使用备忘 | 逍遥游&summary="
           
           >
           
@@ -402,7 +411,7 @@
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://pazulin.github.io/2019/09/06/curl-ftps/&title=用curl透过ftps 协议上传文件(vsftpd,ssh) | 逍遥游&summary="
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://pazulin.github.io/2024/12/09/clash/&title=Clash配置和docker使用备忘 | 逍遥游&summary="
           
           >
           
@@ -414,7 +423,7 @@
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://pazulin.github.io/2019/09/06/curl-ftps/&title=用curl透过ftps 协议上传文件(vsftpd,ssh) | 逍遥游&summary="
+          href="http://service.weibo.com/share/share.php?url=https://pazulin.github.io/2024/12/09/clash/&title=Clash配置和docker使用备忘 | 逍遥游&summary="
           
           >
           
@@ -438,40 +447,21 @@
         
             <div class="prev-next">
                 
-                    <section class="prev">
-                        <span class="art-item-left">
-                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/2019/09/29/aria2-ariaNg/" rel="prev" title="矿渣猫盘安装aria2 + ariaNg + nginx">
-                                  
-                                      矿渣猫盘安装aria2 + ariaNg + nginx
-                                  
+                                <a href="/2021/03/10/s905Lbox/" rel="prev" title="S905盒子安装armbian linux">
+                                    
+                                        S905盒子安装armbian linux
+                                    
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
                                     <a class="tag" href="/tags/linux/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>linux</a>
-                                </h6>
-                            
-                        </span>
-                    </section>
-                
-                
-                    <section class="next">
-                        <span class="art-item-right" aria-hidden="true">
-                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
-                            <h4>
-                                <a href="/2019/09/06/hex-edit/" rel="prev" title="Hex Editor 的几个事项">
-                                    
-                                        Hex Editor 的几个事项
-                                    
-                                </a>
-                            </h4>
-                            
-                                
-                                <h6 class="tags">
-                                    <a class="tag" href="/tags/PC/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>PC</a>
                                 </h6>
                             
                         </span>
@@ -502,7 +492,7 @@
 
   <script>
     window.subData = {
-      title: '用curl透过ftps 协议上传文件(vsftpd,ssh)',
+      title: 'Clash配置和docker使用备忘',
       tools: true
     }
   </script>
@@ -566,6 +556,20 @@
           
           
             
+  <section class='widget toc-wrapper'>
+    
+<header class='material'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;TOC</div>
+  
+    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class='content material'>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#linux%E4%B8%8B%E9%9D%A2%E8%AE%BE%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">linux下面设置环境变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker"><span class="toc-text">Docker</span></a></li></ol>
+    </div>
+  </section>
+
 
           
         

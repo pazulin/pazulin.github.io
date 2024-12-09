@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Clash配置和docker使用备忘</title>
+      <link href="/2024/12/09/clash/"/>
+      <url>/2024/12/09/clash/</url>
+      
+        <content type="html"><![CDATA[<h1 id="linux下面设置环境变量"><a href="#linux下面设置环境变量" class="headerlink" title="linux下面设置环境变量"></a>linux下面设置环境变量</h1><p>包括在windows下面的bash等环境</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890</span><br><span class="line"></span><br></pre></td></tr></table></figure><h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p>上网桥接<br>docker network inspect bridge</p><p>ip addr show docker0<br>你会看到一个像 172.17.0.1 的地址，这个就是 Docker 容器与主机之间的网桥地址。</p><p>步骤 2：运行 Docker 容器并配置代理<br>你需要将容器的网络流量通过 Clash 代理，可以通过以下几种方式实现：</p><p>方法 1：在容器运行时设置环境变量<br>运行容器时，通过环境变量设置代理：</p><p>bash<br>复制代码</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export HTTP_PROXY=http://172.17.0.1:7890</span><br><span class="line">export HTTPS_PROXY=http://172.17.0.1:7890</span><br><span class="line">export NO_PROXY=localhost,127.0.0.1</span><br></pre></td></tr></table></figure><p>验证网络连接：</p><p>测试代理是否生效，例如：</p><p>bash<br>复制代码<br>curl <a href="https://www.google.com/">https://www.google.com</a></p><ol><li>使用 Docker Volumes（卷）<br>Docker 卷允许你将容器的数据保存在主机的文件系统上。即使容器被删除，数据仍然保留在卷中。</li></ol><p>创建和使用卷：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --rm -v /path/on/host:/path/in/container node:18 bash</span><br></pre></td></tr></table></figure><p>-v &#x2F;path&#x2F;on&#x2F;host:&#x2F;path&#x2F;in&#x2F;container：这将主机的 &#x2F;path&#x2F;on&#x2F;host 目录与容器的 &#x2F;path&#x2F;in&#x2F;container 目录进行挂载。所有写入 &#x2F;path&#x2F;in&#x2F;container 的数据都会存储在主机的 &#x2F;path&#x2F;on&#x2F;host 目录中。<br>示例：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --rm -v ~/mydata:/data node:18 bash</span><br></pre></td></tr></table></figure><p>在容器中对 &#x2F;data 目录进行的所有更改都将保存在主机的 ~&#x2F;mydata 目录中，即使容器停止或删除，数据也不会丢失。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>S905盒子安装armbian linux</title>
       <link href="/2021/03/10/s905Lbox/"/>
       <url>/2021/03/10/s905Lbox/</url>

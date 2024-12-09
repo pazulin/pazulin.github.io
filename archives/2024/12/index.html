@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Archives: 2020/8 | 逍遥游</title>
+  <title>Archives: 2024/12 | 逍遥游</title>
   
   
 
@@ -254,8 +254,6 @@
         
           
         
-          
-        
       
     
     
@@ -273,8 +271,8 @@
       
         
   <h2 class="title">
-    <a href="/2020/08/19/yolo-test1/">
-      armbian跑AI网络-Yolo做识别的尝试
+    <a href="/2024/12/09/clash/">
+      Clash配置和docker使用备忘
     </a>
   </h2>
 
@@ -302,128 +300,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-08-19</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/AI/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>AI</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>这个板子是8核A53的amlogic 的S912 . 不过我看过对比，比起A72的新的树莓4，还是差很多，平均1个A72&#x3D;4个A53. 树莓4有4个A72.</p>
-<p>树莓4才有0.1T的计算力。 这样算，这个才有0.05T个算力。</p>
-<p>过程写一下。</p>
-<p>准备<br>‘’’<br>sudo apt-get install python-opencv<br>sudo apt-get install python-pip<br>sudo pip install –upgrade git+<a href="https://github.com/Maratyszcza/PeachPy">https://github.com/Maratyszcza/PeachPy</a><br>sudo pip install –upgrade git+<a href="https://github.com/Maratyszcza/confu">https://github.com/Maratyszcza/confu</a><br>‘’’</p>
-<p>这个过程会出错，说少这个少那个， 看见少的就安装，用apt install xxxx<br>比如<br>少 No module named ‘setuptools’<br>少wheel</p>
-<p>必须安装下面这个,到底有什么用,不知道,会不会和下面这个重复,不清楚,反正我之前没下载, 后面这个反复编译都出错<br>‘’’<br>sudo apt-get install ninja-build<br>‘’’</p>
-<p>安装编译器,这个过程会下载很多依赖库,可能会出错,出错重新来,</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ninja-build/ninja.git</span><br><span class="line">cd ninja</span><br><span class="line">git checkout release</span><br><span class="line">./configure.py --bootstrap</span><br><span class="line">export NINJA_PATH=$PWD</span><br></pre></td></tr></table></figure>
-
-<p>下载编译nnpack</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/shizukachan/NNPACK</span><br><span class="line">cd NNPACK</span><br><span class="line">confu setup</span><br><span class="line">python ./configure.py --backend auto</span><br><span class="line">$NINJA_PATH/ninja</span><br><span class="line"></span><br><span class="line">sudo cp -a lib/* /usr/lib/</span><br><span class="line">sudo cp include/nnpack.h /usr/include/</span><br><span class="line">sudo cp deps/pthreadpool/include/pthreadpool.h /usr/include/</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>上面经常出错,可以利用cmake来做</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake -G Ninja ..</span><br><span class="line">ninja</span><br></pre></td></tr></table></figure>
-<p>然后手动把编译出来的库复制到系统目录  &#x2F;usr&#x2F;lib&#x2F; , 还有下面的h文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cp include/nnpack.h /usr/include/</span><br><span class="line">sudo cp deps/pthreadpool/include/pthreadpool.h /usr/include/</span><br></pre></td></tr></table></figure>
-
-<p>下载编译darknet</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone -b yolov3 https://github.com/zxzhaixiang/darknet-nnpack</span><br><span class="line">cd darknet-nnpack</span><br><span class="line">git checkout yolov3</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
-
-
-
-<p>测试 ,运行<br>python rpi_video.py</p>
-<p>不过我得是usb接口摄像头, 要修过,用图片测试是ok得.</p>
-
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/AI-armbian/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>AI armbian</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2020/08/17/aliyun-port-addr/">
-      armbian 阿里云源地址
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    <a href="https://pazulin.github.io" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>井蛙</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-08-17</p>
+    <p>2024-12-09</p>
   </a>
 </div>
 
@@ -462,8 +339,26 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <p>&#x2F;etc&#x2F;apt&#x2F;source.list</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/ubuntu-ports/ bionic main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu-ports/ bionic-security main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu-ports/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu-ports/ bionic-proposed main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu-ports/ bionic-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu-ports/ bionic main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu-ports/ bionic-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu-ports/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu-ports/ bionic-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu-ports/ bionic-backports main restricted universe multiverse</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      <h1 id="linux下面设置环境变量"><a href="#linux下面设置环境变量" class="headerlink" title="linux下面设置环境变量"></a>linux下面设置环境变量</h1><p>包括在windows下面的bash等环境</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p>上网桥接<br>docker network inspect bridge</p>
+<p>ip addr show docker0<br>你会看到一个像 172.17.0.1 的地址，这个就是 Docker 容器与主机之间的网桥地址。</p>
+<p>步骤 2：运行 Docker 容器并配置代理<br>你需要将容器的网络流量通过 Clash 代理，可以通过以下几种方式实现：</p>
+<p>方法 1：在容器运行时设置环境变量<br>运行容器时，通过环境变量设置代理：</p>
+<p>bash<br>复制代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export HTTP_PROXY=http://172.17.0.1:7890</span><br><span class="line">export HTTPS_PROXY=http://172.17.0.1:7890</span><br><span class="line">export NO_PROXY=localhost,127.0.0.1</span><br></pre></td></tr></table></figure>
+<p>验证网络连接：</p>
+<p>测试代理是否生效，例如：</p>
+<p>bash<br>复制代码<br>curl <a href="https://www.google.com/">https://www.google.com</a></p>
+<ol>
+<li>使用 Docker Volumes（卷）<br>Docker 卷允许你将容器的数据保存在主机的文件系统上。即使容器被删除，数据仍然保留在卷中。</li>
+</ol>
+<p>创建和使用卷：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --rm -v /path/on/host:/path/in/container node:18 bash</span><br></pre></td></tr></table></figure>
+<p>-v &#x2F;path&#x2F;on&#x2F;host:&#x2F;path&#x2F;in&#x2F;container：这将主机的 &#x2F;path&#x2F;on&#x2F;host 目录与容器的 &#x2F;path&#x2F;in&#x2F;container 目录进行挂载。所有写入 &#x2F;path&#x2F;in&#x2F;container 的数据都会存储在主机的 &#x2F;path&#x2F;on&#x2F;host 目录中。<br>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --rm -v ~/mydata:/data node:18 bash</span><br></pre></td></tr></table></figure>
+<p>在容器中对 &#x2F;data 目录进行的所有更改都将保存在主机的 ~&#x2F;mydata 目录中，即使容器停止或删除，数据也不会丢失。</p>
 
       
     </div>

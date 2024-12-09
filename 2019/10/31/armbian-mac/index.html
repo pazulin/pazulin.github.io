@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
   <title>905盒子装armbian后基本设置 | 逍遥游</title>
   
@@ -10,14 +10,14 @@
 
   
 
-  <meta name="HandheldFriendly" content="True">
+  <meta name="HandheldFriendly" content="True" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <!-- meta -->
   
 
   <!-- link -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
   
@@ -27,7 +27,9 @@
   
 
   
-    <link rel="stylesheet" href="/style.css">
+    
+<link rel="stylesheet" href="/style.css">
+
   
 
   <script>
@@ -38,7 +40,7 @@
 
   
   
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body>
   
@@ -161,7 +163,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="Search" />
+						<input type="text" class="input u-search-input" placeholder="搜索" />
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -342,18 +344,18 @@
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
           <p>#设置mac</p>
-<p>盒子mac 没有,<br>直接编辑 /etc/network/interfaces 文件，在 iface eth0 inet static 后面添加一行：<br>pre-up ifconfig eth0 hw ether xx:xx:xx:xx:xx:xx（要改成的MAC）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">iface eth0 inet static</span><br><span class="line">pre-up ifconfig eth0 hw ether xx:xx:xx:xx:xx:xx（要改成的MAC）</span><br><span class="line">address 192.168.1.10</span><br><span class="line">netmask 255.255.255.0</span><br><span class="line">gateway 192.168.1.1</span><br></pre></td></tr></table></figure>
+<p>盒子mac 没有,<br>直接编辑 &#x2F;etc&#x2F;network&#x2F;interfaces 文件，在 iface eth0 inet static 后面添加一行：<br>pre-up ifconfig eth0 hw ether xx:xx:xx:xx:xx:xx（要改成的MAC）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">iface eth0 inet static</span><br><span class="line">pre-up ifconfig eth0 hw ether xx:xx:xx:xx:xx:xx（要改成的MAC）</span><br><span class="line">address 192.168.1.10</span><br><span class="line">netmask 255.255.255.0</span><br><span class="line">gateway 192.168.1.1</span><br></pre></td></tr></table></figure>
 
 <p>对于wifi 也是一样</p>
 <p>另外一种说法 uboot 中设置,不过我试过不行</p>
-<p>/boot/uEnv.ini  </p>
-<p>dtb_name=/dtb/meson-gxl-s905d-phicomm-n1.dtb<br>bootargs=root=LABEL=ROOT_EMMC rootflags=data=writeback rw console=ttyAML0,115200n8 console=tty0 no_cons…………………..<br>ethaddr=42:b8:79:09:d8:ed</p>
+<p>&#x2F;boot&#x2F;uEnv.ini  </p>
+<p>dtb_name&#x3D;&#x2F;dtb&#x2F;meson-gxl-s905d-phicomm-n1.dtb<br>bootargs&#x3D;root&#x3D;LABEL&#x3D;ROOT_EMMC rootflags&#x3D;data&#x3D;writeback rw console&#x3D;ttyAML0,115200n8 console&#x3D;tty0 no_cons…………………..<br>ethaddr&#x3D;42:b8:79:09:d8:ed</p>
 <p>#设置时区</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;Asia/Shanghai&quot; &gt; /etc/timezone &amp;&amp; ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;Asia/Shanghai&quot; &gt; /etc/timezone &amp;&amp; ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
 
-<p>#设置语言环境<br>/etc/environment</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ARCH=arm64</span><br><span class="line">LC_ALL=&quot;en_US.UTF-8&quot;</span><br><span class="line">LANG=&quot;en_US.UTF-8&quot;</span><br></pre></td></tr></table></figure>
+<p>#设置语言环境<br>&#x2F;etc&#x2F;environment</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ARCH=arm64</span><br><span class="line">LC_ALL=&quot;en_US.UTF-8&quot;</span><br><span class="line">LANG=&quot;en_US.UTF-8&quot;</span><br></pre></td></tr></table></figure>
         </div>
         
           
@@ -367,7 +369,7 @@
           <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-31T15:38:01+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>last updated at Oct 31, 2019</p>
+    <p>最后更新于 Oct 31, 2019</p>
   </a>
 </div>
 
@@ -439,7 +441,7 @@
                 
                     <section class="prev">
                         <span class="art-item-left">
-                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
                             <h4>
                                 <a href="/2019/11/21/sui1/" rel="prev" title="随笔">
                                   
@@ -459,7 +461,7 @@
                 
                     <section class="next">
                         <span class="art-item-right" aria-hidden="true">
-                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
                                 <a href="/2019/10/22/add-rtl8189fs-driver-armbian/" rel="prev" title="add rtl8189fs driver for armbian">
                                     
@@ -640,7 +642,7 @@
   <section class='widget category'>
     
 <header class='material'>
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
   
     <a class="rightBtn"
     
@@ -668,11 +670,11 @@
         
           <li><a class="flat-box" title="/categories/openwrt/" href="/categories/openwrt/"><div class='name'>openwrt</div><div class='badge'>(7)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/中医/" href="/categories/中医/"><div class='name'>中医</div><div class='badge'>(4)</div></a></li>
+          <li><a class="flat-box" title="/categories/%E4%B8%AD%E5%8C%BB/" href="/categories/%E4%B8%AD%E5%8C%BB/"><div class='name'>中医</div><div class='badge'>(4)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/寓言/" href="/categories/寓言/"><div class='name'>寓言</div><div class='badge'>(3)</div></a></li>
+          <li><a class="flat-box" title="/categories/%E5%AF%93%E8%A8%80/" href="/categories/%E5%AF%93%E8%A8%80/"><div class='name'>寓言</div><div class='badge'>(3)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/我的作品/" href="/categories/我的作品/"><div class='name'>我的作品</div><div class='badge'>(1)</div></a></li>
+          <li><a class="flat-box" title="/categories/%E6%88%91%E7%9A%84%E4%BD%9C%E5%93%81/" href="/categories/%E6%88%91%E7%9A%84%E4%BD%9C%E5%93%81/"><div class='name'>我的作品</div><div class='badge'>(1)</div></a></li>
         
       </ul>
     </div>
@@ -689,7 +691,7 @@
   <section class='widget tagcloud'>
     
 <header class='material'>
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
   
     <a class="rightBtn"
     
@@ -703,7 +705,7 @@
 </header>
 
     <div class='content material'>
-      <a href="/tags/AI-armbian/" style="font-size: 14px; color: #999">AI armbian</a> <a href="/tags/OrangePi/" style="font-size: 14px; color: #999">OrangePi</a> <a href="/tags/PC/" style="font-size: 14px; color: #999">PC</a> <a href="/tags/linux/" style="font-size: 24px; color: #555">linux</a> <a href="/tags/live/" style="font-size: 14px; color: #999">live</a> <a href="/tags/nodemcu/" style="font-size: 14px; color: #999">nodemcu</a> <a href="/tags/openwrt/" style="font-size: 20.67px; color: #6c6c6c">openwrt</a> <a href="/tags/中医/" style="font-size: 17.33px; color: #828282">中医</a> <a href="/tags/中医-经方/" style="font-size: 14px; color: #999">中医 经方</a> <a href="/tags/寓言/" style="font-size: 17.33px; color: #828282">寓言</a>
+      <a href="/tags/AI-armbian/" style="font-size: 14px; color: #999">AI armbian</a> <a href="/tags/OrangePi/" style="font-size: 14px; color: #999">OrangePi</a> <a href="/tags/PC/" style="font-size: 14px; color: #999">PC</a> <a href="/tags/linux/" style="font-size: 24px; color: #555">linux</a> <a href="/tags/live/" style="font-size: 14px; color: #999">live</a> <a href="/tags/nodemcu/" style="font-size: 14px; color: #999">nodemcu</a> <a href="/tags/openwrt/" style="font-size: 20.67px; color: #6c6c6c">openwrt</a> <a href="/tags/%E4%B8%AD%E5%8C%BB/" style="font-size: 17.33px; color: #828282">中医</a> <a href="/tags/%E4%B8%AD%E5%8C%BB-%E7%BB%8F%E6%96%B9/" style="font-size: 14px; color: #999">中医 经方</a> <a href="/tags/%E5%AF%93%E8%A8%80/" style="font-size: 17.33px; color: #828282">寓言</a>
     </div>
   </section>
 
@@ -760,19 +762,19 @@
     </div>
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
-    as theme
+    作为主题
     
-      , 
-      total visits
+      ，
+      总访问量为
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      times
+      次
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -867,10 +869,14 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/app.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/app.js"></script>
 
 
-  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/search.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/search.js"></script>
+
 
 
 
@@ -878,15 +884,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {

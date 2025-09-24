@@ -210,6 +210,320 @@
       
         
   <h2 class="title">
+    <a href="/2019/10/08/auto-update-trackerlist/">
+      自动更新aria2的tracker list
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="https://pazulin.github.io" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>井蛙</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-10-08</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/linux/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>(原文在这里)[<a href="https://stray.love/itshou-zha/wei-aria2-tian-jia-tracker-fu-wu-qi]">https://stray.love/itshou-zha/wei-aria2-tian-jia-tracker-fu-wu-qi]</a></p>
+<p>把下面脚本放入定时任务,然后通过rpc更新 ,简单方便快捷</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">#more trackers list, see https://github.com/ngosang/trackerslist</span><br><span class="line"></span><br><span class="line">tracker_url=&#x27;https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all.txt&#x27;</span><br><span class="line">path=&#x27;http://10.10.10.5:6800/jsonrpc&#x27;</span><br><span class="line">passwd=&#x27;xxxxxx&#x27;</span><br><span class="line"></span><br><span class="line">tracker=$(echo -n  $(curl -s -L $tracker_url | sed &#x27;N;s/\n//g&#x27;) | tr &#x27; &#x27; &#x27;,&#x27;)</span><br><span class="line">[ -n &quot;$tracker&quot; ] &amp;&amp; curl $path -d &#x27;&#123;&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;aria2.changeGlobalOption&quot;,&quot;id&quot;:&quot;cron&quot;,&quot;params&quot;:[&quot;token:&#x27;$passwd&#x27;&quot;,&#123;&quot;bt-tracker&quot;:&quot;&#x27;$tracker&#x27;&quot;&#125;]&#125;&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>linux</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/09/29/aria2-ariaNg/">
+      矿渣猫盘安装aria2 + ariaNg + nginx
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="https://pazulin.github.io" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>井蛙</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-09-29</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/linux/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>利用猫盘做一个下载机,其实也没什么东西要下载,迅雷都可以,干嘛还要做这样一台机呢? 折腾罢了. aria2下载速度远远不如迅雷的,但是还要折腾这个,还是有一点比迅雷好的地方的,就是可以利用晚上时间下载.</p>
+<p>猫盘刷debin系统, 不表.</p>
+<p><a href="https://github.com/hanwckf/build-catdrive/">fireware在这里</a></p>
+<p>然后apt instll aria2 nginx等组件.</p>
+<p>airaNg 的要手动下载,apt 安装不了.</p>
+<p>重点说配置把,aria2 最重要就是配置文件,这个网上有, 主要事要做一个service加入系统服务中<br>在&#x2F;etc&#x2F;systemd&#x2F;system 下面做一个aira2.service文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Aria2 Service</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">ExecStart=aria2c --enable-rpc=true --input-file=/root/aria2/aria2.session --conf-path=/root/aria2/aria2.conf</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p>必须放入&#x2F;etc&#x2F;systemd&#x2F;system中,不要放入user文件夹中 ,会导致退出登录后无法连接到airaNg的问题.</p>
+<p>ariaNg 下载后&#x2F;var&#x2F;www&#x2F;html&#x2F;下面 ,不要放到其他地方,如果放到其他地方,nginx 要配置,当然如果你会配nginx,当我没说. 我比较懒,就不配了,自己放入,然后就可以访问.</p>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>linux</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/09/06/curl-ftps/">
+      用curl透过ftps 协议上传文件(vsftpd,ssh)
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="https://pazulin.github.io" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>井蛙</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-09-06</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/openwrt/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>openwrt</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>curl 不单单是下载工具,还可以上传,支持众多协议.<br>我有一个摄像头接在ar9331 上面,跑mjpeg-stream,主要是拍照,监控淋花的情况,每天拍一张都两张照片,为什么不用现成的摄像头呢? 其实也可以,不过了,一来做来玩玩,另外一个可以把多年照片存起来,这个还是有点意思.</p>
+<p>不说废话</p>
+<p>在公司内网开内一个ftp服务器, 要端口映射到外网,这里面有点技巧,<br>ftp现在都是加密的,要不然就太不安全. 必须ssh.</p>
+<p>内网ftp服务器vsftpd的设置</p>
+<p>&#x2F;etc&#x2F;vsftpd.conf 关键地方我用中文标记</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br></pre></td><td class="code"><pre><span class="line"># Example config file /etc/vsftpd.conf</span><br><span class="line">#</span><br><span class="line"># The default compiled in settings are fairly paranoid. This sample file</span><br><span class="line"># loosens things up a bit, to make the ftp daemon more usable.</span><br><span class="line"># Please see vsftpd.conf.5 for all compiled in defaults.</span><br><span class="line">#</span><br><span class="line"># READ THIS: This example file is NOT an exhaustive list of vsftpd options.</span><br><span class="line"># Please read the vsftpd.conf.5 manual page to get a full idea of vsftpd&#x27;s</span><br><span class="line"># capabilities.</span><br><span class="line">#</span><br><span class="line">#</span><br><span class="line"># Run standalone?  vsftpd can run either from an inetd or as a standalone</span><br><span class="line"># daemon started from an initscript.</span><br><span class="line">listen=Yes  关闭ipv6 后必须打开这个</span><br><span class="line">#</span><br><span class="line"># This directive enables listening on IPv6 sockets. By default, listening</span><br><span class="line"># on the IPv6 &quot;any&quot; address (::) will accept connections from both IPv6</span><br><span class="line"># and IPv4 clients. It is not necessary to listen on *both* IPv4 and IPv6</span><br><span class="line"># sockets. If you want that (perhaps because you want to listen on specific</span><br><span class="line"># addresses) then you must run two copies of vsftpd with two configuration</span><br><span class="line"># files.</span><br><span class="line">listen_ipv6=No 必须关闭ipv6 ,否则最后传不到实际外网的ip地址</span><br><span class="line">#</span><br><span class="line"># Allow anonymous FTP? (Disabled by default).</span><br><span class="line">anonymous_enable=NO</span><br><span class="line">#</span><br><span class="line"># Uncomment this to allow local users to log in.</span><br><span class="line">local_enable=YES</span><br><span class="line">#</span><br><span class="line"># Uncomment this to enable any form of FTP write command.</span><br><span class="line">write_enable=YES</span><br><span class="line">#</span><br><span class="line"># Default umask for local users is 077. You may wish to change this to 022,</span><br><span class="line"># if your users expect that (022 is used by most other ftpd&#x27;s)</span><br><span class="line">local_umask=022</span><br><span class="line">#</span><br><span class="line"># Uncomment this to allow the anonymous FTP user to upload files. This only</span><br><span class="line"># has an effect if the above global write enable is activated. Also, you will</span><br><span class="line"># obviously need to create a directory writable by the FTP user.</span><br><span class="line">#anon_upload_enable=YES</span><br><span class="line">#</span><br><span class="line"># Uncomment this if you want the anonymous FTP user to be able to create</span><br><span class="line"># new directories.</span><br><span class="line">#anon_mkdir_write_enable=YES</span><br><span class="line">#</span><br><span class="line"># Activate directory messages - messages given to remote users when they</span><br><span class="line"># go into a certain directory.</span><br><span class="line">dirmessage_enable=YES</span><br><span class="line">#</span><br><span class="line"># If enabled, vsftpd will display directory listings with the time</span><br><span class="line"># in  your  local  time  zone.  The default is to display GMT. The</span><br><span class="line"># times returned by the MDTM FTP command are also affected by this</span><br><span class="line"># option.</span><br><span class="line">use_localtime=YES</span><br><span class="line">#</span><br><span class="line"># Activate logging of uploads/downloads.</span><br><span class="line">xferlog_enable=YES</span><br><span class="line">#</span><br><span class="line"># Make sure PORT transfer connections originate from port 20 (ftp-data).</span><br><span class="line">connect_from_port_20=YES</span><br><span class="line">#</span><br><span class="line"># If you want, you can arrange for uploaded anonymous files to be owned by</span><br><span class="line"># a different user. Note! Using &quot;root&quot; for uploaded files is not</span><br><span class="line"># recommended!</span><br><span class="line">#chown_uploads=YES</span><br><span class="line">#chown_username=whoever</span><br><span class="line">#</span><br><span class="line"># You may override where the log file goes if you like. The default is shown</span><br><span class="line"># below.</span><br><span class="line">#xferlog_file=/var/log/vsftpd.log</span><br><span class="line">#</span><br><span class="line"># If you want, you can have your log file in standard ftpd xferlog format.</span><br><span class="line"># Note that the default log file location is /var/log/xferlog in this case.</span><br><span class="line">#xferlog_std_format=YES</span><br><span class="line">#</span><br><span class="line"># You may change the default value for timing out an idle session.</span><br><span class="line">#idle_session_timeout=600</span><br><span class="line">#</span><br><span class="line"># You may change the default value for timing out a data connection.</span><br><span class="line">#data_connection_timeout=120</span><br><span class="line">#</span><br><span class="line"># It is recommended that you define on your system a unique user which the</span><br><span class="line"># ftp server can use as a totally isolated and unprivileged user.</span><br><span class="line">#nopriv_user=ftpsecure</span><br><span class="line">#</span><br><span class="line"># Enable this and the server will recognise asynchronous ABOR requests. Not</span><br><span class="line"># recommended for security (the code is non-trivial). Not enabling it,</span><br><span class="line"># however, may confuse older FTP clients.</span><br><span class="line">#async_abor_enable=YES</span><br><span class="line">#</span><br><span class="line"># By default the server will pretend to allow ASCII mode but in fact ignore</span><br><span class="line"># the request. Turn on the below options to have the server actually do ASCII</span><br><span class="line"># mangling on files when in ASCII mode.</span><br><span class="line"># Beware that on some FTP servers, ASCII support allows a denial of service</span><br><span class="line"># attack (DoS) via the command &quot;SIZE /big/file&quot; in ASCII mode. vsftpd</span><br><span class="line"># predicted this attack and has always been safe, reporting the size of the</span><br><span class="line"># raw file.</span><br><span class="line"># ASCII mangling is a horrible feature of the protocol.</span><br><span class="line">#ascii_upload_enable=YES</span><br><span class="line">#ascii_download_enable=YES</span><br><span class="line">#</span><br><span class="line"># You may fully customise the login banner string:</span><br><span class="line">#ftpd_banner=Welcome to blah FTP service.</span><br><span class="line">#</span><br><span class="line"># You may specify a file of disallowed anonymous e-mail addresses. Apparently</span><br><span class="line"># useful for combatting certain DoS attacks.</span><br><span class="line">#deny_email_enable=YES</span><br><span class="line"># (default follows)</span><br><span class="line">#banned_email_file=/etc/vsftpd.banned_emails</span><br><span class="line">#</span><br><span class="line"># You may restrict local users to their home directories.  See the FAQ for</span><br><span class="line"># the possible risks in this before using chroot_local_user or</span><br><span class="line"># chroot_list_enable below.</span><br><span class="line">#chroot_local_user=YES</span><br><span class="line">#</span><br><span class="line"># You may specify an explicit list of local users to chroot() to their home</span><br><span class="line"># directory. If chroot_local_user is YES, then this list becomes a list of</span><br><span class="line"># users to NOT chroot().</span><br><span class="line"># (Warning! chroot&#x27;ing can be very dangerous. If using chroot, make sure that</span><br><span class="line"># the user does not have write access to the top level directory within the</span><br><span class="line"># chroot)</span><br><span class="line">chroot_local_user=YES</span><br><span class="line">#chroot_list_enable=YES</span><br><span class="line"># (default follows)</span><br><span class="line">chroot_list_file=/etc/vsftpd.chroot_list</span><br><span class="line">#</span><br><span class="line"># You may activate the &quot;-R&quot; option to the builtin ls. This is disabled by</span><br><span class="line"># default to avoid remote users being able to cause excessive I/O on large</span><br><span class="line"># sites. However, some broken FTP clients such as &quot;ncftp&quot; and &quot;mirror&quot; assume</span><br><span class="line"># the presence of the &quot;-R&quot; option, so there is a strong case for enabling it.</span><br><span class="line">#ls_recurse_enable=YES</span><br><span class="line">#</span><br><span class="line"># Customization</span><br><span class="line">#</span><br><span class="line"># Some of vsftpd&#x27;s settings don&#x27;t fit the filesystem layout by</span><br><span class="line"># default.</span><br><span class="line">#</span><br><span class="line"># This option should be the name of a directory which is empty.  Also, the</span><br><span class="line"># directory should not be writable by the ftp user. This directory is used</span><br><span class="line"># as a secure chroot() jail at times vsftpd does not require filesystem</span><br><span class="line"># access.</span><br><span class="line">secure_chroot_dir=/var/run/vsftpd/empty</span><br><span class="line">#</span><br><span class="line"># This string is the name of the PAM service vsftpd will use.</span><br><span class="line">pam_service_name=vsftpd</span><br><span class="line">#</span><br><span class="line"># This option specifies the location of the RSA certificate to use for SSL</span><br><span class="line"># encrypted connections.</span><br><span class="line">rsa_cert_file=/etc/ssl/certs/xxxxx.pem</span><br><span class="line">rsa_private_key_file=/etc/ssl/private/xxxx.key</span><br><span class="line">ssl_enable=Yes</span><br><span class="line">force_local_data_ssl=Yes</span><br><span class="line">force_local_logins_ssl=Yes</span><br><span class="line">ssl_tlsv1=Yes</span><br><span class="line"></span><br><span class="line">#</span><br><span class="line"># Uncomment this to indicate that vsftpd use a utf8 filesystem.</span><br><span class="line">utf8_filesystem=YES</span><br><span class="line"></span><br><span class="line">userlist_enable=Yes</span><br><span class="line">userlist_deny=No</span><br><span class="line">userlist_file=/etc/vsftpd.user_list</span><br><span class="line">allow_writeable_chroot=Yes</span><br><span class="line"></span><br><span class="line">pasv_enable=Yes</span><br><span class="line">listen_port=??? //看需要</span><br><span class="line">pasv_max_port=???? //看需要</span><br><span class="line">pasv_min_port=????  //看需要</span><br><span class="line">pasv_addr_resolve=Yes // 必须用这个 , 否则下面要填实际ip,但是动态ip怎么可能有ip , 这是pasv 模式下,回传给客户段的ip地址,</span><br><span class="line">pasv_address=abc.com // 可以填域名,必须有上面那个yes</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>然后把端口映射一下.</p>
+<p>然后利用curl 上传,curl 是支持加密ftp的.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -k --ftp-ssl --ftp-ssl-reqd --ftp-create-dirs -T xxx.jpg -u user:password ftp://abcd.com:1000/</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>-k 是忽略证书检查, 是ftp:&#x2F;&#x2F; 不是ftps.</p>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/openwrt/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>openwrt</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
     <a href="/2019/09/06/hex-edit/">
       Hex Editor 的几个事项
     </a>
@@ -917,297 +1231,6 @@
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/08/05/rg100a-comm/">
-      rg100a comm run 400mhz
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    <a href="https://pazulin.github.io" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>井蛙</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-08-05</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/openwrt/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>openwrt</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>1.拆开接上串口，见以前的图，打开串口，重启rg100a，按回车，让其不要启动linux，在cfe控制界面停下来。<br>2.接上网络，登录192.168.1.1.</p>
-<p>3，输入下面中的其中一个用户密码登录进去。</p>
-<p>USER&#x3D;telecomadmin pass&#x3D;telecomadmin 2:user&#x3D;telecomadmin pass&#x3D;nE7jA%5m 3:user&#x3D;bjcnchgw pass&#x3D;8mCnC@bj</p>
-<ol start="4">
-<li>上次文件，更新系统。在串口哪里，可以看到更新过程，然后自动重启。</li>
-</ol>
-<p><img src="/images/3197274260556595789.jpg" alt="rg100_comm"></p>
-<p>R206，R207，R208，R209各焊上4.7K贴片电阻。成功超频400MHZ</p>
-
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/openwrt/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>openwrt</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/08/01/volumio-orangepizero/">
-      Volumio install in Orange Pi Zero
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    <a href="https://pazulin.github.io" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>井蛙</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-08-01</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E6%88%91%E7%9A%84%E4%BD%9C%E5%93%81/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>我的作品</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>Volumio 没有对应的Zero 的版本,但是又lite 板 ,Lite 是H3 cpu , 和H2 的Zero相比应该是可以运行的, 在volumio的论坛上又lite版的移植</p>
-<p>在这里<a href="https://forum.volumio.org/volumio-orange-boards-t9692.html">volumio for orangepi</a></p>
-<p><img src="/images/20190801122827.jpg" alt="Orange Pi Zero"><br>烧入SD启动就可以, 设置里面选择I2S-master, 我用的是PCM5102的DA 底噪不明显,示波器看BCK 不稳 , Allwinner 的CPU就这个德行? 怎么做Hifi 啊?? 不知树莓派如何.</p>
-<p>勉强先用.<br><img src="/images/20190801122811.jpg" alt="volumio 运行界面"><br>另外一个要命的问题, volumio是utf8, mount nas的时候也是utf8 .<br>这也算了, ssh登录后台,手动mount cifs -o charset&#x3D;cp936 竟然不能正常mount, 不知为何.</p>
-<p>所以有些中文文件名无法显示,有些却正常,不知为何, 另外最麻烦的是ape文件中的cue文件,里面全是gb2312的,在volumio里面全部乱码.这怎么用啊?<br><img src="/images/20190801122823.jpg" alt="我的volumio"></p>
-
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/OrangePi/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>OrangePi</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2019/07/31/first-test/">
-      新的blog
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    <a href="https://pazulin.github.io" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>井蛙</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-07-31</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>新做的blog 不知道好不好, 先试试, 但是存在一个问题,这个blog 要hexo 支持, 如果在另外一台电脑 , 那不是写不了?</p>
-
-      
-    </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1223,8 +1246,14 @@
             </a>
           
           <p class="current">
-            3 / 3
+            3 / 4
           </p>
+          
+            <a class="next" rel="next" href="/page/4/">
+              <section class="post next">
+                &nbsp;Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
+              </section>
+            </a>
           
         </div>
       </div>
@@ -1390,7 +1419,7 @@
         
           <li><a class="flat-box" title="/categories/PC/" href="/categories/PC/"><div class='name'>PC</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(10)</div></a></li>
+          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(13)</div></a></li>
         
           <li><a class="flat-box" title="/categories/live/" href="/categories/live/"><div class='name'>live</div><div class='badge'>(1)</div></a></li>
         

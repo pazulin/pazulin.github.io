@@ -311,9 +311,327 @@
         
           
         
+          
+        
+          
+        
+          
+        
       
     
     
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2025/09/21/compile-volumio/">
+      ����Volumio
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="https://pazulin.github.io" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>井蛙</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2025-09-21</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/linux/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>�ڴ治��, ��Ҫ����swap</p>
+<p>sudo fallocate -l 2G &#x2F;swapfile     # �½� 2G ��С�� swap<br>sudo chmod 600 &#x2F;swapfile           # Ȩ��Ҫ��ȷ<br>sudo mkswap &#x2F;swapfile              # ��ʽ���� swap<br>sudo swapon &#x2F;swapfile              # ���� swap</p>
+<p>free -h �鿴</p>
+<p>�����ڴ�<br>export NODE_OPTIONS&#x3D;”–max-old-space-size&#x3D;1536”</p>
+<p>����ʱ���ٽ���<br>npm install –unsafe-perm –no-audit –no-fund –maxsockets&#x3D;1 –verbose</p>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>linux</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2024/12/13/ch347tdriver/">
+      关于在Q7的armbian里面编译8189fs驱动
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="https://pazulin.github.io" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>井蛙</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2024-12-13</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/linux/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>新版的armbian  在<a href="https://github.com/ophub/amlogic-s9xxx-armbian/releases%E9%87%8C%E9%9D%A2,%E6%AF%94%E6%88%91%E8%87%AA%E5%B7%B1%E5%87%A0%E5%B9%B4%E5%89%8D%E7%BC%96%E8%AF%91%E7%9A%84%E5%A5%BD%E5%A4%9A%E4%BA%86">https://github.com/ophub/amlogic-s9xxx-armbian/releases里面,比我自己几年前编译的好多了</a>, 但是wifi还是没有装驱动,可以手动编译一个</p>
+<p>数码视讯的Q7的8189fs 驱动 ,注意, 必须要这个分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git clone -b rtl8189fs  https://github.com/jwrdegoede/rtl8189ES_linux.git</span><br><span class="line"></span><br><span class="line">然后就是编译</span><br><span class="line">make -j4 ARCH=arm64 KSRC=/usr/lib/modules/$(uname -r)/build</span><br><span class="line">sudo cp 8189fs.ko /usr/lib/modules/$(uname -r)/kernel/drivers/net/wireless/realtek/</span><br><span class="line">sudo depmod -a</span><br><span class="line">sudo modprobe 8189fs</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>linux</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2024/12/09/youyou-gpt/">
+      chatgpt智能音箱制作
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="https://pazulin.github.io" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>井蛙</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2024-12-09</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/linux/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>我这个armbian版本的内核比较新.6.1版本, 4.x版本也试过,没问题</p>
+<p>先安装必要的包</p>
+<p>如果venv没有,先安装,我的python是3.12 , 根据你版本安装</p>
+<p>安装下面的包<br>apt update<br>apt install python3.12-venv<br>apt install python3.12-dev<br>apt install portaudio19-dev</p>
+<p>创建虚拟环境<br>python3 -m venv env<br>source env&#x2F;bin&#x2F;activate</p>
+<p>安装包<br>pip3 install pvporcupine<br>pip3 install wheel<br>pip3 install pyaudio<br>pip3 install requests<br>pip3 install websocket-client<br>pip3 install openai</p>
+<p>因为我这个电视盒原来有个音频设备, 现在修改第二个声卡为缺省声卡, 就是用usb声卡作为缺省声卡</p>
+<p>编辑这个文件, 如果没有创建一个<br>&#x2F;etc&#x2F;asound.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">defaults.pcm.card 1</span><br><span class="line">defaults.pcm.device 0</span><br><span class="line">defaults.ctl.card 1</span><br></pre></td></tr></table></figure>
+
+<p>调整声音大小用<br>alsamixer<br>打开这个程序可以看到usb声卡名称, 就说明上面设置对了</p>
+<p>安装一个可以用python i2c 驱动一个显示屏的库<br>pip3 install luma.oled</p>
+<p>前提是用一个CH347T做个一个usb 转i2c 的板<br>这个板的驱动可以github上面下载编译安装.</p>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>linux</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class='post-wrapper'>
@@ -1108,340 +1426,6 @@
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2020/12/04/learntm/">
-      中医一些观点
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    <a href="https://pazulin.github.io" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>井蛙</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-12-04</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E4%B8%AD%E5%8C%BB/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>中医</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>下面这些内容来自 <a href="http://loveheal.org/">http://loveheal.org/</a> 我的老师施合一. 我引用过来是怕自己忘记了.</p>
-<h1 id="关于糖"><a href="#关于糖" class="headerlink" title="关于糖"></a>关于糖</h1><p>中醫觀點：<br>請大家到原來引用的網址去看這位女士的圖片，的確臉色變亮了（也許有人會說臉色可以用修圖軟體改變）、眼袋明顯縮小了。<br>中醫認為，飲食方面應該五味均衡、清淡，不宜偏重一味；但現代人常常太偏重辛辣、或甜味、或酸甜，偏重各種口味都會有不同的副作用，以後會再說明。<br>此處只討論甜味(中醫稱為甘味)，天然的甜味，例如甘蔗汁，可以潤肺養脾胃，曾經有一位初期糖尿病患的女患者，因為其他不舒服症狀來看診，她檢查到有血糖過高、有糖尿病的時候，她聽說甘蔗汁可以治療消渴證，於是每天喝甘蔗汁一個月(每天喝的量我忘記了，抱歉..)，各位讀者猜結果如何？結果一個月後血糖下降，真的糖尿病症狀改善了。如果各位讀者每天吃精製糖、白糖做成的甜點、甜的飲料等等，請問是否糖尿病症狀會改善？答案是否定的，應該會加重，而且會有容易胃酸過多、脂肪堆積等等問題產生。為什麼甘蔗汁、天然的紅糖與精製糖不一樣呢？天然的甘蔗汁帶有一點酸澀的味道是白糖沒有的，而酸澀的味道是養陰的，這就是甘蔗汁與精製白糖的不同。所以筆者才會提倡，如果要吃甜味的食物或飲料，請確認要用天然的甘蔗汁、或天然紅糖、黑糖、天然蜂蜜等。<br>不過，天然的甜味也不是吃越多越好；首先，中醫認為甘能令人中滿，吃太甜，容易有胃部脹滿、胃酸過多的問題；<br>其次，甘味能益脾陽，但脾陽過亢則容易損傷脾陰，例如小孩子甜食吃多會亢奮、過動，這是陽太亢的現象，而大人甜食吃多，會導致容易口渴、餓的時候氣虛乏力的消渴現象，這是第二個問題；第三，吃太甜容易在體內累積濕氣，導致脂肪堆積、身體沈重、血脈運行不暢等問題；第四，甜的食物或飲料吃太多，脾土過亢則剋腎水，使得小孩子可能過動之外，也容易骨骼發育不良，腦部發育遲緩，家長不可不慎。<br>結論就是，天然的甜味食物，適量有益於健康，但過量則不宜。至於精製糖、人工糖、果糖、化學糖精等等，就盡量避免；<br>否則就可能導致糖尿病、胃酸過多、火燒心、過動、發育遲緩、智力減退等問題。</p>
-
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/%E4%B8%AD%E5%8C%BB/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>中医</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2020/09/27/river/">
-      小河流的旅程
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    <a href="https://pazulin.github.io" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>井蛙</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-09-27</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E5%AF%93%E8%A8%80/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>寓言</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>来自 <a href="http://loveheal.org/phpbb3/viewtopic.php?f=6&t=7">http://loveheal.org/phpbb3/viewtopic.php?f=6&amp;t=7</a></p>
-<p>小河流的旅程</p>
-<p>有一條小河流從遙遠的高山上流下來，經過了很多個村莊與森林，最後它來到了一個沙漠。它想：「我已經越過了重重的障礙，這次應該也可以越過這個沙漠吧！」</p>
-<p>當它決定越過這個沙漠的時候，它發現它的河水漸漸消失在泥沙當中，它試了一次又一次，總是徒勞無功，於是它灰心了，「也許這就是我的命運了，我永遠也到不了傳說中那個浩瀚的大海。」它頹喪地自言自語。</p>
-<p>這時候，四周響起了一陣低沈的聲音，「如果微風可以跨越沙漠，那麼河流也可以。」原來這是沙漠發出的聲音。</p>
-<p>小河流很不服氣地回答說：「那是因為微風可以飛過沙漠，可是我卻不行。」</p>
-<p>「因為你堅持你原來的樣子，所以你永遠無法跨越這個沙漠。你必須讓微風帶著你飛過這個沙漠，到你的目的地。只要願意你放棄你現在的樣子，讓自己蒸發到微風中。」沙漠用它低沈的聲音這麼說。</p>
-<p>小河流從來不知道有這樣的事情，「放棄我現在的樣子，然後消失在微風中？不！不！」小河流無法接受這樣的概念，畢竟它從未有這樣的經驗，叫它放棄自己現在的樣子，那麼不等於是自我毀滅了嗎？「我怎麼知道這是真的？」小河流這麼問。</p>
-<p>「微風可以把水氣包含在它之中，然後飄過沙漠，到了適當的地點，它就把這些水氣釋放出來，於是就變成了雨水。然後這些雨水又會形成河流，繼續向前進。」沙漠很有耐心地回答。</p>
-<p>「那我還是原來的河流嗎？」小河流問。</p>
-<p>「可以說是，也可以說不是。」沙漠回答。「不管你是一條河流或是看不見的水蒸氣，你內在的本質從來沒有改變。你會堅持你是一條河流，是因為你從來不知道自己內在的本質。」</p>
-<p>此時小河流的心中，隱隱約約地想起了似乎自己在變成河流之前，似乎也是由微風帶著自己，飛到內陸某座高山的半山腰，然後變成雨水落下，才變成今日的河流。</p>
-<p>於是小河流終於鼓起勇氣，投入微風張開的雙臂，消失在微風之中，讓微風帶著它，奔向它生命中（某個階段）的歸宿。</p>
-<p>　</p>
-<p>附註：</p>
-<p>我們的生命歷程往往也像小河流一樣，想要跨越生命中的障礙，達成某種程度的突破，往真善美的目標邁進，也需要有「放下自我」的勇氣，邁向未知的領域。</p>
-<p>2012&#x2F;12&#x2F;09 後記：<br>這個故事是我在十幾年前從一本英文書中翻譯成中文的，今日一時興起，在GOOGLE搜尋了一下，沒想到可以得到24萬筆以上的結果；<br>還被遠流出版社出版過。有佛教、天主教、基督教的網站引用，甚至熱烈討論，當然也有些傳銷業者等等的使用。<br>但是他們可能都不知道，這是一個回教蘇菲教派的寓言故事，用來揭示一些修行的真理。<br>我相信有些宗教人士，一旦知道這是源自回教的故事，就會心生芥蒂，他們看這個故事的感覺就變了….<br>其實真理一直在那邊，但是我們凡夫的眼光有限，只能用自己的小我來認知，每個人、每個宗教都只能認知一部份，<br>如今一些極端宗教人士，為了強調自己所信仰宗教的崇高、唯一性，<br>卻要去貶抑、甚至仇視其他宗教，在我看來，這些都是因為人們沒將心眼打開、無法看到無所不在的愛，<br>所以被自己的我執所限制，才有這些分裂與誤解，甚至衍生成仇恨與殺戮。<br>可嘆..</p>
-
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/%E5%AF%93%E8%A8%80/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>寓言</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2020/08/19/yolo-test1/">
-      armbian跑AI网络-Yolo做识别的尝试
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    <a href="https://pazulin.github.io" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>井蛙</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-08-19</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/AI/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>AI</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>这个板子是8核A53的amlogic 的S912 . 不过我看过对比，比起A72的新的树莓4，还是差很多，平均1个A72&#x3D;4个A53. 树莓4有4个A72.</p>
-<p>树莓4才有0.1T的计算力。 这样算，这个才有0.05T个算力。</p>
-<p>过程写一下。</p>
-<p>准备<br>‘’’<br>sudo apt-get install python-opencv<br>sudo apt-get install python-pip<br>sudo pip install –upgrade git+<a href="https://github.com/Maratyszcza/PeachPy">https://github.com/Maratyszcza/PeachPy</a><br>sudo pip install –upgrade git+<a href="https://github.com/Maratyszcza/confu">https://github.com/Maratyszcza/confu</a><br>‘’’</p>
-<p>这个过程会出错，说少这个少那个， 看见少的就安装，用apt install xxxx<br>比如<br>少 No module named ‘setuptools’<br>少wheel</p>
-<p>必须安装下面这个,到底有什么用,不知道,会不会和下面这个重复,不清楚,反正我之前没下载, 后面这个反复编译都出错<br>‘’’<br>sudo apt-get install ninja-build<br>‘’’</p>
-<p>安装编译器,这个过程会下载很多依赖库,可能会出错,出错重新来,</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ninja-build/ninja.git</span><br><span class="line">cd ninja</span><br><span class="line">git checkout release</span><br><span class="line">./configure.py --bootstrap</span><br><span class="line">export NINJA_PATH=$PWD</span><br></pre></td></tr></table></figure>
-
-<p>下载编译nnpack</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/shizukachan/NNPACK</span><br><span class="line">cd NNPACK</span><br><span class="line">confu setup</span><br><span class="line">python ./configure.py --backend auto</span><br><span class="line">$NINJA_PATH/ninja</span><br><span class="line"></span><br><span class="line">sudo cp -a lib/* /usr/lib/</span><br><span class="line">sudo cp include/nnpack.h /usr/include/</span><br><span class="line">sudo cp deps/pthreadpool/include/pthreadpool.h /usr/include/</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>上面经常出错,可以利用cmake来做</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake -G Ninja ..</span><br><span class="line">ninja</span><br></pre></td></tr></table></figure>
-<p>然后手动把编译出来的库复制到系统目录  &#x2F;usr&#x2F;lib&#x2F; , 还有下面的h文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cp include/nnpack.h /usr/include/</span><br><span class="line">sudo cp deps/pthreadpool/include/pthreadpool.h /usr/include/</span><br></pre></td></tr></table></figure>
-
-<p>下载编译darknet</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone -b yolov3 https://github.com/zxzhaixiang/darknet-nnpack</span><br><span class="line">cd darknet-nnpack</span><br><span class="line">git checkout yolov3</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
-
-
-
-<p>测试 ,运行<br>python rpi_video.py</p>
-<p>不过我得是usb接口摄像头, 要修过,用图片测试是ok得.</p>
-
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/AI-armbian/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>AI armbian</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1451,7 +1435,7 @@
         <div class="prev-next">
           
           <p class="current">
-            1 / 3
+            1 / 4
           </p>
           
             <a class="next" rel="next" href="/page/2/">
@@ -1624,7 +1608,7 @@
         
           <li><a class="flat-box" title="/categories/PC/" href="/categories/PC/"><div class='name'>PC</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(10)</div></a></li>
+          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(13)</div></a></li>
         
           <li><a class="flat-box" title="/categories/live/" href="/categories/live/"><div class='name'>live</div><div class='badge'>(1)</div></a></li>
         

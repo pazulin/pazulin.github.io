@@ -254,9 +254,223 @@
         
           
         
+          
+        
+          
+        
       
     
     
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2024/12/13/ch347tdriver/">
+      关于在Q7的armbian里面编译8189fs驱动
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="https://pazulin.github.io" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>井蛙</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2024-12-13</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/linux/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>新版的armbian  在<a href="https://github.com/ophub/amlogic-s9xxx-armbian/releases%E9%87%8C%E9%9D%A2,%E6%AF%94%E6%88%91%E8%87%AA%E5%B7%B1%E5%87%A0%E5%B9%B4%E5%89%8D%E7%BC%96%E8%AF%91%E7%9A%84%E5%A5%BD%E5%A4%9A%E4%BA%86">https://github.com/ophub/amlogic-s9xxx-armbian/releases里面,比我自己几年前编译的好多了</a>, 但是wifi还是没有装驱动,可以手动编译一个</p>
+<p>数码视讯的Q7的8189fs 驱动 ,注意, 必须要这个分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git clone -b rtl8189fs  https://github.com/jwrdegoede/rtl8189ES_linux.git</span><br><span class="line"></span><br><span class="line">然后就是编译</span><br><span class="line">make -j4 ARCH=arm64 KSRC=/usr/lib/modules/$(uname -r)/build</span><br><span class="line">sudo cp 8189fs.ko /usr/lib/modules/$(uname -r)/kernel/drivers/net/wireless/realtek/</span><br><span class="line">sudo depmod -a</span><br><span class="line">sudo modprobe 8189fs</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>linux</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2024/12/09/youyou-gpt/">
+      chatgpt智能音箱制作
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="https://pazulin.github.io" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>井蛙</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2024-12-09</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/linux/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>我这个armbian版本的内核比较新.6.1版本, 4.x版本也试过,没问题</p>
+<p>先安装必要的包</p>
+<p>如果venv没有,先安装,我的python是3.12 , 根据你版本安装</p>
+<p>安装下面的包<br>apt update<br>apt install python3.12-venv<br>apt install python3.12-dev<br>apt install portaudio19-dev</p>
+<p>创建虚拟环境<br>python3 -m venv env<br>source env&#x2F;bin&#x2F;activate</p>
+<p>安装包<br>pip3 install pvporcupine<br>pip3 install wheel<br>pip3 install pyaudio<br>pip3 install requests<br>pip3 install websocket-client<br>pip3 install openai</p>
+<p>因为我这个电视盒原来有个音频设备, 现在修改第二个声卡为缺省声卡, 就是用usb声卡作为缺省声卡</p>
+<p>编辑这个文件, 如果没有创建一个<br>&#x2F;etc&#x2F;asound.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">defaults.pcm.card 1</span><br><span class="line">defaults.pcm.device 0</span><br><span class="line">defaults.ctl.card 1</span><br></pre></td></tr></table></figure>
+
+<p>调整声音大小用<br>alsamixer<br>打开这个程序可以看到usb声卡名称, 就说明上面设置对了</p>
+<p>安装一个可以用python i2c 驱动一个显示屏的库<br>pip3 install luma.oled</p>
+<p>前提是用一个CH347T做个一个usb 转i2c 的板<br>这个板的驱动可以github上面下载编译安装.</p>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>linux</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class='post-wrapper'>
@@ -540,7 +754,7 @@
         
           <li><a class="flat-box" title="/categories/PC/" href="/categories/PC/"><div class='name'>PC</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(10)</div></a></li>
+          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(13)</div></a></li>
         
           <li><a class="flat-box" title="/categories/live/" href="/categories/live/"><div class='name'>live</div><div class='badge'>(1)</div></a></li>
         

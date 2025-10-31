@@ -163,7 +163,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="搜尋" />
+						<input type="text" class="input u-search-input" placeholder="Search" />
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -253,6 +253,110 @@
   <section class="post-list">
     
     
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2020/01/07/cron-play-mp3/">
+      armbian定时播放mp3
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="https://pazulin.github.io" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>井蛙</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2020-01-07</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/linux/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>为了小孩多听粤语,想播放以前收音机里面的小说节目,于是做了一个这样的东西, 每天定时大约吃饭时间播放一集节目, 第一季节目就播三国演义把.</p>
+<p>垃圾电视盒刷armbian, 接usb 声卡, 一个功放模块,一个控制模块, 三个模块都是自己做了, 控制模块是usb转串口,接一个单片机,控制功放模块的电源, 因为24小时不停待机,因此不播放的时候要休眠状态.<br>垃圾电视盒是没有IO的,所以有这个东西.</p>
+<p>安装所有必须的东西<br>samba, cifs-utils , 音频文件在nas上,所以要装samba 共享.<br>stty,控制串口波特率等<br>sox , 播放mp3的的东西<br>apt-get install libsox-fmt-all  支持mp3<br>python, 控制脚本</p>
+<p>python 脚本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line"></span><br><span class="line">import json</span><br><span class="line">import os</span><br><span class="line">import linecache</span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">filename = &#x27;cur_play_id.json&#x27;</span><br><span class="line">list_name = &#x27;play_list&#x27;</span><br><span class="line">index=1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">os.system(&#x27;stty -F /dev/ttyUSB0 115200&#x27;)</span><br><span class="line">os.system (&#x27;echo &quot;:9000020101aa\r\n&quot; &gt;&gt; /dev/ttyUSB0&#x27;)</span><br><span class="line">os.system (&#x27;play sanya.mp3&#x27;)</span><br><span class="line"></span><br><span class="line">if len(sys.argv)  &gt; 1  :</span><br><span class="line">    list_name= sys.argv[1]</span><br><span class="line">  </span><br><span class="line">print(list_name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">try:</span><br><span class="line"></span><br><span class="line">    with open (filename) as f_obj:</span><br><span class="line">        ja=json.load(f_obj)</span><br><span class="line">        index=ja[&#x27;cur_index&#x27;]</span><br><span class="line">        index = index +1</span><br><span class="line"></span><br><span class="line">except FileNotFoundError:</span><br><span class="line">    print(&quot;index file Not Found!@!!!&quot;)</span><br><span class="line">    index = 1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">try:</span><br><span class="line"></span><br><span class="line">    play_file = linecache.getline(list_name,index).strip()</span><br><span class="line">    if play_file ==&#x27;&#x27; :</span><br><span class="line">        print (&quot;end of play list file&quot;)</span><br><span class="line">    else :</span><br><span class="line">        a_cmd = &#x27;play &#x27; + play_file</span><br><span class="line">        print(a_cmd)</span><br><span class="line">        os.system(a_cmd)</span><br><span class="line">        os.system (&#x27;echo &quot;:9000020100aa\r\n&quot; &gt;&gt; /dev/ttyUSB0&#x27;)</span><br><span class="line"></span><br><span class="line">except FileNotFoundError:</span><br><span class="line">    print (&quot;Play List file not found!!&quot;)</span><br><span class="line">    os._exit(0)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">data_dic = &#123;&#x27;cur_index&#x27;:index&#125;</span><br><span class="line"></span><br><span class="line">with open(filename,&#x27;w&#x27;) as f:</span><br><span class="line">    json.dump(data_dic,f)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>用法就是python play_mp3.py list.txt</p>
+<p>生成播放列表文件的脚本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -1 |awk &#x27;&#123;print i$0&#125;&#x27; i=`pwd`&#x27;/&#x27; &gt; list.txt</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>linux</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class='post-wrapper'>
@@ -793,7 +897,7 @@
           
             <a class="prev" rel="prev" href="/categories/linux/">
               <section class="post prev" >
-                <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一頁&nbsp;
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous&nbsp;
               </section>
             </a>
           
@@ -948,7 +1052,7 @@
   <section class='widget category'>
     
 <header class='material'>
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分類</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
   
     <a class="rightBtn"
     
@@ -968,7 +1072,7 @@
         
           <li><a class="flat-box" title="/categories/PC/" href="/categories/PC/"><div class='name'>PC</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(15)</div></a></li>
+          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(16)</div></a></li>
         
           <li><a class="flat-box" title="/categories/live/" href="/categories/live/"><div class='name'>live</div><div class='badge'>(1)</div></a></li>
         
@@ -997,7 +1101,7 @@
   <section class='widget tagcloud'>
     
 <header class='material'>
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;熱門標籤</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
   
     <a class="rightBtn"
     
@@ -1068,19 +1172,19 @@
     </div>
   
   <br>
-  <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
+  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
 </div>
   <div>
-    本站使用
+    Use
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
-    作為主題
+    as theme
     
-      ，
-      總訪問量為
+      , 
+      total visits
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      次
+      times
     
-    。
+    . 
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -1190,15 +1294,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "複製成功";
-  let COPY_FAILURE = "複製失敗";
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>複製</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {

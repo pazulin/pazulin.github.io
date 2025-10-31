@@ -163,7 +163,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="搜尋" />
+						<input type="text" class="input u-search-input" placeholder="Search" />
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -346,7 +346,12 @@
           <p>Q7 能跑一个volumio 2.8的固件<br>地址在<br>2.6<br><a href="http://updates.volumio.org/vim1/volumio/2.603/volumio-2.603-2019-09-03-vim1.img.zip">http://updates.volumio.org/vim1/volumio/2.603/volumio-2.603-2019-09-03-vim1.img.zip</a></p>
 <p>2.8<br><a href="http://updates.volumio.org/aml9xxxarmv7/volumio/2.857/volumio-2.857-2020-12-11-aml9xxxarmv7.img.zip">http://updates.volumio.org/aml9xxxarmv7/volumio/2.857/volumio-2.857-2020-12-11-aml9xxxarmv7.img.zip</a></p>
 <p>我运行是下面2.8这个版本</p>
+<p>dtb 文件改一下, 改成一个dtb.img,这个文件我忘记是从哪里复制的了</p>
 <p>apt 的源 要改一下<br>deb <a href="http://archive.debian.org/debian">http://archive.debian.org/debian</a> jessie main contrib non-free<br>deb <a href="http://archive.debian.org/debian-security">http://archive.debian.org/debian-security</a> jessie&#x2F;updates main contrib non-free</p>
+<p>下面来自恩山</p>
+<p>PS 哪位大大 有Volumio docker ARM 版本的<br>hub.docker.com上面找到 只有 X86 版本的<br>N1用不了</p>
+<p>补充一下，一、初绍化volumio<br>  有朋友反馈无法使用以太网，需要替换DTB.img<br>  我用的是无线，所以没有去试，那们朋友如果有回复需要替换那个文件 我再更新<br>  42# @LXPCWL 朋友已经解决了这个问题<br>无线初始化大概说一下，论坛里面应该有比较详细的<br>1、写入U盘 后，启动（这个版本可以写入emmc）<br>2、电脑（我是用笔记本，手机也可以）搜索到一个叫 volumio  SSID<br>3、连接上 查看一下获取到IP地址是不是 192.168.211.X<br>4、访问<a href="http://192.168.211.1:3000/">http://192.168.211.1:3000</a><br>5、按照提示设置一下 volumio连接进你的家庭WIFI</p>
+<p>二、打开ssh 访问 <a href="http://volumioip:3000/dev">http://volumioIP:3000/dev</a><br>ssh enable然后就可以 ssh登录volumio 了<br>用户名密码都是 volumio<br>root 的密码也是 volumio</p>
 
         </div>
         
@@ -358,10 +363,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2025-10-31T11:53:58+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2025-11-01T07:35:03+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>最後更新於 Oct 31, 2025</p>
+    <p>last updated at Nov 1, 2025</p>
   </a>
 </div>
 
@@ -431,10 +436,29 @@
         
             <div class="prev-next">
                 
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
+                            <h4>
+                                <a href="/2025/11/01/volumio-display-key/" rel="prev" title="volumio增加外置显示屏和按键">
+                                  
+                                      volumio增加外置显示屏和按键
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/linux/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>linux</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
                 
                     <section class="next">
                         <span class="art-item-right" aria-hidden="true">
-                            <h6>下一頁&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
                                 <a href="/2025/10/10/iho-3300ad/" rel="prev" title="IHO-3300AD高安 刷armbian">
                                     
@@ -615,7 +639,7 @@
   <section class='widget category'>
     
 <header class='material'>
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分類</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
   
     <a class="rightBtn"
     
@@ -635,7 +659,7 @@
         
           <li><a class="flat-box" title="/categories/PC/" href="/categories/PC/"><div class='name'>PC</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(15)</div></a></li>
+          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(16)</div></a></li>
         
           <li><a class="flat-box" title="/categories/live/" href="/categories/live/"><div class='name'>live</div><div class='badge'>(1)</div></a></li>
         
@@ -664,7 +688,7 @@
   <section class='widget tagcloud'>
     
 <header class='material'>
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;熱門標籤</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
   
     <a class="rightBtn"
     
@@ -735,19 +759,19 @@
     </div>
   
   <br>
-  <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
+  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
 </div>
   <div>
-    本站使用
+    Use
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
-    作為主題
+    as theme
     
-      ，
-      總訪問量為
+      , 
+      total visits
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      次
+      times
     
-    。
+    . 
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -857,15 +881,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "複製成功";
-  let COPY_FAILURE = "複製失敗";
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>複製</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {

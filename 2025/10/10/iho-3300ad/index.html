@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>中医一些观点 | 逍遥游</title>
+  <title>IHO-3300AD高安 刷armbian | 逍遥游</title>
   
   
 
@@ -261,8 +261,8 @@
         
   
     <h1 class="title">
-      <a href="/2020/12/04/learntm/">
-        中医一些观点
+      <a href="/2025/10/10/iho-3300ad/">
+        IHO-3300AD高安 刷armbian
       </a>
     </h1>
   
@@ -291,7 +291,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-12-04</p>
+    <p>2025-10-10</p>
   </a>
 </div>
 
@@ -301,9 +301,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/%E4%B8%AD%E5%8C%BB/' rel="nofollow">
+    <a href='/categories/linux/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>中医</p>
+      <p>linux</p>
     </a>
   </div>
 
@@ -343,8 +343,27 @@
 
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
-          <p>下面这些内容来自 <a href="http://loveheal.org/">http://loveheal.org/</a> 我的老师施合一. 我引用过来是怕自己忘记了.</p>
-<h1 id="关于糖"><a href="#关于糖" class="headerlink" title="关于糖"></a>关于糖</h1><p>中醫觀點：<br>請大家到原來引用的網址去看這位女士的圖片，的確臉色變亮了（也許有人會說臉色可以用修圖軟體改變）、眼袋明顯縮小了。<br>中醫認為，飲食方面應該五味均衡、清淡，不宜偏重一味；但現代人常常太偏重辛辣、或甜味、或酸甜，偏重各種口味都會有不同的副作用，以後會再說明。<br>此處只討論甜味(中醫稱為甘味)，天然的甜味，例如甘蔗汁，可以潤肺養脾胃，曾經有一位初期糖尿病患的女患者，因為其他不舒服症狀來看診，她檢查到有血糖過高、有糖尿病的時候，她聽說甘蔗汁可以治療消渴證，於是每天喝甘蔗汁一個月(每天喝的量我忘記了，抱歉..)，各位讀者猜結果如何？結果一個月後血糖下降，真的糖尿病症狀改善了。如果各位讀者每天吃精製糖、白糖做成的甜點、甜的飲料等等，請問是否糖尿病症狀會改善？答案是否定的，應該會加重，而且會有容易胃酸過多、脂肪堆積等等問題產生。為什麼甘蔗汁、天然的紅糖與精製糖不一樣呢？天然的甘蔗汁帶有一點酸澀的味道是白糖沒有的，而酸澀的味道是養陰的，這就是甘蔗汁與精製白糖的不同。所以筆者才會提倡，如果要吃甜味的食物或飲料，請確認要用天然的甘蔗汁、或天然紅糖、黑糖、天然蜂蜜等。<br>不過，天然的甜味也不是吃越多越好；首先，中醫認為甘能令人中滿，吃太甜，容易有胃部脹滿、胃酸過多的問題；<br>其次，甘味能益脾陽，但脾陽過亢則容易損傷脾陰，例如小孩子甜食吃多會亢奮、過動，這是陽太亢的現象，而大人甜食吃多，會導致容易口渴、餓的時候氣虛乏力的消渴現象，這是第二個問題；第三，吃太甜容易在體內累積濕氣，導致脂肪堆積、身體沈重、血脈運行不暢等問題；第四，甜的食物或飲料吃太多，脾土過亢則剋腎水，使得小孩子可能過動之外，也容易骨骼發育不良，腦部發育遲緩，家長不可不慎。<br>結論就是，天然的甜味食物，適量有益於健康，但過量則不宜。至於精製糖、人工糖、果糖、化學糖精等等，就盡量避免；<br>否則就可能導致糖尿病、胃酸過多、火燒心、過動、發育遲緩、智力減退等問題。</p>
+          <p>图便宜15元一个 ,买了5个 . 谁知道是高安版, 而且没有wifi . 刷机过程也是折腾</p>
+<ol>
+<li><p>要下载一个兼容的安卓镜像, 幸运的找到一个 “小黄IHO3300AD(905)四川高安最新没有无线线刷2261.img”,如果不是,卡在1%不动</p>
+</li>
+<li><p>usb 公头用软件烧入, 这个步骤很奇怪, 有时候这个usb口不行,换下一个usb口就可以, 可能是我笔记本usb hub 问题?</p>
+</li>
+<li><p>焊好TTL先, 其中有2个跳线断开了, 2R1 2R24 短接, 恢复ttl功能.</p>
+</li>
+<li><p>启动进入安卓系统<br>2r1 2r24 短接 恢复ttl功能<br>ttl 终端 密码<br>sh login：root<br>Password：Ch4008111666</p>
+</li>
+</ol>
+<p>5.烧好一个armbian镜像. 发觉meson-gxl-s905l2-x7-5g.dtb 可用, 修改uEnv.txt 文件,改过来, 然后extlinux 里面 的conf文件也要把bak去掉,变成extlinux.conf,这样就能启动, 不过网卡没用<br>要把u-boot-s905x-s905lb.bin 复制 改名为 u-boot.ext, 这样就能启动了 ,并有网卡.</p>
+<ol start="6">
+<li><p>插入tf卡,启动安卓, 并进入系统,执行reboot update ,就可以启动armbian</p>
+</li>
+<li><p>执行armbian-install . 不过安装后没有网卡, 不止什么原因,搞了很久也不想, 折腾到这里结束</p>
+</li>
+</ol>
+<p>Rank0: 1024MB(auto)-2T-18<br>AddrBus test pass!<br>-s<br>Load fip header from eMMC, src: 0x0000c200, des: 0x01400000, size: 0x00004000<br>aml log : R2048 check pass!<br>New fip structure!<br>Load bl30 from eMMC, src: 0x00010200, des: 0x01700000, size: 0x00007600<br>aml log : R2048 check pass!<br>Load bl301 from eMMC, src: 0x00018200, des: 0x01700000, size: 0x00002400<br>aml log : R2048 check pass!<br>Load bl31 from eMMC, src: 0x0001c200, des: 0x01700000, size: 0x00019600<br>aml log : R2048 check pass!<br>Load bl33 from eMMC, src: 0x00038200, des: 0x01700000, size: 0x0007b000<br>aml log : R2048 check pass!<br>NOTICE:  BL3-1: v1.0(debug):521e8c3<br>NOTICE:  BL3-1: Built : 14:22:49, Jun  5 2018<br>NOTICE:  BL31: GXL secure boot!<br>NOTICE:  BL31: BL33 decompress pass<br>[Image: gxl_v1.1.3101-a78fa1e 2018-06-04 16:24:21 huan.biao@droid12]<br>efuse init ops &#x3D; c5<br>efuse init hdcp &#x3D; c, cf9&#x3D;7<br>bl30: check_permit, count is 1<br>bl30: check_permit: ok!<br>chipid: 0 0 7 1c c 0 32 b4 40 a0 0 c5 not ES chip<br>[1.633107 Inits done]<br>INFO:    BL3-1: Initializing runtime services<br>WARNING: No OPTEE provided by BL2 boot loader<br>ERROR:   Error initializing runtime service opteed_fast<br>INFO:    BL3-1: Preparing for EL3 exit to normal world<br>INFO:    BL3-1: Next image address &#x3D; 0x1000000<br>INFO:    BL3-1: Next image spsr &#x3D; 0x3c9</p>
+<p>U-Boot 2015.01 (May 25 2021 - 14:13:05), Build: jenkins-SC_IHO-3300AD_2140133-00060-3</p>
+<p>DRAM:  1 GiB<br>Relocation Offset is: 36e8c000</p>
 
         </div>
         
@@ -356,10 +375,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-12-07T16:25:36+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2025-10-11T12:14:07+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>最后更新于 Dec 7, 2020</p>
+    <p>最后更新于 Oct 11, 2025</p>
   </a>
 </div>
 
@@ -368,7 +387,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E4%B8%AD%E5%8C%BB/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>中医</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>linux</p></a></div>
 
 
         
@@ -381,7 +400,7 @@
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://pazulin.github.io/2020/12/04/learntm/&title=中医一些观点 | 逍遥游&summary="
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://pazulin.github.io/2025/10/10/iho-3300ad/&title=IHO-3300AD高安 刷armbian | 逍遥游&summary="
           
           >
           
@@ -393,7 +412,7 @@
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://pazulin.github.io/2020/12/04/learntm/&title=中医一些观点 | 逍遥游&summary="
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://pazulin.github.io/2025/10/10/iho-3300ad/&title=IHO-3300AD高安 刷armbian | 逍遥游&summary="
           
           >
           
@@ -405,7 +424,7 @@
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://pazulin.github.io/2020/12/04/learntm/&title=中医一些观点 | 逍遥游&summary="
+          href="http://service.weibo.com/share/share.php?url=https://pazulin.github.io/2025/10/10/iho-3300ad/&title=IHO-3300AD高安 刷armbian | 逍遥游&summary="
           
           >
           
@@ -433,16 +452,16 @@
                         <span class="art-item-left">
                             <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
                             <h4>
-                                <a href="/2020/12/10/story-shy/" rel="prev" title="寓言">
+                                <a href="/2025/10/31/volumio-q7/" rel="prev" title="volumio������Q7 ���Ӻ���">
                                   
-                                      寓言
+                                      volumio������Q7 ���Ӻ���
                                   
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/%E5%AF%93%E8%A8%80/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>寓言</a>
+                                    <a class="tag" href="/tags/linux/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>linux</a>
                                 </h6>
                             
                         </span>
@@ -453,16 +472,16 @@
                         <span class="art-item-right" aria-hidden="true">
                             <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/2020/09/27/river/" rel="prev" title="小河流的旅程">
+                                <a href="/2025/09/21/compile-volumio/" rel="prev" title="编译Volumio">
                                     
-                                        小河流的旅程
+                                        编译Volumio
                                     
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/%E5%AF%93%E8%A8%80/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>寓言</a>
+                                    <a class="tag" href="/tags/linux/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>linux</a>
                                 </h6>
                             
                         </span>
@@ -493,7 +512,7 @@
 
   <script>
     window.subData = {
-      title: '中医一些观点',
+      title: 'IHO-3300AD高安 刷armbian',
       tools: true
     }
   </script>
@@ -557,20 +576,6 @@
           
           
             
-  <section class='widget toc-wrapper'>
-    
-<header class='material'>
-  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
-  
-    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
-  
-</header>
-
-    <div class='content material'>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E7%B3%96"><span class="toc-text">关于糖</span></a></li></ol>
-    </div>
-  </section>
-
 
           
         

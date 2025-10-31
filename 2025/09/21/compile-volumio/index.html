@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>����Volumio | 逍遥游</title>
+  <title>编译Volumio | 逍遥游</title>
   
   
 
@@ -163,7 +163,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="Search" />
+						<input type="text" class="input u-search-input" placeholder="搜索" />
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -262,7 +262,7 @@
   
     <h1 class="title">
       <a href="/2025/09/21/compile-volumio/">
-        ����Volumio
+        编译Volumio
       </a>
     </h1>
   
@@ -343,11 +343,11 @@
 
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
-          <p>�ڴ治��, ��Ҫ����swap</p>
-<p>sudo fallocate -l 2G &#x2F;swapfile     # �½� 2G ��С�� swap<br>sudo chmod 600 &#x2F;swapfile           # Ȩ��Ҫ��ȷ<br>sudo mkswap &#x2F;swapfile              # ��ʽ���� swap<br>sudo swapon &#x2F;swapfile              # ���� swap</p>
-<p>free -h �鿴</p>
-<p>�����ڴ�<br>export NODE_OPTIONS&#x3D;”–max-old-space-size&#x3D;1536”</p>
-<p>����ʱ���ٽ���<br>npm install –unsafe-perm –no-audit –no-fund –maxsockets&#x3D;1 –verbose</p>
+          <p>内存不够, 需要增加swap</p>
+<p>sudo fallocate -l 2G &#x2F;swapfile     # 新建 2G 大小的 swap<br>sudo chmod 600 &#x2F;swapfile           # 权限要正确<br>sudo mkswap &#x2F;swapfile              # 格式化成 swap<br>sudo swapon &#x2F;swapfile              # 启用 swap</p>
+<p>free -h 查看</p>
+<p>开大内存<br>export NODE_OPTIONS&#x3D;”–max-old-space-size&#x3D;1536”</p>
+<p>编译时减少进程<br>npm install –unsafe-perm –no-audit –no-fund –maxsockets&#x3D;1 –verbose</p>
 
         </div>
         
@@ -359,10 +359,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2025-09-21T20:08:52+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2025-09-24T11:50:03+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>last updated at Sep 21, 2025</p>
+    <p>最后更新于 Sep 24, 2025</p>
   </a>
 </div>
 
@@ -384,7 +384,7 @@
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://pazulin.github.io/2025/09/21/compile-volumio/&title=����Volumio | 逍遥游&summary="
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://pazulin.github.io/2025/09/21/compile-volumio/&title=编译Volumio | 逍遥游&summary="
           
           >
           
@@ -396,7 +396,7 @@
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://pazulin.github.io/2025/09/21/compile-volumio/&title=����Volumio | 逍遥游&summary="
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://pazulin.github.io/2025/09/21/compile-volumio/&title=编译Volumio | 逍遥游&summary="
           
           >
           
@@ -408,7 +408,7 @@
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://pazulin.github.io/2025/09/21/compile-volumio/&title=����Volumio | 逍遥游&summary="
+          href="http://service.weibo.com/share/share.php?url=https://pazulin.github.io/2025/09/21/compile-volumio/&title=编译Volumio | 逍遥游&summary="
           
           >
           
@@ -432,10 +432,29 @@
         
             <div class="prev-next">
                 
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                            <h4>
+                                <a href="/2025/10/10/iho-3300ad/" rel="prev" title="IHO-3300AD高安 刷armbian">
+                                  
+                                      IHO-3300AD高安 刷armbian
+                                  
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/linux/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>linux</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
                 
                     <section class="next">
                         <span class="art-item-right" aria-hidden="true">
-                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
                                 <a href="/2024/12/13/ch347tdriver/" rel="prev" title="关于在Q7的armbian里面编译8189fs驱动">
                                     
@@ -477,7 +496,7 @@
 
   <script>
     window.subData = {
-      title: '����Volumio',
+      title: '编译Volumio',
       tools: true
     }
   </script>
@@ -616,7 +635,7 @@
   <section class='widget category'>
     
 <header class='material'>
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
   
     <a class="rightBtn"
     
@@ -636,7 +655,7 @@
         
           <li><a class="flat-box" title="/categories/PC/" href="/categories/PC/"><div class='name'>PC</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(13)</div></a></li>
+          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(15)</div></a></li>
         
           <li><a class="flat-box" title="/categories/live/" href="/categories/live/"><div class='name'>live</div><div class='badge'>(1)</div></a></li>
         
@@ -665,7 +684,7 @@
   <section class='widget tagcloud'>
     
 <header class='material'>
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
   
     <a class="rightBtn"
     
@@ -736,19 +755,19 @@
     </div>
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
-    as theme
+    作为主题
     
-      , 
-      total visits
+      ，
+      总访问量为
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      times
+      次
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -858,15 +877,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {

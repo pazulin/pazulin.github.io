@@ -110,7 +110,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="Search" />
+						<input type="text" class="input u-search-input" placeholder="搜索" />
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -196,6 +196,216 @@
   <section class="post-list">
     
     
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/08/07/ssmtp-conf/">
+      ssmtp 配置
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="https://pazulin.github.io" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>井蛙</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-08-07</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/openwrt/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>openwrt</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>ssmtp 是一个简单发邮件工具,</p>
+<p>配置&#x2F;etc&#x2F;ssmtp&#x2F;ssmtp.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line"># /etc/ssmtp.conf -- a config file for sSMTP sendmail.</span><br><span class="line">#</span><br><span class="line"></span><br><span class="line"># The person who gets all mail for userids &lt; 1000</span><br><span class="line"># Make this empty to disable rewriting.</span><br><span class="line">root=robot123456@kaudioxxyyzz.net</span><br><span class="line"></span><br><span class="line"># The place where the mail goes. The actual machine name is required</span><br><span class="line"># no MX records are consulted. Commonly mailhosts are named mail.domain.com</span><br><span class="line"># The example will fit if you are in domain.com and your mailhub is so named.</span><br><span class="line">mailhub=smtp.kaudioxxyyzz.net</span><br><span class="line"></span><br><span class="line"># Example for SMTP port number 2525</span><br><span class="line"># mailhub=mail.your.domain:2525</span><br><span class="line"># Example for SMTP port number 25 (Standard/RFC)</span><br><span class="line"># mailhub=mail.your.domain</span><br><span class="line"># Example for SSL encrypted connection</span><br><span class="line"># mailhub=mail.your.domain:465</span><br><span class="line"></span><br><span class="line"># Where will the mail seem to come from?</span><br><span class="line">rewriteDomain=kaudioxxyyzz.net</span><br><span class="line"></span><br><span class="line"># The full hostname</span><br><span class="line">hostname=kaudioxxyyzz.net</span><br><span class="line"></span><br><span class="line"># Set this to never rewrite the &quot;From:&quot; line (unless not given) and to</span><br><span class="line"># use that address in the &quot;from line&quot; of the envelope.</span><br><span class="line">FromLineOverride=YES</span><br><span class="line"></span><br><span class="line"># Use SSL/TLS to send secure messages to server.</span><br><span class="line">#UseTLS=YES</span><br><span class="line"></span><br><span class="line"># Use SSL/TLS certificate to authenticate against smtp host.</span><br><span class="line">#UseTLSCert=YES</span><br><span class="line"></span><br><span class="line"># Use this RSA certificate.</span><br><span class="line">#TLSCert=/etc/ssl/certs/ssmtp.pem</span><br><span class="line"></span><br><span class="line"># Get enhanced (*really* enhanced) debugging information in the logs</span><br><span class="line"># If you want to have debugging of the config file parsing, move this option</span><br><span class="line"># to the top of the config file and uncomment</span><br><span class="line">#Debug=YES</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">AuthUser=robot1234576@kaudioxxyyzz.net</span><br><span class="line">AuthPass=pw</span><br></pre></td></tr></table></figure>
+
+<p>&#x2F;etc&#x2F;ssmtp&#x2F;revaliases</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># sSMTP aliases</span><br><span class="line">#</span><br><span class="line"># Format:       local_account:outgoing_address:mailhub</span><br><span class="line">#</span><br><span class="line"># Example: root:your_login@your.domain:mailhub.your.domain[:port]</span><br><span class="line"># where [:port] is an optional port number that defaults to 25.</span><br><span class="line"></span><br><span class="line">root:robot1111111@kaudiofdsafasd.net:smtp.kaudioafsdfasdf.net</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/openwrt/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>openwrt</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/08/05/aliyun-ddns/">
+      利用阿里云 OpenAPI 以及 DNS 云解析自建 DDNS 运行在路由器之尝试
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="https://pazulin.github.io" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>井蛙</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-08-05</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/openwrt/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>openwrt</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p><a href="https://yq.aliyun.com/articles/712164?spm=a2c4e.11155472.0.0.15213c1eH2kuhC">原文章在</a></p>
+<p>不过我尝试安装openwrt 路由器上</p>
+<p>首先openwrt 的路由器空间必须大,我是安装在u盘上的,可能要10M左右空间 ,python安装也占不少空间.</p>
+<p>程序中用到阿里云的库, aliyunsdkcore 和aliyunsdkalidns , 之前有人用pip 安装,但是openwrt 上不能, 所以下载其源码,然后解压后, 把里面核心代码复制到 &#x2F;usr&#x2F;lib&#x2F;python2.7&#x2F;XXXX (后面路径不记得) ,我看见别人自己提取相关几个文件,放在当前目录也可以.</p>
+<p>update_ip.py 这个基本上来自前面那个文章,只不过我因为跑在openwrt上, 所以我改了获取ip的方式,改有get_ip这个脚本获取.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># coding= utf-8</span><br><span class="line"></span><br><span class="line">import subprocess</span><br><span class="line">import os</span><br><span class="line">import json</span><br><span class="line">#from urllib2 import urlopen</span><br><span class="line">from aliyunsdkcore.client import AcsClient</span><br><span class="line">from aliyunsdkcore.acs_exception.exceptions import ClientException</span><br><span class="line">from aliyunsdkcore.acs_exception.exceptions import ServerException</span><br><span class="line">from aliyunsdkalidns.request.v20150109 import DescribeDomainRecordsRequest</span><br><span class="line">from aliyunsdkalidns.request.v20150109 import UpdateDomainRecordRequest</span><br><span class="line"></span><br><span class="line">class DnsHandler:</span><br><span class="line">    # 从阿里云开发者后台获取Access_Key_Id和Access_Key_Secret</span><br><span class="line">    access_key_id = &quot;&quot;</span><br><span class="line">    access_key_secret = &quot;&quot;</span><br><span class="line">    region_id = &quot;cn-hangzhou&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    # 填入自己的域名</span><br><span class="line">    domain_name = &quot;&quot;</span><br><span class="line">    # 填入二级域名的RR值</span><br><span class="line">    rr_keyword = &quot;&quot;</span><br><span class="line"></span><br><span class="line">    # 解析记录类型，一般为A记录</span><br><span class="line">    record_type = &quot;A&quot;</span><br><span class="line"></span><br><span class="line">    # 用于储存解析记录的文件名</span><br><span class="line">    file_name = &quot;.ip_addr&quot;</span><br><span class="line"></span><br><span class="line">    client = None</span><br><span class="line">    record = None</span><br><span class="line">    current_ip  = &#x27;&#x27;</span><br><span class="line"></span><br><span class="line">    # 初始化，获取client实例</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.client = AcsClient(</span><br><span class="line">            self.access_key_id,</span><br><span class="line">            self.access_key_secret,</span><br><span class="line">            self.region_id</span><br><span class="line">        )</span><br><span class="line">        self.record = self.get_record()</span><br><span class="line">        self.current_ip = self.get_current_ip()</span><br><span class="line"></span><br><span class="line">    # 如果公网IP发生变化，则自动修改阿里云解析记录</span><br><span class="line">    def reset(self):</span><br><span class="line">        if self.current_ip &lt;&gt; self.get_record_value():</span><br><span class="line">        # print self.current_ip</span><br><span class="line">            print self.update_record(self.current_ip)</span><br><span class="line">            self.get_record()</span><br><span class="line"></span><br><span class="line">    # 获取阿里云域名解析完整记录，并使用文件缓存</span><br><span class="line">    def get_record(self):</span><br><span class="line">        if os.path.isfile(self.file_name) :</span><br><span class="line">            file_handler = open(self.file_name, &#x27;r&#x27;)</span><br><span class="line">            r = file_handler.read()</span><br><span class="line">            file_handler.close()</span><br><span class="line">        else :</span><br><span class="line">            request = DescribeDomainRecordsRequest.DescribeDomainRecordsRequest()</span><br><span class="line">            request.set_PageSize(10)</span><br><span class="line">            request.set_action_name(&quot;DescribeDomainRecords&quot;)</span><br><span class="line">            request.set_DomainName(self.domain_name)</span><br><span class="line">            request.set_RRKeyWord(self.rr_keyword)</span><br><span class="line">            request.set_TypeKeyWord(self.record_type)</span><br><span class="line">            r = self.client.do_action_with_exception(request)</span><br><span class="line">            file_handler = open(self.file_name, &#x27;w&#x27;)</span><br><span class="line">            file_handler.write(r)</span><br><span class="line">            file_handler.close()</span><br><span class="line">        return json.loads(r)</span><br><span class="line"></span><br><span class="line">    # 获取阿里云域名解析记录ID</span><br><span class="line">    def get_record_id(self) :</span><br><span class="line">        return self.record[&quot;DomainRecords&quot;][&quot;Record&quot;][0][&quot;RecordId&quot;]</span><br><span class="line"></span><br><span class="line">    # 获取当前域名解析记录</span><br><span class="line">    def get_record_value(self) :</span><br><span class="line">        return self.record[&quot;DomainRecords&quot;][&quot;Record&quot;][0][&quot;Value&quot;]</span><br><span class="line"></span><br><span class="line">    # 修改阿里云解析记录</span><br><span class="line">    def update_record(self, value):</span><br><span class="line">        request = UpdateDomainRecordRequest.UpdateDomainRecordRequest()</span><br><span class="line">        request.set_action_name(&quot;UpdateDomainRecord&quot;)</span><br><span class="line">        request.set_RecordId(self.get_record_id())</span><br><span class="line">        request.set_Type(self.record_type)</span><br><span class="line">        request.set_RR(self.rr_keyword)</span><br><span class="line">        request.set_Value(value)</span><br><span class="line">        return self.client.do_action_with_exception(request)</span><br><span class="line"></span><br><span class="line">    # 获取当前公网IP</span><br><span class="line">    def get_current_ip(self):</span><br><span class="line">        #ip,retcode=os.system(&#x27;./get_ip&#x27;)</span><br><span class="line">        out_bytes=subprocess.check_output(&#x27;/root/get_ip&#x27;)</span><br><span class="line">        out_text= out_bytes.decode(&#x27;utf8&#x27;)</span><br><span class="line">        out_text=out_text.replace(&quot;\n&quot;,&quot;&quot;)</span><br><span class="line">        #print out_text</span><br><span class="line">        #out_text.replace(&quot;\n&quot;,&quot;&quot;).replace(&quot;\r&quot;,&quot;&quot;)</span><br><span class="line">        return out_text</span><br><span class="line">        # //json.load(urlopen(&#x27;http://jsonip.com&#x27;))[&#x27;ip&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 实例化类并启动更新程序</span><br><span class="line">dns = DnsHandler()</span><br><span class="line">dns.reset()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#!/bin/sh</span><br><span class="line"># check ip change and update it</span><br><span class="line"></span><br><span class="line">ip_regex=&quot;[0-9]\&#123;1,3\&#125;\.[0-9]\&#123;1,3\&#125;\.[0-9]\&#123;1,3\&#125;\.[0-9]\&#123;1,3\&#125;&quot; </span><br><span class="line"></span><br><span class="line">ipaddr=$(ifconfig pppoe-wan | awk &#x27;/inet /&#123;print $2&#125;&#x27;  |grep -o &quot;$ip_regex&quot; )</span><br><span class="line"></span><br><span class="line">echo $ipaddr</span><br></pre></td></tr></table></figure>
+
+<p>然后加到cron 里面<br>*&#x2F;15 * * * *  python &#x2F;root&#x2F;update_ip.py</p>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/openwrt/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>openwrt</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class='post-wrapper'>
@@ -498,7 +708,7 @@
           
             <a class="prev" rel="prev" href="/page/3/">
               <section class="post prev" >
-                <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous&nbsp;
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页&nbsp;
               </section>
             </a>
           
@@ -650,7 +860,7 @@
   <section class='widget category'>
     
 <header class='material'>
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
   
     <a class="rightBtn"
     
@@ -670,7 +880,7 @@
         
           <li><a class="flat-box" title="/categories/PC/" href="/categories/PC/"><div class='name'>PC</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(13)</div></a></li>
+          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(15)</div></a></li>
         
           <li><a class="flat-box" title="/categories/live/" href="/categories/live/"><div class='name'>live</div><div class='badge'>(1)</div></a></li>
         
@@ -699,7 +909,7 @@
   <section class='widget tagcloud'>
     
 <header class='material'>
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
   
     <a class="rightBtn"
     
@@ -770,19 +980,19 @@
     </div>
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
-    as theme
+    作为主题
     
-      , 
-      total visits
+      ，
+      总访问量为
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      times
+      次
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -892,15 +1102,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {

@@ -163,7 +163,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="Search" />
+						<input type="text" class="input u-search-input" placeholder="搜索" />
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -317,6 +317,10 @@
         
           
         
+          
+        
+          
+        
       
     
     
@@ -334,8 +338,227 @@
       
         
   <h2 class="title">
+    <a href="/2025/10/31/volumio-q7/">
+      volumio������Q7 ���Ӻ���
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="https://pazulin.github.io" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>井蛙</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2025-10-31</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/linux/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>Q7 ����һ��volumio 2.8�Ĺ̼�<br>��ַ��<br>2.6<br><a href="http://updates.volumio.org/vim1/volumio/2.603/volumio-2.603-2019-09-03-vim1.img.zip">http://updates.volumio.org/vim1/volumio/2.603/volumio-2.603-2019-09-03-vim1.img.zip</a></p>
+<p>2.8<br><a href="http://updates.volumio.org/aml9xxxarmv7/volumio/2.857/volumio-2.857-2020-12-11-aml9xxxarmv7.img.zip">http://updates.volumio.org/aml9xxxarmv7/volumio/2.857/volumio-2.857-2020-12-11-aml9xxxarmv7.img.zip</a></p>
+<p>������������2.8����汾</p>
+<p>apt ��Դ Ҫ��һ��<br>deb <a href="http://archive.debian.org/debian">http://archive.debian.org/debian</a> jessie main contrib non-free<br>deb <a href="http://archive.debian.org/debian-security">http://archive.debian.org/debian-security</a> jessie&#x2F;updates main contrib non-free</p>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>linux</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2025/10/10/iho-3300ad/">
+      IHO-3300AD高安 刷armbian
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="https://pazulin.github.io" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>井蛙</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2025-10-10</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/linux/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>图便宜15元一个 ,买了5个 . 谁知道是高安版, 而且没有wifi . 刷机过程也是折腾</p>
+<ol>
+<li><p>要下载一个兼容的安卓镜像, 幸运的找到一个 “小黄IHO3300AD(905)四川高安最新没有无线线刷2261.img”,如果不是,卡在1%不动</p>
+</li>
+<li><p>usb 公头用软件烧入, 这个步骤很奇怪, 有时候这个usb口不行,换下一个usb口就可以, 可能是我笔记本usb hub 问题?</p>
+</li>
+<li><p>焊好TTL先, 其中有2个跳线断开了, 2R1 2R24 短接, 恢复ttl功能.</p>
+</li>
+<li><p>启动进入安卓系统<br>2r1 2r24 短接 恢复ttl功能<br>ttl 终端 密码<br>sh login：root<br>Password：Ch4008111666</p>
+</li>
+</ol>
+<p>5.烧好一个armbian镜像. 发觉meson-gxl-s905l2-x7-5g.dtb 可用, 修改uEnv.txt 文件,改过来, 然后extlinux 里面 的conf文件也要把bak去掉,变成extlinux.conf,这样就能启动, 不过网卡没用<br>要把u-boot-s905x-s905lb.bin 复制 改名为 u-boot.ext, 这样就能启动了 ,并有网卡.</p>
+<ol start="6">
+<li><p>插入tf卡,启动安卓, 并进入系统,执行reboot update ,就可以启动armbian</p>
+</li>
+<li><p>执行armbian-install . 不过安装后没有网卡, 不止什么原因,搞了很久也不想, 折腾到这里结束</p>
+</li>
+</ol>
+<p>Rank0: 1024MB(auto)-2T-18<br>AddrBus test pass!<br>-s<br>Load fip header from eMMC, src: 0x0000c200, des: 0x01400000, size: 0x00004000<br>aml log : R2048 check pass!<br>New fip structure!<br>Load bl30 from eMMC, src: 0x00010200, des: 0x01700000, size: 0x00007600<br>aml log : R2048 check pass!<br>Load bl301 from eMMC, src: 0x00018200, des: 0x01700000, size: 0x00002400<br>aml log : R2048 check pass!<br>Load bl31 from eMMC, src: 0x0001c200, des: 0x01700000, size: 0x00019600<br>aml log : R2048 check pass!<br>Load bl33 from eMMC, src: 0x00038200, des: 0x01700000, size: 0x0007b000<br>aml log : R2048 check pass!<br>NOTICE:  BL3-1: v1.0(debug):521e8c3<br>NOTICE:  BL3-1: Built : 14:22:49, Jun  5 2018<br>NOTICE:  BL31: GXL secure boot!<br>NOTICE:  BL31: BL33 decompress pass<br>[Image: gxl_v1.1.3101-a78fa1e 2018-06-04 16:24:21 huan.biao@droid12]<br>efuse init ops &#x3D; c5<br>efuse init hdcp &#x3D; c, cf9&#x3D;7<br>bl30: check_permit, count is 1<br>bl30: check_permit: ok!<br>chipid: 0 0 7 1c c 0 32 b4 40 a0 0 c5 not ES chip<br>[1.633107 Inits done]<br>INFO:    BL3-1: Initializing runtime services<br>WARNING: No OPTEE provided by BL2 boot loader<br>ERROR:   Error initializing runtime service opteed_fast<br>INFO:    BL3-1: Preparing for EL3 exit to normal world<br>INFO:    BL3-1: Next image address &#x3D; 0x1000000<br>INFO:    BL3-1: Next image spsr &#x3D; 0x3c9</p>
+<p>U-Boot 2015.01 (May 25 2021 - 14:13:05), Build: jenkins-SC_IHO-3300AD_2140133-00060-3</p>
+<p>DRAM:  1 GiB<br>Relocation Offset is: 36e8c000</p>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>linux</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
     <a href="/2025/09/21/compile-volumio/">
-      ����Volumio
+      编译Volumio
     </a>
   </h2>
 
@@ -402,11 +625,11 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <p>�ڴ治��, ��Ҫ����swap</p>
-<p>sudo fallocate -l 2G &#x2F;swapfile     # �½� 2G ��С�� swap<br>sudo chmod 600 &#x2F;swapfile           # Ȩ��Ҫ��ȷ<br>sudo mkswap &#x2F;swapfile              # ��ʽ���� swap<br>sudo swapon &#x2F;swapfile              # ���� swap</p>
-<p>free -h �鿴</p>
-<p>�����ڴ�<br>export NODE_OPTIONS&#x3D;”–max-old-space-size&#x3D;1536”</p>
-<p>����ʱ���ٽ���<br>npm install –unsafe-perm –no-audit –no-fund –maxsockets&#x3D;1 –verbose</p>
+      <p>内存不够, 需要增加swap</p>
+<p>sudo fallocate -l 2G &#x2F;swapfile     # 新建 2G 大小的 swap<br>sudo chmod 600 &#x2F;swapfile           # 权限要正确<br>sudo mkswap &#x2F;swapfile              # 格式化成 swap<br>sudo swapon &#x2F;swapfile              # 启用 swap</p>
+<p>free -h 查看</p>
+<p>开大内存<br>export NODE_OPTIONS&#x3D;”–max-old-space-size&#x3D;1536”</p>
+<p>编译时减少进程<br>npm install –unsafe-perm –no-audit –no-fund –maxsockets&#x3D;1 –verbose</p>
 
       
     </div>
@@ -1183,249 +1406,6 @@
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2020/12/24/shenji1/">
-      神迹
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    <a href="https://pazulin.github.io" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>井蛙</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-12-24</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E5%AF%93%E8%A8%80/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>寓言</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>神迹<br>东势王朝倒塌后第三天，救难人员从扭曲变形的钢筋水泥中，救出钟永祥先生，被困数十个小时，重见天日的那一刻，他不仅神情镇定，身体状况仍十分良好;更令人惊讶的是：他并没有灰头土脸，甚至还可以称得上是相当“干净”!钟先生被救出后，他告诉大家一段遭遇，这件事传出后，众人莫不啧啧称奇。</p>
-<p>故事得从钟先生一位远亲来访谈起。钟先生是广东人，他的亲戚远道来台探亲，身为主人的，当然热情款待。几天后，远亲整装离台，临行前，除了感谢之外，还特别告诉钟先生：“你们家的客房很清凉，睡起来好舒服，有时你也可以睡睡看。”</p>
-<p>钟先生平常都睡在主卧室，那天钟太太到台中看儿子，他想起远亲的那番话，于是当晚便改睡在客房。</p>
-<p>睡眠正甜时，突然大地一阵撼动。钟先生家住六楼，他感觉家里似乎向下坠落，真乎?梦乎?房屋四壁好像被什么东西挤压，就快碎裂般。</p>
-<p>可是刹那间，他看见好几个全身散发金色、而且光头的人，用手撑住他头顶上那片即将倾倒的墙，同时，又有几个人压在他身上，感觉好像是在护著他的身体一般。</p>
-<p>他心想：“三更半夜，为什么有这么多人在我房间?”猛然回神，发现四处漆黑，他问：“你们是什么人?”用手挥动，却发现杳无人迹。</p>
-<p>这时，他摸摸身旁，吓了一跳，墙壁倾斜，他正处在中间的小空隙中。由于平日笃信佛法，钟先生马上想到：“刚刚一定是菩萨来救我!”于是端坐起来，就在墙与地之间的小缝中专心念佛。</p>
-<p>三天过去，如果一般人陷于瓦砾中，必定觉得度日如年，身心逼恼。但是钟先生说：“我只有一心念佛、念观世音菩萨的名号，全然不管身在何处，反倒觉得自己很快就被救出来了。”</p>
-<p>被救出后，钟先生才知道，东势王朝五楼以下陷落坍平，六楼变成一楼，而他家除了客房一角仍有空隙外，其他房间早已挤成一团。</p>
-<p>同样是东势灾民的刘春珠师姐听说钟先生的事迹后，她特地去拜访。之前，她就风闻钟先生为人乐善好施，是一位医术高明的中医师，也专精针灸，平常若有贫穷患者求诊，他就分文不收。</p>
-<p>刘师姐到钟先生的诊所，说明来意，钟先生知道她也是佛弟子，就告诉她更多奇迹。钟先生的诊所是一栋四楼建筑，四楼是佛堂，供奉三尊佛像，有释迦世尊及观世音菩萨，都是瓷器所造。地震后，佛像震落地上，不可思议，竟完好如初。</p>
-<p>一、二、三楼都有书柜，奇特的事情发生了。钟先生行医多年，略有积蓄，在两岸开放探亲后，他重返广东故居，听人说某古寺倾倒荒废，他便独力资助寺院重建，此寺名为“绵洋寺”(位于福建省)。寺院落成时，他拍了许多照片当做纪念，这些照片就分别贴在书柜的玻璃上。</p>
-<p>钟先生告诉刘师姐：“所有书柜材质一模一样，地震时所有的书柜倒了一地，但是，只要是贴著绵洋寺照片的柜子，完全没事，其他的柜子，玻璃碎落一地。”</p>
-<p>这次大地震，钟永祥先生见证了佛菩萨的神迹，他说：感谢佛菩萨保佑，今后要更努力行善!</p>
-
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/%E5%AF%93%E8%A8%80/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>寓言</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2020/12/10/story-shy/">
-      寓言
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    <a href="https://pazulin.github.io" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>井蛙</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2020-12-10</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E5%AF%93%E8%A8%80/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>寓言</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>来自 <a href="http://loveheal.org/phpbb3/viewforum.php?f=6">http://loveheal.org/phpbb3/viewforum.php?f=6</a></p>
-<h1 id="馬雅（Maya）的奧秘-～這是一個印度的神話，寓意深遠。"><a href="#馬雅（Maya）的奧秘-～這是一個印度的神話，寓意深遠。" class="headerlink" title="馬雅（Maya）的奧秘 ～這是一個印度的神話，寓意深遠。"></a>馬雅（Maya）的奧秘 ～這是一個印度的神話，寓意深遠。</h1><p>這是一個印度的神話。那拉達是一位專司音樂的半仙，祂愛管閒事，喜歡到處旅行，替天界的神明傳閒話。</p>
-<p>那拉達急於知道毘濕努神（Vishinu）的「馬雅」奧秘，於是祂來到昆濕努神歇息的樹林中。打過招呼之後，那拉達詢問這位象徵藍色大海的神祇有關祂的馬雅奧祕。『馬雅』指的是蒙蔽世人的幻覺之王。</p>
-<p>昆濕努神答應告訴那拉達這個奧祕，但是祂覺得口渴，祂希望那拉達能替他取點水來喝。那拉達進入森林想找一個有水的人家。過了不久祂來到一棟房子面前。祂敲了敲門，一位非常美麗的少女前來開門。她面帶微笑，用她那對如蓮的大眼看著祂，接著就轉過身去取水。那拉達迷上了這位少女，祂在牠的家中一待就是好幾天。</p>
-<p>時間很快便過去了，那拉達和祂所愛的人結成夫妻，並且生了幾個小孩。那拉達和妻小生活得非常快樂。有一年大雨下個不停，洪水淹沒了兩岸，沖走了那拉達的家和附近的樹木。祂一手抓著妻子，一手抓著孩子，肩膀上還扛著另一個小孩。那拉達涉水尋找躲避的高地，但是不久洪水就淹沒了祂的胸膛和下巴。祂的孩子一個一個被洪水沖走，只有妻子還在身邊。黑夜的來臨更增加了祂心中的恐懼，洪水仍然繼繽高漲，最後祂的妻子也抓不住祂，被洪水淹沒。在孤單無助的情況下，祂舉起雙手向神明求援，突然有一個聲音從空中傳來：「十分鐘已經過去了，我的那杯水到底在哪裏啊？」</p>
-<p>編者註：</p>
-<p>馬雅（Maya）在佛教的語言中，就是由眾生共業所交織而成的業力。</p>
-<p>在我們中國的道家哲理故事中，也有同樣的故事；例如「黃梁一夢」與「南柯一夢」的故事都有相同的寓意。</p>
-<p>在我們的一生將要結束的最後一刻，希望你可以想起這個充滿智慧的故事。</p>
-<h1 id="一袋寶石～蘇菲教派的寓言故事～"><a href="#一袋寶石～蘇菲教派的寓言故事～" class="headerlink" title="一袋寶石～蘇菲教派的寓言故事～"></a>一袋寶石～蘇菲教派的寓言故事～</h1><p>早上一大早，太陽還沒有出來，一個漁夫到了河邊，在岸上他感覺到有什麼東西在他的腳下，後來找出來是一小袋的石頭。他撿起袋子，將漁網放在一旁，坐在岸邊等待日出。</p>
-<p>他在等待黎明，以便開始一天的工作，他懶洋洋地從袋子裡拿出一塊石頭丟進水裡。沒有其他事可做，他繼續把石頭一塊一塊丟進水裡。</p>
-<p>慢慢地，太陽升起，大地重現光明，這時除了一塊石頭之外其他的石頭都丟光了，最後一塊石頭在他的手裡。當他藉著白天的光看到了他手中所拿的東酉時，他的心跳幾乎都要停止了，那是一顆寶石！在黑暗中，他把整裝的寶石都丟光了！在不知不覺當中，他的損失有多少！他充滿懊悔，咒罵他自己，很傷心地哭得幾乎失去理智。</p>
-<p>他在無意間碰到的財富足夠豐富他的生活好幾倍，然而在不知不覺當中，在黑暗中，他又把它丟掉了。但是就某方面來講，他還是幸運的﹍還有一顆寶石留下來，在他將那顆寶石丟掉之前，天己經亮了。一般來講，大多數的人甚至還沒有那麼幸運。</p>
-<p>周圍一片漆黑，而時間又過得很快，太陽尚未升起我們就己經浪費掉所有生命中的寶石。生命是一個大的寶庫，人類沒有好好利用它，只是白白地將它浪費掉，等到我們知道了生命的重要性時，我們已經將時光消磨殆盡。生活的秘密、奧秘、快樂、解脫、慈悲、智慧……，一切都丟盡了，而一個人的一生就這樣過去了。</p>
-<h1 id="抓猴子的方法"><a href="#抓猴子的方法" class="headerlink" title="抓猴子的方法"></a>抓猴子的方法</h1><p>抓猴子的方法</p>
-<p>有一隻猴子在樹上玩耍嬉戲，突然，牠看到了樹下有一個看起來很好吃的櫻桃，於是牠就從樹上下來，牠發現了這個櫻桃是在一個很大的玻璃瓶裡面。</p>
-<p>這個玻璃平的瓶口很窄小，恰好猴子的手可以伸進去，於是猴子用手伸進去抓住了這個好吃的櫻桃，可是牠的手因為握住了櫻桃，所以沒有辦法從窄小的瓶口伸出來。</p>
-<p>此時獵人從遠處從容地走過來，猴子還是不知道應該把手中的櫻桃放開，於是就被獵人給抓住了。</p>
-<p>　</p>
-<p>附註：我們是不是也常常為了眼前小小的利益，忘了人生更重要的目標呢？</p>
-<h1 id="莊嚴的寺廟～美的奧秘～"><a href="#莊嚴的寺廟～美的奧秘～" class="headerlink" title="莊嚴的寺廟～美的奧秘～"></a>莊嚴的寺廟～美的奧秘～</h1><p>有一個皇帝想要整修在京城裡的一座寺廟，他派人去找技藝高超的設計師，希望能夠將寺廟整修成美麗而又莊嚴。</p>
-<p>後來有兩組人員被找來了，其中一組是京城裡很有名的工匠與畫師，另外一組是幾個和尚。由於皇帝沒有辦法決定到底哪一組人員的的手藝比較好，於是他就決定要給他們機會作一個比較。</p>
-<p>皇帝要求這兩組人員，各自去整修一個小寺廟，而這兩個寺廟互相面對面；三天之後，皇帝要來驗收成果。</p>
-<p>工匠們向皇帝要了一百多種顏色的顏料（漆），又要求了很多的工具；而讓皇帝很奇怪的是，和尚們居然只要了一些抹布與水桶等等簡單的清潔用具。</p>
-<p>三天之後，皇帝來驗收兩組人員裝修寺廟的結果，他首先看看工匠們所裝飾的寺廟，工匠們敲鑼打鼓地慶祝著工程的完成，他們用了非常多的顏料，以非常精巧的手藝把寺廟裝飾得五顏六色。皇帝很滿意地點點頭，接著回過頭來看看和尚們負責整修的寺廟，他一看之下就愣住了，和尚們所整修的寺廟沒有塗上任何的顏料，他們只是把所有的牆壁、桌椅、窗戶等等都擦拭的非常乾淨，寺廟中所有的物品都顯現出了它們原來的顏色，而它們光澤的表面就像鏡子一般，無瑕地反射出從外面而來的色彩，那天邊多變的雲彩、隨風搖曳的樹影，甚至是對面五顏六色的寺廟，都變成了這個寺廟美麗色彩的一部份，而這座寺廟只是寧靜地接受這一切。</p>
-<p>皇帝被這莊嚴的寺廟深深地感動了，當然我們也知道最後的勝負了。</p>
-<p>　</p>
-<p>筆者註：<br>我們的心就像是一座寺廟，我們不需要用各種精巧的裝飾來美化我們的心靈，我們需要的只是讓內在原有的美，無瑕地顯現出來。</p>
-<h1 id="慾望的鎖鍊～發生在我們周遭的故事～"><a href="#慾望的鎖鍊～發生在我們周遭的故事～" class="headerlink" title="慾望的鎖鍊～發生在我們周遭的故事～"></a>慾望的鎖鍊～發生在我們周遭的故事～</h1><p>有一位禁欲苦行的修道者，準備離開他所住的村莊，到無人居住的山中去隱居修行，他只帶了一塊布當作衣服，就一個人到山中居住了。</p>
-<p>後來他想到當他要洗衣服的時候，他需要另外一塊布來替換，於是他就下山到村莊中，向村民們乞討一塊布當作衣服，村民們都知道他是虔誠的修道者，於是毫不考慮地就給了他一塊布，當作換洗用的衣服。</p>
-<p>當這位修道者回到山中之後，他發覺在他居住的茅屋裡面有一隻老鼠，常常會在他專心打坐的時候來咬他那件準備換洗的衣服，他早就發誓一生遵守不殺生的戒律，因此他不願意去傷害那隻老鼠，但是他又沒有辦法趕走那隻老鼠，所以他回到村莊中，向村民要一隻貓來飼養。</p>
-<p>得到了一隻貓之後，他又想到了─『貓要吃什麼呢？我並不想讓貓去吃老鼠，但總不能跟我一樣只吃一些水果與野菜吧！』，於是他又向村民要了一隻乳牛，這樣子那隻貓就可以靠牛奶維生。</p>
-<p>但是，在山中居住了一段時間以後，他發覺每天都要花很多的時間來照顧那隻母牛，於是他又回到村莊中，他找到了一個可憐流浪漢，於是就帶這無家可歸的流浪漢到山中居住，幫他照顧乳牛。</p>
-<p>那個流浪漢在山中居住了一段時間之後，他跟修道者抱怨說：「我跟你不一樣，我需要一個太太，我要正常的家庭生活。」修道者想一想也是有道理，他不能強迫別人一定要跟他一樣，過著禁欲苦行的生活……….</p>
-<p>這個故事就這樣繼續演變下去，你可能也猜到了，到了後來，也許是半年以後，整個村莊都搬到山上去了。</p>
-
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/%E5%AF%93%E8%A8%80/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>寓言</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1440,7 +1420,7 @@
           
             <a class="next" rel="next" href="/page/2/">
               <section class="post next">
-                &nbsp;Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
+                &nbsp;下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
               </section>
             </a>
           
@@ -1588,7 +1568,7 @@
   <section class='widget category'>
     
 <header class='material'>
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
   
     <a class="rightBtn"
     
@@ -1608,7 +1588,7 @@
         
           <li><a class="flat-box" title="/categories/PC/" href="/categories/PC/"><div class='name'>PC</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(13)</div></a></li>
+          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(15)</div></a></li>
         
           <li><a class="flat-box" title="/categories/live/" href="/categories/live/"><div class='name'>live</div><div class='badge'>(1)</div></a></li>
         
@@ -1637,7 +1617,7 @@
   <section class='widget tagcloud'>
     
 <header class='material'>
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
   
     <a class="rightBtn"
     
@@ -1708,19 +1688,19 @@
     </div>
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
-    as theme
+    作为主题
     
-      , 
-      total visits
+      ，
+      总访问量为
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      times
+      次
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -1830,15 +1810,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {

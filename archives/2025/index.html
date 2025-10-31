@@ -163,7 +163,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="Search" />
+						<input type="text" class="input u-search-input" placeholder="搜索" />
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -254,6 +254,10 @@
         
           
         
+          
+        
+          
+        
       
     
     
@@ -271,8 +275,227 @@
       
         
   <h2 class="title">
+    <a href="/2025/10/31/volumio-q7/">
+      volumio������Q7 ���Ӻ���
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="https://pazulin.github.io" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>井蛙</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2025-10-31</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/linux/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>Q7 ����һ��volumio 2.8�Ĺ̼�<br>��ַ��<br>2.6<br><a href="http://updates.volumio.org/vim1/volumio/2.603/volumio-2.603-2019-09-03-vim1.img.zip">http://updates.volumio.org/vim1/volumio/2.603/volumio-2.603-2019-09-03-vim1.img.zip</a></p>
+<p>2.8<br><a href="http://updates.volumio.org/aml9xxxarmv7/volumio/2.857/volumio-2.857-2020-12-11-aml9xxxarmv7.img.zip">http://updates.volumio.org/aml9xxxarmv7/volumio/2.857/volumio-2.857-2020-12-11-aml9xxxarmv7.img.zip</a></p>
+<p>������������2.8����汾</p>
+<p>apt ��Դ Ҫ��һ��<br>deb <a href="http://archive.debian.org/debian">http://archive.debian.org/debian</a> jessie main contrib non-free<br>deb <a href="http://archive.debian.org/debian-security">http://archive.debian.org/debian-security</a> jessie&#x2F;updates main contrib non-free</p>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>linux</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2025/10/10/iho-3300ad/">
+      IHO-3300AD高安 刷armbian
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="https://pazulin.github.io" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>井蛙</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2025-10-10</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/linux/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>linux</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <p>图便宜15元一个 ,买了5个 . 谁知道是高安版, 而且没有wifi . 刷机过程也是折腾</p>
+<ol>
+<li><p>要下载一个兼容的安卓镜像, 幸运的找到一个 “小黄IHO3300AD(905)四川高安最新没有无线线刷2261.img”,如果不是,卡在1%不动</p>
+</li>
+<li><p>usb 公头用软件烧入, 这个步骤很奇怪, 有时候这个usb口不行,换下一个usb口就可以, 可能是我笔记本usb hub 问题?</p>
+</li>
+<li><p>焊好TTL先, 其中有2个跳线断开了, 2R1 2R24 短接, 恢复ttl功能.</p>
+</li>
+<li><p>启动进入安卓系统<br>2r1 2r24 短接 恢复ttl功能<br>ttl 终端 密码<br>sh login：root<br>Password：Ch4008111666</p>
+</li>
+</ol>
+<p>5.烧好一个armbian镜像. 发觉meson-gxl-s905l2-x7-5g.dtb 可用, 修改uEnv.txt 文件,改过来, 然后extlinux 里面 的conf文件也要把bak去掉,变成extlinux.conf,这样就能启动, 不过网卡没用<br>要把u-boot-s905x-s905lb.bin 复制 改名为 u-boot.ext, 这样就能启动了 ,并有网卡.</p>
+<ol start="6">
+<li><p>插入tf卡,启动安卓, 并进入系统,执行reboot update ,就可以启动armbian</p>
+</li>
+<li><p>执行armbian-install . 不过安装后没有网卡, 不止什么原因,搞了很久也不想, 折腾到这里结束</p>
+</li>
+</ol>
+<p>Rank0: 1024MB(auto)-2T-18<br>AddrBus test pass!<br>-s<br>Load fip header from eMMC, src: 0x0000c200, des: 0x01400000, size: 0x00004000<br>aml log : R2048 check pass!<br>New fip structure!<br>Load bl30 from eMMC, src: 0x00010200, des: 0x01700000, size: 0x00007600<br>aml log : R2048 check pass!<br>Load bl301 from eMMC, src: 0x00018200, des: 0x01700000, size: 0x00002400<br>aml log : R2048 check pass!<br>Load bl31 from eMMC, src: 0x0001c200, des: 0x01700000, size: 0x00019600<br>aml log : R2048 check pass!<br>Load bl33 from eMMC, src: 0x00038200, des: 0x01700000, size: 0x0007b000<br>aml log : R2048 check pass!<br>NOTICE:  BL3-1: v1.0(debug):521e8c3<br>NOTICE:  BL3-1: Built : 14:22:49, Jun  5 2018<br>NOTICE:  BL31: GXL secure boot!<br>NOTICE:  BL31: BL33 decompress pass<br>[Image: gxl_v1.1.3101-a78fa1e 2018-06-04 16:24:21 huan.biao@droid12]<br>efuse init ops &#x3D; c5<br>efuse init hdcp &#x3D; c, cf9&#x3D;7<br>bl30: check_permit, count is 1<br>bl30: check_permit: ok!<br>chipid: 0 0 7 1c c 0 32 b4 40 a0 0 c5 not ES chip<br>[1.633107 Inits done]<br>INFO:    BL3-1: Initializing runtime services<br>WARNING: No OPTEE provided by BL2 boot loader<br>ERROR:   Error initializing runtime service opteed_fast<br>INFO:    BL3-1: Preparing for EL3 exit to normal world<br>INFO:    BL3-1: Next image address &#x3D; 0x1000000<br>INFO:    BL3-1: Next image spsr &#x3D; 0x3c9</p>
+<p>U-Boot 2015.01 (May 25 2021 - 14:13:05), Build: jenkins-SC_IHO-3300AD_2140133-00060-3</p>
+<p>DRAM:  1 GiB<br>Relocation Offset is: 36e8c000</p>
+
+      
+    </div>
+    
+      <div class="full-width auto-padding tags">
+        
+          <a href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>linux</a>
+        
+      </div>
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
     <a href="/2025/09/21/compile-volumio/">
-      ����Volumio
+      编译Volumio
     </a>
   </h2>
 
@@ -339,11 +562,11 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <p>�ڴ治��, ��Ҫ����swap</p>
-<p>sudo fallocate -l 2G &#x2F;swapfile     # �½� 2G ��С�� swap<br>sudo chmod 600 &#x2F;swapfile           # Ȩ��Ҫ��ȷ<br>sudo mkswap &#x2F;swapfile              # ��ʽ���� swap<br>sudo swapon &#x2F;swapfile              # ���� swap</p>
-<p>free -h �鿴</p>
-<p>�����ڴ�<br>export NODE_OPTIONS&#x3D;”–max-old-space-size&#x3D;1536”</p>
-<p>����ʱ���ٽ���<br>npm install –unsafe-perm –no-audit –no-fund –maxsockets&#x3D;1 –verbose</p>
+      <p>内存不够, 需要增加swap</p>
+<p>sudo fallocate -l 2G &#x2F;swapfile     # 新建 2G 大小的 swap<br>sudo chmod 600 &#x2F;swapfile           # 权限要正确<br>sudo mkswap &#x2F;swapfile              # 格式化成 swap<br>sudo swapon &#x2F;swapfile              # 启用 swap</p>
+<p>free -h 查看</p>
+<p>开大内存<br>export NODE_OPTIONS&#x3D;”–max-old-space-size&#x3D;1536”</p>
+<p>编译时减少进程<br>npm install –unsafe-perm –no-audit –no-fund –maxsockets&#x3D;1 –verbose</p>
 
       
     </div>
@@ -505,7 +728,7 @@
   <section class='widget category'>
     
 <header class='material'>
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
   
     <a class="rightBtn"
     
@@ -525,7 +748,7 @@
         
           <li><a class="flat-box" title="/categories/PC/" href="/categories/PC/"><div class='name'>PC</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(13)</div></a></li>
+          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(15)</div></a></li>
         
           <li><a class="flat-box" title="/categories/live/" href="/categories/live/"><div class='name'>live</div><div class='badge'>(1)</div></a></li>
         
@@ -554,7 +777,7 @@
   <section class='widget tagcloud'>
     
 <header class='material'>
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
   
     <a class="rightBtn"
     
@@ -625,19 +848,19 @@
     </div>
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
-    as theme
+    作为主题
     
-      , 
-      total visits
+      ，
+      总访问量为
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      times
+      次
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -755,15 +978,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {

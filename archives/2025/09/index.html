@@ -163,7 +163,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="Search" />
+						<input type="text" class="input u-search-input" placeholder="搜索" />
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -272,7 +272,7 @@
         
   <h2 class="title">
     <a href="/2025/09/21/compile-volumio/">
-      ����Volumio
+      编译Volumio
     </a>
   </h2>
 
@@ -339,11 +339,11 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <p>�ڴ治��, ��Ҫ����swap</p>
-<p>sudo fallocate -l 2G &#x2F;swapfile     # �½� 2G ��С�� swap<br>sudo chmod 600 &#x2F;swapfile           # Ȩ��Ҫ��ȷ<br>sudo mkswap &#x2F;swapfile              # ��ʽ���� swap<br>sudo swapon &#x2F;swapfile              # ���� swap</p>
-<p>free -h �鿴</p>
-<p>�����ڴ�<br>export NODE_OPTIONS&#x3D;”–max-old-space-size&#x3D;1536”</p>
-<p>����ʱ���ٽ���<br>npm install –unsafe-perm –no-audit –no-fund –maxsockets&#x3D;1 –verbose</p>
+      <p>内存不够, 需要增加swap</p>
+<p>sudo fallocate -l 2G &#x2F;swapfile     # 新建 2G 大小的 swap<br>sudo chmod 600 &#x2F;swapfile           # 权限要正确<br>sudo mkswap &#x2F;swapfile              # 格式化成 swap<br>sudo swapon &#x2F;swapfile              # 启用 swap</p>
+<p>free -h 查看</p>
+<p>开大内存<br>export NODE_OPTIONS&#x3D;”–max-old-space-size&#x3D;1536”</p>
+<p>编译时减少进程<br>npm install –unsafe-perm –no-audit –no-fund –maxsockets&#x3D;1 –verbose</p>
 
       
     </div>
@@ -505,7 +505,7 @@
   <section class='widget category'>
     
 <header class='material'>
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
   
     <a class="rightBtn"
     
@@ -525,7 +525,7 @@
         
           <li><a class="flat-box" title="/categories/PC/" href="/categories/PC/"><div class='name'>PC</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(13)</div></a></li>
+          <li><a class="flat-box" title="/categories/linux/" href="/categories/linux/"><div class='name'>linux</div><div class='badge'>(15)</div></a></li>
         
           <li><a class="flat-box" title="/categories/live/" href="/categories/live/"><div class='name'>live</div><div class='badge'>(1)</div></a></li>
         
@@ -554,7 +554,7 @@
   <section class='widget tagcloud'>
     
 <header class='material'>
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
   
     <a class="rightBtn"
     
@@ -625,19 +625,19 @@
     </div>
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
-    as theme
+    作为主题
     
-      , 
-      total visits
+      ，
+      总访问量为
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      times
+      次
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -755,15 +755,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {

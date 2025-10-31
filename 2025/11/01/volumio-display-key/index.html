@@ -163,7 +163,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="Search" />
+						<input type="text" class="input u-search-input" placeholder="搜尋" />
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -345,494 +345,16 @@
         <div class="article-entry" itemprop="articleBody">
           <p>Q7上面跑volumio 2.8,增加一个ESP32C3 的模块, 这个模块有显示屏和按键,显示屏接的是1.3寸OLED 显示屏, 按键接的是一个4个按键的模块,分别接到ESP32C3的GPIO</p>
 <p>python 代码如下</p>
-<p>‘’’</p>
-<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>import serial<br>import time<br>import json<br>import requests<br>import logging<br>from threading import Thread<br>from Queue import Queue<br>import sys</p>
-<h1 id="重新加载sys并设置默认编码"><a href="#重新加载sys并设置默认编码" class="headerlink" title="重新加载sys并设置默认编码"></a>重新加载sys并设置默认编码</h1><p>reload(sys)<br>sys.setdefaultencoding(‘utf-8’)</p>
-<h1 id="配置日志-抑制-requests-和-urllib3-的日志"><a href="#配置日志-抑制-requests-和-urllib3-的日志" class="headerlink" title="配置日志 - 抑制 requests 和 urllib3 的日志"></a>配置日志 - 抑制 requests 和 urllib3 的日志</h1><p>logging.basicConfig(level&#x3D;logging.INFO, format&#x3D;’%(asctime)s - %(levelname)s - %(message)s’)<br>logging.getLogger(“requests”).setLevel(logging.WARNING)<br>logging.getLogger(“urllib3”).setLevel(logging.WARNING)</p>
-<p>SERIAL_PORT &#x3D; ‘&#x2F;dev&#x2F;ttyACM0’<br>BAUD_RATE &#x3D; 115200<br>VOLUMIO_HOST &#x3D; ‘localhost’<br>VOLUMIO_PORT &#x3D; 3000</p>
-<p>GET_STATE &#x3D; ‘http:&#x2F;&#x2F;{}:{}&#x2F;api&#x2F;v1&#x2F;getState’.format(VOLUMIO_HOST, VOLUMIO_PORT)<br>GET_QUEUE &#x3D; ‘http:&#x2F;&#x2F;{}:{}&#x2F;api&#x2F;v1&#x2F;getQueue’.format(VOLUMIO_HOST, VOLUMIO_PORT)</p>
-<p>SEEK_UPDATE_INTERVAL &#x3D; 2<br>MAX_RETRIES &#x3D; 3<br>RETRY_DELAY &#x3D; 5</p>
-<h1 id="创建会话对象，支持连接复用"><a href="#创建会话对象，支持连接复用" class="headerlink" title="创建会话对象，支持连接复用"></a>创建会话对象，支持连接复用</h1><p>session &#x3D; requests.Session()</p>
-<p>class VolumioController:<br>    def <strong>init</strong>(self):<br>        self.ser &#x3D; None<br>        self.command_queue &#x3D; Queue()<br>        self.running &#x3D; True<br>        self.volumio_available &#x3D; True<br>        self.serial_available &#x3D; False<br>        self.last_state_data &#x3D; None<br>        self.last_queue_data &#x3D; None<br>        self.data_cache_time &#x3D; 0<br>        self.queue_cache_time &#x3D; 0<br>        self.last_position &#x3D; -1  # 记录上次的位置<br>        self.last_uri &#x3D; “”  # 记录上次的URI，用于检测文件夹切换<br>        self.cache_duration &#x3D; 1.0  # 状态缓存1秒<br>        self.queue_cache_duration &#x3D; 2.0  # 队列缓存2秒，减少时间</p>
-<pre><code>def init_serial(self):
-    &quot;&quot;&quot;初始化串口连接，支持重试&quot;&quot;&quot;
-    retry_count = 0
-    while retry_count &lt; MAX_RETRIES and self.running:
-        try:
-            self.ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=0.5)
-            self.serial_available = True
-            logging.info(&quot;串口连接成功: %s&quot;, SERIAL_PORT)
-            return True
-        except Exception as e:
-            retry_count += 1
-            logging.error(&quot;串口连接失败 (尝试 %d/%d): %s&quot;, retry_count, MAX_RETRIES, str(e))
-            if retry_count &lt; MAX_RETRIES:
-                time.sleep(RETRY_DELAY)
-    
-    logging.error(&quot;无法建立串口连接，程序退出&quot;)
-    return False
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import serial</span><br><span class="line">import time</span><br><span class="line">import json</span><br><span class="line">import requests</span><br><span class="line">import logging</span><br><span class="line">from threading import Thread</span><br><span class="line">from Queue import Queue</span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line"># 重新加载sys并设置默认编码</span><br><span class="line">reload(sys)</span><br><span class="line">sys.setdefaultencoding(&#x27;utf-8&#x27;)</span><br><span class="line"></span><br><span class="line"># 配置日志 - 抑制 requests 和 urllib3 的日志</span><br><span class="line">logging.basicConfig(level=logging.INFO, format=&#x27;%(asctime)s - %(levelname)s - %(message)s&#x27;)</span><br><span class="line">logging.getLogger(&quot;requests&quot;).setLevel(logging.WARNING)</span><br><span class="line">logging.getLogger(&quot;urllib3&quot;).setLevel(logging.WARNING)</span><br><span class="line"></span><br><span class="line">SERIAL_PORT = &#x27;/dev/ttyACM0&#x27;</span><br><span class="line">BAUD_RATE = 115200</span><br><span class="line">VOLUMIO_HOST = &#x27;localhost&#x27;</span><br><span class="line">VOLUMIO_PORT = 3000</span><br><span class="line"></span><br><span class="line">GET_STATE = &#x27;http://&#123;&#125;:&#123;&#125;/api/v1/getState&#x27;.format(VOLUMIO_HOST, VOLUMIO_PORT)</span><br><span class="line">GET_QUEUE = &#x27;http://&#123;&#125;:&#123;&#125;/api/v1/getQueue&#x27;.format(VOLUMIO_HOST, VOLUMIO_PORT)</span><br><span class="line"></span><br><span class="line">SEEK_UPDATE_INTERVAL = 2</span><br><span class="line">MAX_RETRIES = 3</span><br><span class="line">RETRY_DELAY = 5</span><br><span class="line"></span><br><span class="line"># 创建会话对象，支持连接复用</span><br><span class="line">session = requests.Session()</span><br><span class="line"></span><br><span class="line">class VolumioController:</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.ser = None</span><br><span class="line">        self.command_queue = Queue()</span><br><span class="line">        self.running = True</span><br><span class="line">        self.volumio_available = True</span><br><span class="line">        self.serial_available = False</span><br><span class="line">        self.last_state_data = None</span><br><span class="line">        self.last_queue_data = None</span><br><span class="line">        self.data_cache_time = 0</span><br><span class="line">        self.queue_cache_time = 0</span><br><span class="line">        self.last_position = -1  # 记录上次的位置</span><br><span class="line">        self.last_uri = &quot;&quot;  # 记录上次的URI，用于检测文件夹切换</span><br><span class="line">        self.cache_duration = 1.0  # 状态缓存1秒</span><br><span class="line">        self.queue_cache_duration = 2.0  # 队列缓存2秒，减少时间</span><br><span class="line">        </span><br><span class="line">    def init_serial(self):</span><br><span class="line">        &quot;&quot;&quot;初始化串口连接，支持重试&quot;&quot;&quot;</span><br><span class="line">        retry_count = 0</span><br><span class="line">        while retry_count &lt; MAX_RETRIES and self.running:</span><br><span class="line">            try:</span><br><span class="line">                self.ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=0.5)</span><br><span class="line">                self.serial_available = True</span><br><span class="line">                logging.info(&quot;串口连接成功: %s&quot;, SERIAL_PORT)</span><br><span class="line">                return True</span><br><span class="line">            except Exception as e:</span><br><span class="line">                retry_count += 1</span><br><span class="line">                logging.error(&quot;串口连接失败 (尝试 %d/%d): %s&quot;, retry_count, MAX_RETRIES, str(e))</span><br><span class="line">                if retry_count &lt; MAX_RETRIES:</span><br><span class="line">                    time.sleep(RETRY_DELAY)</span><br><span class="line">        </span><br><span class="line">        logging.error(&quot;无法建立串口连接，程序退出&quot;)</span><br><span class="line">        return False</span><br><span class="line"></span><br><span class="line">    # def truncate_song_name(self, name, max_length=10):</span><br><span class="line">    #     &quot;&quot;&quot;截断歌曲名称，直接截取前max_length个字符&quot;&quot;&quot;</span><br><span class="line">    #     if not name:</span><br><span class="line">    #         return u&quot;未知歌曲&quot;</span><br><span class="line">        </span><br><span class="line">    #     # 确保是unicode字符串</span><br><span class="line">    #     if not isinstance(name, unicode):</span><br><span class="line">    #         try:</span><br><span class="line">    #             name = name.decode(&#x27;utf-8&#x27;)</span><br><span class="line">    #         except:</span><br><span class="line">    #             name = u&quot;未知歌曲&quot;</span><br><span class="line">        </span><br><span class="line">    #     if len(name) &lt;= max_length:</span><br><span class="line">    #         return name</span><br><span class="line">        </span><br><span class="line">    #     # 直接截取前max_length个字符，不加省略号</span><br><span class="line">    #     return name[:max_length]</span><br><span class="line">    def truncate_song_name(self, name, max_chinese=10, max_english=20):</span><br><span class="line">        &quot;&quot;&quot;截断歌曲名称，如果包含中文就用10个字符，否则用20个字符&quot;&quot;&quot;</span><br><span class="line">        if not name:</span><br><span class="line">            return u&quot;未知歌曲&quot;</span><br><span class="line">        </span><br><span class="line">        # 确保是unicode字符串</span><br><span class="line">        if not isinstance(name, unicode):</span><br><span class="line">            try:</span><br><span class="line">                name = name.decode(&#x27;utf-8&#x27;)</span><br><span class="line">            except:</span><br><span class="line">                return u&quot;未知歌曲&quot;</span><br><span class="line">        </span><br><span class="line">        # 检查是否包含中文字符</span><br><span class="line">        has_chinese = any(u&#x27;\u4e00&#x27; &lt;= char &lt;= u&#x27;\u9fff&#x27; for char in name)</span><br><span class="line">        </span><br><span class="line">        # 选择最大长度</span><br><span class="line">        max_length = max_chinese if has_chinese else max_english</span><br><span class="line">        </span><br><span class="line">        if len(name) &lt;= max_length:</span><br><span class="line">            return name</span><br><span class="line">        </span><br><span class="line">        return name[:max_length]</span><br><span class="line">        </span><br><span class="line">    def safe_volumio_request(self, url, timeout=2, use_cache=False, cache_type=&quot;state&quot;):</span><br><span class="line">        &quot;&quot;&quot;安全的Volumio请求，带重试机制和缓存&quot;&quot;&quot;</span><br><span class="line">        current_time = time.time()</span><br><span class="line">        </span><br><span class="line">        # 使用缓存数据（如果可用且未过期）</span><br><span class="line">        if use_cache:</span><br><span class="line">            cache_duration = self.cache_duration if cache_type == &quot;state&quot; else self.queue_cache_duration</span><br><span class="line">            cache_time = self.data_cache_time if cache_type == &quot;state&quot; else self.queue_cache_time</span><br><span class="line">            cache_data = self.last_state_data if cache_type == &quot;state&quot; else self.last_queue_data</span><br><span class="line">            </span><br><span class="line">            if cache_data and current_time - cache_time &lt; cache_duration:</span><br><span class="line">                if url == GET_STATE and cache_type == &quot;state&quot;:</span><br><span class="line">                    return self.last_state_data</span><br><span class="line">                elif url == GET_QUEUE and cache_type == &quot;queue&quot;:</span><br><span class="line">                    return self.last_queue_data</span><br><span class="line">        </span><br><span class="line">        for attempt in range(MAX_RETRIES):</span><br><span class="line">            try:</span><br><span class="line">                response = session.get(url, timeout=timeout)</span><br><span class="line">                if response.status_code == 200:</span><br><span class="line">                    self.volumio_available = True</span><br><span class="line">                    data = response.json()</span><br><span class="line">                    </span><br><span class="line">                    # 缓存数据</span><br><span class="line">                    if url == GET_STATE:</span><br><span class="line">                        self.last_state_data = data</span><br><span class="line">                        self.data_cache_time = current_time</span><br><span class="line">                    elif url == GET_QUEUE:</span><br><span class="line">                        self.last_queue_data = data</span><br><span class="line">                        self.queue_cache_time = current_time</span><br><span class="line">                    </span><br><span class="line">                    return data</span><br><span class="line">                else:</span><br><span class="line">                    logging.warning(&quot;Volumio返回错误状态码: %d&quot;, response.status_code)</span><br><span class="line">            except Exception as e:</span><br><span class="line">                logging.warning(&quot;Volumio请求失败 (尝试 %d/%d): %s&quot;, attempt + 1, MAX_RETRIES, str(e))</span><br><span class="line">            </span><br><span class="line">            if attempt &lt; MAX_RETRIES - 1:</span><br><span class="line">                time.sleep(1)</span><br><span class="line">        </span><br><span class="line">        self.volumio_available = False</span><br><span class="line">        logging.error(&quot;Volumio服务不可用&quot;)</span><br><span class="line">        return None</span><br><span class="line"></span><br><span class="line">    def get_volumio_status(self):</span><br><span class="line">        &quot;&quot;&quot;获取Volumio状态，带降级处理&quot;&quot;&quot;</span><br><span class="line">        state_data = self.safe_volumio_request(GET_STATE, use_cache=True, cache_type=&quot;state&quot;)</span><br><span class="line">        if not state_data:</span><br><span class="line">            return self.get_fallback_status()</span><br><span class="line">        </span><br><span class="line">        try:</span><br><span class="line">            # 修正字段映射</span><br><span class="line">            seek_ms = state_data.get(&#x27;seek&#x27;, 0)  # 毫秒</span><br><span class="line">            seek = int(seek_ms / 1000)  # 转换为秒</span><br><span class="line">            duration = int(state_data.get(&#x27;duration&#x27;, 1) or 1)</span><br><span class="line">            title = state_data.get(&#x27;title&#x27;, u&#x27;无歌曲&#x27;)</span><br><span class="line">            status = state_data.get(&#x27;status&#x27;, &#x27;stop&#x27;)</span><br><span class="line">            current_position = int(state_data.get(&#x27;position&#x27;, -1))  # 队列中的位置</span><br><span class="line">            current_uri = state_data.get(&#x27;uri&#x27;, &#x27;&#x27;)  # 当前歌曲的URI</span><br><span class="line"></span><br><span class="line">            # 检测文件夹切换 - 如果URI路径发生变化，强制刷新队列</span><br><span class="line">            force_queue_update = False</span><br><span class="line">            if current_uri and self.last_uri:</span><br><span class="line">                # 提取文件夹路径进行比较</span><br><span class="line">                current_folder = &#x27;/&#x27;.join(current_uri.split(&#x27;/&#x27;)[:-1])</span><br><span class="line">                last_folder = &#x27;/&#x27;.join(self.last_uri.split(&#x27;/&#x27;)[:-1])</span><br><span class="line">                if current_folder != last_folder:</span><br><span class="line">                    logging.info(&quot;检测到文件夹切换，强制刷新队列&quot;)</span><br><span class="line">                    force_queue_update = True</span><br><span class="line">            </span><br><span class="line">            self.last_uri = current_uri</span><br><span class="line"></span><br><span class="line">            # 简化歌曲名称显示 - 当前歌曲保留完整名称</span><br><span class="line">            display_title = self.truncate_song_name(title, 30)  # 当前歌曲显示30个字符</span><br><span class="line"></span><br><span class="line">            # 只有当需要时才获取队列信息</span><br><span class="line">            prev_song = u&#x27;无&#x27;</span><br><span class="line">            next_song = u&#x27;无&#x27;</span><br><span class="line">            if status == &#x27;play&#x27; or status == &#x27;pause&#x27;:</span><br><span class="line">                # 检查位置是否改变或需要强制更新</span><br><span class="line">                position_changed = (current_position != self.last_position)</span><br><span class="line">                if position_changed or force_queue_update:</span><br><span class="line">                    logging.info(&quot;位置变化或强制更新，重新获取队列信息&quot;)</span><br><span class="line">                </span><br><span class="line">                prev_song, next_song = self.get_queue_info(</span><br><span class="line">                    current_position, </span><br><span class="line">                    force_update=(position_changed or force_queue_update)</span><br><span class="line">                )</span><br><span class="line">                self.last_position = current_position</span><br><span class="line">            </span><br><span class="line">            return &#123;</span><br><span class="line">                &quot;title&quot;: display_title,</span><br><span class="line">                &quot;prevSong&quot;: prev_song,</span><br><span class="line">                &quot;nextSong&quot;: next_song,</span><br><span class="line">                &quot;duration&quot;: duration,</span><br><span class="line">                &quot;seek&quot;: seek,</span><br><span class="line">                &quot;status&quot;: status</span><br><span class="line">            &#125;</span><br><span class="line">        except Exception as e:</span><br><span class="line">            logging.error(&quot;解析Volumio状态数据失败: %s, 原始数据: %s&quot;, str(e), state_data)</span><br><span class="line">            return self.get_fallback_status()</span><br><span class="line"></span><br><span class="line">    def get_queue_info(self, position, force_update=False):</span><br><span class="line">        &quot;&quot;&quot;获取队列信息&quot;&quot;&quot;</span><br><span class="line">        # 修正：只有当位置有效时才获取队列</span><br><span class="line">        if position &lt; 0:</span><br><span class="line">            return u&#x27;无&#x27;, u&#x27;无&#x27;</span><br><span class="line">            </span><br><span class="line">        # 如果强制更新，不使用缓存</span><br><span class="line">        use_cache = not force_update</span><br><span class="line">        queue_data = self.safe_volumio_request(GET_QUEUE, use_cache=use_cache, cache_type=&quot;queue&quot;)</span><br><span class="line">        if not queue_data:</span><br><span class="line">            return u&#x27;未知&#x27;, u&#x27;未知&#x27;</span><br><span class="line">        </span><br><span class="line">        try:</span><br><span class="line">            queue = queue_data.get(&#x27;queue&#x27;, [])</span><br><span class="line">            prev_song = u&#x27;无&#x27;</span><br><span class="line">            next_song = u&#x27;无&#x27;</span><br><span class="line">            </span><br><span class="line">            if 0 &lt;= position &lt; len(queue):</span><br><span class="line">                if position &gt; 0:</span><br><span class="line">                    prev_item = queue[position - 1]</span><br><span class="line">                    # 尝试多个可能的字段名</span><br><span class="line">                    prev_name = prev_item.get(&#x27;name&#x27;, prev_item.get(&#x27;title&#x27;, u&#x27;无&#x27;))</span><br><span class="line">                    # 队列中的歌曲名称截取前10个字符</span><br><span class="line">                    prev_song = self.truncate_song_name(prev_name, 10)</span><br><span class="line">                </span><br><span class="line">                if position &lt; len(queue) - 1:</span><br><span class="line">                    next_item = queue[position + 1]</span><br><span class="line">                    # 尝试多个可能的字段名</span><br><span class="line">                    next_name = next_item.get(&#x27;name&#x27;, next_item.get(&#x27;title&#x27;, u&#x27;无&#x27;))</span><br><span class="line">                    # 队列中的歌曲名称截取前10个字符</span><br><span class="line">                    next_song = self.truncate_song_name(next_name, 10)</span><br><span class="line">            </span><br><span class="line">            logging.debug(&quot;队列信息: 位置=%d, 上一首=%s, 下一首=%s&quot;, position, prev_song, next_song)</span><br><span class="line">            return prev_song, next_song</span><br><span class="line">        except Exception as e:</span><br><span class="line">            logging.error(&quot;解析队列信息失败: %s, 队列数据: %s&quot;, str(e), queue_data)</span><br><span class="line">            return u&#x27;未知&#x27;, u&#x27;未知&#x27;</span><br><span class="line"></span><br><span class="line">    def get_fallback_status(self):</span><br><span class="line">        &quot;&quot;&quot;返回降级状态&quot;&quot;&quot;</span><br><span class="line">        return &#123;</span><br><span class="line">            &quot;title&quot;: u&quot;服务不可用&quot;,</span><br><span class="line">            &quot;prevSong&quot;: u&quot;未知&quot;,</span><br><span class="line">            &quot;nextSong&quot;: u&quot;未知&quot;,</span><br><span class="line">            &quot;duration&quot;: 1,</span><br><span class="line">            &quot;seek&quot;: 0,</span><br><span class="line">            &quot;status&quot;: &quot;stop&quot;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    def safe_serial_send(self, data):</span><br><span class="line">        &quot;&quot;&quot;安全的串口数据发送&quot;&quot;&quot;</span><br><span class="line">        if not self.serial_available or not self.ser:</span><br><span class="line">            return False</span><br><span class="line">        </span><br><span class="line">        try:</span><br><span class="line">            # 确保所有字符串都是UTF-8编码的普通字符串，而不是Unicode对象</span><br><span class="line">            ascii_safe_data = &#123;&#125;</span><br><span class="line">            for key, value in data.items():</span><br><span class="line">                if isinstance(value, unicode):</span><br><span class="line">                    # 将Unicode转换为UTF-8编码的字符串</span><br><span class="line">                    ascii_safe_data[key] = value.encode(&#x27;utf-8&#x27;)</span><br><span class="line">                else:</span><br><span class="line">                    ascii_safe_data[key] = value</span><br><span class="line">            </span><br><span class="line">            # 使用 ensure_ascii=False 来支持中文</span><br><span class="line">            json_str = json.dumps(ascii_safe_data, ensure_ascii=False) + &#x27;\n&#x27;</span><br><span class="line">            </span><br><span class="line">            # 在 Python 2.7 中，需要显式编码为 UTF-8</span><br><span class="line">            self.ser.write(json_str.encode(&#x27;utf-8&#x27;))</span><br><span class="line">            return True</span><br><span class="line">        except Exception as e:</span><br><span class="line">            logging.error(&quot;串口发送失败: %s&quot;, str(e))</span><br><span class="line">            self.serial_available = False</span><br><span class="line">            self.try_reconnect_serial()</span><br><span class="line">            return False</span><br><span class="line"></span><br><span class="line">    def try_reconnect_serial(self):</span><br><span class="line">        &quot;&quot;&quot;尝试重新连接串口&quot;&quot;&quot;</span><br><span class="line">        if self.ser:</span><br><span class="line">            try:</span><br><span class="line">                self.ser.close()</span><br><span class="line">            except:</span><br><span class="line">                pass</span><br><span class="line">        </span><br><span class="line">        logging.info(&quot;尝试重新连接串口...&quot;)</span><br><span class="line">        self.serial_available = self.init_serial()</span><br><span class="line"></span><br><span class="line">    def handle_esp32_command(self, cmd):</span><br><span class="line">        &quot;&quot;&quot;处理ESP32命令&quot;&quot;&quot;</span><br><span class="line">        cmd = cmd.strip().upper()</span><br><span class="line">        command_urls = &#123;</span><br><span class="line">            &#x27;PLAY&#x27;: &#x27;http://&#123;&#125;:&#123;&#125;/api/v1/commands/?cmd=play&#x27;.format(VOLUMIO_HOST, VOLUMIO_PORT),</span><br><span class="line">            &#x27;PAUSE&#x27;: &#x27;http://&#123;&#125;:&#123;&#125;/api/v1/commands/?cmd=pause&#x27;.format(VOLUMIO_HOST, VOLUMIO_PORT),</span><br><span class="line">            &#x27;NEXT&#x27;: &#x27;http://&#123;&#125;:&#123;&#125;/api/v1/commands/?cmd=next&#x27;.format(VOLUMIO_HOST, VOLUMIO_PORT),</span><br><span class="line">            &#x27;PREV&#x27;: &#x27;http://&#123;&#125;:&#123;&#125;/api/v1/commands/?cmd=prev&#x27;.format(VOLUMIO_HOST, VOLUMIO_PORT)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if cmd in command_urls:</span><br><span class="line">            # 执行命令后，强制更新队列信息</span><br><span class="line">            self.safe_volumio_request(command_urls[cmd], timeout=1)</span><br><span class="line">            # 清除队列缓存，确保下次获取最新数据</span><br><span class="line">            self.last_queue_data = None</span><br><span class="line">            self.queue_cache_time = 0</span><br><span class="line">            # 重置位置跟踪</span><br><span class="line">            self.last_position = -1</span><br><span class="line">        else:</span><br><span class="line">            logging.warning(&quot;未知命令: %s&quot;, cmd)</span><br><span class="line"></span><br><span class="line">    def read_serial_commands(self):</span><br><span class="line">        &quot;&quot;&quot;读取串口命令的独立线程&quot;&quot;&quot;</span><br><span class="line">        while self.running:</span><br><span class="line">            if self.serial_available and self.ser and self.ser.inWaiting():</span><br><span class="line">                try:</span><br><span class="line">                    line = self.ser.readline().strip()</span><br><span class="line">                    if line:</span><br><span class="line">                        # Python 2.7 解码处理</span><br><span class="line">                        try:</span><br><span class="line">                            line = line.decode(&#x27;utf-8&#x27;)</span><br><span class="line">                        except UnicodeDecodeError:</span><br><span class="line">                            try:</span><br><span class="line">                                line = line.decode(&#x27;gbk&#x27;)</span><br><span class="line">                            except:</span><br><span class="line">                                line = line.decode(&#x27;latin-1&#x27;)</span><br><span class="line">                        </span><br><span class="line">                        logging.info(&quot;收到ESP32命令: %s&quot;, line)</span><br><span class="line">                        self.handle_esp32_command(line)</span><br><span class="line">                except Exception as e:</span><br><span class="line">                    logging.error(&quot;串口读取错误: %s&quot;, str(e))</span><br><span class="line">                    self.serial_available = False</span><br><span class="line">            time.sleep(0.1)</span><br><span class="line"></span><br><span class="line">    def run(self):</span><br><span class="line">        &quot;&quot;&quot;主运行循环&quot;&quot;&quot;</span><br><span class="line">        if not self.init_serial():</span><br><span class="line">            return</span><br><span class="line">        </span><br><span class="line">        # 启动串口读取线程</span><br><span class="line">        serial_thread = Thread(target=self.read_serial_commands)</span><br><span class="line">        serial_thread.daemon = True</span><br><span class="line">        serial_thread.start()</span><br><span class="line">        </span><br><span class="line">        last_title = &quot;&quot;</span><br><span class="line">        last_status = &quot;&quot;</span><br><span class="line">        last_seek_sent = -1</span><br><span class="line">        last_seek_time = time.time()</span><br><span class="line">        last_health_check = time.time()</span><br><span class="line">        last_full_update = 0</span><br><span class="line">        </span><br><span class="line">        while self.running:</span><br><span class="line">            try:</span><br><span class="line">                current_time = time.time()</span><br><span class="line">                </span><br><span class="line">                # 健康检查（减少频率）</span><br><span class="line">                if current_time - last_health_check &gt; 30:</span><br><span class="line">                    if not self.volumio_available:</span><br><span class="line">                        logging.info(&quot;尝试恢复Volumio连接...&quot;)</span><br><span class="line">                        test_data = self.safe_volumio_request(GET_STATE, timeout=1)</span><br><span class="line">                        if test_data:</span><br><span class="line">                            logging.info(&quot;Volumio连接已恢复&quot;)</span><br><span class="line">                    last_health_check = current_time</span><br><span class="line">                </span><br><span class="line">                # 获取状态并发送</span><br><span class="line">                song_info = self.get_volumio_status()</span><br><span class="line">                </span><br><span class="line">                now = time.time()</span><br><span class="line">                # 减少完整状态发送频率</span><br><span class="line">                needs_full_update = (song_info[&#x27;title&#x27;] != last_title or </span><br><span class="line">                                   song_info[&#x27;status&#x27;] != last_status or</span><br><span class="line">                                   now - last_full_update &gt; 30)  # 每30秒强制更新一次</span><br><span class="line">                </span><br><span class="line">                if needs_full_update:</span><br><span class="line">                    if self.safe_serial_send(song_info):</span><br><span class="line">                        last_title = song_info[&#x27;title&#x27;]</span><br><span class="line">                        last_status = song_info[&#x27;status&#x27;]</span><br><span class="line">                        last_seek_sent = song_info[&#x27;seek&#x27;]</span><br><span class="line">                        last_seek_time = now</span><br><span class="line">                        last_full_update = now</span><br><span class="line">                # 如果正在播放且 seek 超过更新时间间隔 → 发送 seek 更新</span><br><span class="line">                elif (song_info[&#x27;status&#x27;] == &#x27;play&#x27; and </span><br><span class="line">                      (now - last_seek_time &gt;= SEEK_UPDATE_INTERVAL)):</span><br><span class="line">                    if song_info[&#x27;seek&#x27;] != last_seek_sent:</span><br><span class="line">                        if self.safe_serial_send(&#123;&quot;seek&quot;: song_info[&#x27;seek&#x27;]&#125;):</span><br><span class="line">                            last_seek_sent = song_info[&#x27;seek&#x27;]</span><br><span class="line">                    last_seek_time = now</span><br><span class="line">                </span><br><span class="line">                time.sleep(0.2)  # 增加休眠时间，减少请求频率</span><br><span class="line">                </span><br><span class="line">            except Exception as e:</span><br><span class="line">                logging.error(&quot;主循环发生未预期错误: %s&quot;, str(e))</span><br><span class="line">                time.sleep(1)</span><br><span class="line"></span><br><span class="line">    def stop(self):</span><br><span class="line">        &quot;&quot;&quot;停止运行&quot;&quot;&quot;</span><br><span class="line">        self.running = False</span><br><span class="line">        if self.ser:</span><br><span class="line">            try:</span><br><span class="line">                self.ser.close()</span><br><span class="line">            except:</span><br><span class="line">                pass</span><br><span class="line">        session.close()</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    controller = VolumioController()</span><br><span class="line">    try:</span><br><span class="line">        controller.run()</span><br><span class="line">    except KeyboardInterrupt:</span><br><span class="line">        logging.info(&quot;收到中断信号，程序退出&quot;)</span><br><span class="line">    except Exception as e:</span><br><span class="line">        logging.error(&quot;程序运行出错: %s&quot;, str(e))</span><br><span class="line">    finally:</span><br><span class="line">        controller.stop()</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    main()</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-# def truncate_song_name(self, name, max_length=10):
-#     &quot;&quot;&quot;截断歌曲名称，直接截取前max_length个字符&quot;&quot;&quot;
-#     if not name:
-#         return u&quot;未知歌曲&quot;
-    
-#     # 确保是unicode字符串
-#     if not isinstance(name, unicode):
-#         try:
-#             name = name.decode(&#39;utf-8&#39;)
-#         except:
-#             name = u&quot;未知歌曲&quot;
-    
-#     if len(name) &lt;= max_length:
-#         return name
-    
-#     # 直接截取前max_length个字符，不加省略号
-#     return name[:max_length]
-def truncate_song_name(self, name, max_chinese=10, max_english=20):
-    &quot;&quot;&quot;截断歌曲名称，如果包含中文就用10个字符，否则用20个字符&quot;&quot;&quot;
-    if not name:
-        return u&quot;未知歌曲&quot;
-    
-    # 确保是unicode字符串
-    if not isinstance(name, unicode):
-        try:
-            name = name.decode(&#39;utf-8&#39;)
-        except:
-            return u&quot;未知歌曲&quot;
-    
-    # 检查是否包含中文字符
-    has_chinese = any(u&#39;\u4e00&#39; &lt;= char &lt;= u&#39;\u9fff&#39; for char in name)
-    
-    # 选择最大长度
-    max_length = max_chinese if has_chinese else max_english
-    
-    if len(name) &lt;= max_length:
-        return name
-    
-    return name[:max_length]
-    
-def safe_volumio_request(self, url, timeout=2, use_cache=False, cache_type=&quot;state&quot;):
-    &quot;&quot;&quot;安全的Volumio请求，带重试机制和缓存&quot;&quot;&quot;
-    current_time = time.time()
-    
-    # 使用缓存数据（如果可用且未过期）
-    if use_cache:
-        cache_duration = self.cache_duration if cache_type == &quot;state&quot; else self.queue_cache_duration
-        cache_time = self.data_cache_time if cache_type == &quot;state&quot; else self.queue_cache_time
-        cache_data = self.last_state_data if cache_type == &quot;state&quot; else self.last_queue_data
-        
-        if cache_data and current_time - cache_time &lt; cache_duration:
-            if url == GET_STATE and cache_type == &quot;state&quot;:
-                return self.last_state_data
-            elif url == GET_QUEUE and cache_type == &quot;queue&quot;:
-                return self.last_queue_data
-    
-    for attempt in range(MAX_RETRIES):
-        try:
-            response = session.get(url, timeout=timeout)
-            if response.status_code == 200:
-                self.volumio_available = True
-                data = response.json()
-                
-                # 缓存数据
-                if url == GET_STATE:
-                    self.last_state_data = data
-                    self.data_cache_time = current_time
-                elif url == GET_QUEUE:
-                    self.last_queue_data = data
-                    self.queue_cache_time = current_time
-                
-                return data
-            else:
-                logging.warning(&quot;Volumio返回错误状态码: %d&quot;, response.status_code)
-        except Exception as e:
-            logging.warning(&quot;Volumio请求失败 (尝试 %d/%d): %s&quot;, attempt + 1, MAX_RETRIES, str(e))
-        
-        if attempt &lt; MAX_RETRIES - 1:
-            time.sleep(1)
-    
-    self.volumio_available = False
-    logging.error(&quot;Volumio服务不可用&quot;)
-    return None
 
-def get_volumio_status(self):
-    &quot;&quot;&quot;获取Volumio状态，带降级处理&quot;&quot;&quot;
-    state_data = self.safe_volumio_request(GET_STATE, use_cache=True, cache_type=&quot;state&quot;)
-    if not state_data:
-        return self.get_fallback_status()
-    
-    try:
-        # 修正字段映射
-        seek_ms = state_data.get(&#39;seek&#39;, 0)  # 毫秒
-        seek = int(seek_ms / 1000)  # 转换为秒
-        duration = int(state_data.get(&#39;duration&#39;, 1) or 1)
-        title = state_data.get(&#39;title&#39;, u&#39;无歌曲&#39;)
-        status = state_data.get(&#39;status&#39;, &#39;stop&#39;)
-        current_position = int(state_data.get(&#39;position&#39;, -1))  # 队列中的位置
-        current_uri = state_data.get(&#39;uri&#39;, &#39;&#39;)  # 当前歌曲的URI
-
-        # 检测文件夹切换 - 如果URI路径发生变化，强制刷新队列
-        force_queue_update = False
-        if current_uri and self.last_uri:
-            # 提取文件夹路径进行比较
-            current_folder = &#39;/&#39;.join(current_uri.split(&#39;/&#39;)[:-1])
-            last_folder = &#39;/&#39;.join(self.last_uri.split(&#39;/&#39;)[:-1])
-            if current_folder != last_folder:
-                logging.info(&quot;检测到文件夹切换，强制刷新队列&quot;)
-                force_queue_update = True
-        
-        self.last_uri = current_uri
-
-        # 简化歌曲名称显示 - 当前歌曲保留完整名称
-        display_title = self.truncate_song_name(title, 30)  # 当前歌曲显示30个字符
-
-        # 只有当需要时才获取队列信息
-        prev_song = u&#39;无&#39;
-        next_song = u&#39;无&#39;
-        if status == &#39;play&#39; or status == &#39;pause&#39;:
-            # 检查位置是否改变或需要强制更新
-            position_changed = (current_position != self.last_position)
-            if position_changed or force_queue_update:
-                logging.info(&quot;位置变化或强制更新，重新获取队列信息&quot;)
-            
-            prev_song, next_song = self.get_queue_info(
-                current_position, 
-                force_update=(position_changed or force_queue_update)
-            )
-            self.last_position = current_position
-        
-        return &#123;
-            &quot;title&quot;: display_title,
-            &quot;prevSong&quot;: prev_song,
-            &quot;nextSong&quot;: next_song,
-            &quot;duration&quot;: duration,
-            &quot;seek&quot;: seek,
-            &quot;status&quot;: status
-        &#125;
-    except Exception as e:
-        logging.error(&quot;解析Volumio状态数据失败: %s, 原始数据: %s&quot;, str(e), state_data)
-        return self.get_fallback_status()
-
-def get_queue_info(self, position, force_update=False):
-    &quot;&quot;&quot;获取队列信息&quot;&quot;&quot;
-    # 修正：只有当位置有效时才获取队列
-    if position &lt; 0:
-        return u&#39;无&#39;, u&#39;无&#39;
-        
-    # 如果强制更新，不使用缓存
-    use_cache = not force_update
-    queue_data = self.safe_volumio_request(GET_QUEUE, use_cache=use_cache, cache_type=&quot;queue&quot;)
-    if not queue_data:
-        return u&#39;未知&#39;, u&#39;未知&#39;
-    
-    try:
-        queue = queue_data.get(&#39;queue&#39;, [])
-        prev_song = u&#39;无&#39;
-        next_song = u&#39;无&#39;
-        
-        if 0 &lt;= position &lt; len(queue):
-            if position &gt; 0:
-                prev_item = queue[position - 1]
-                # 尝试多个可能的字段名
-                prev_name = prev_item.get(&#39;name&#39;, prev_item.get(&#39;title&#39;, u&#39;无&#39;))
-                # 队列中的歌曲名称截取前10个字符
-                prev_song = self.truncate_song_name(prev_name, 10)
-            
-            if position &lt; len(queue) - 1:
-                next_item = queue[position + 1]
-                # 尝试多个可能的字段名
-                next_name = next_item.get(&#39;name&#39;, next_item.get(&#39;title&#39;, u&#39;无&#39;))
-                # 队列中的歌曲名称截取前10个字符
-                next_song = self.truncate_song_name(next_name, 10)
-        
-        logging.debug(&quot;队列信息: 位置=%d, 上一首=%s, 下一首=%s&quot;, position, prev_song, next_song)
-        return prev_song, next_song
-    except Exception as e:
-        logging.error(&quot;解析队列信息失败: %s, 队列数据: %s&quot;, str(e), queue_data)
-        return u&#39;未知&#39;, u&#39;未知&#39;
-
-def get_fallback_status(self):
-    &quot;&quot;&quot;返回降级状态&quot;&quot;&quot;
-    return &#123;
-        &quot;title&quot;: u&quot;服务不可用&quot;,
-        &quot;prevSong&quot;: u&quot;未知&quot;,
-        &quot;nextSong&quot;: u&quot;未知&quot;,
-        &quot;duration&quot;: 1,
-        &quot;seek&quot;: 0,
-        &quot;status&quot;: &quot;stop&quot;
-    &#125;
-
-def safe_serial_send(self, data):
-    &quot;&quot;&quot;安全的串口数据发送&quot;&quot;&quot;
-    if not self.serial_available or not self.ser:
-        return False
-    
-    try:
-        # 确保所有字符串都是UTF-8编码的普通字符串，而不是Unicode对象
-        ascii_safe_data = &#123;&#125;
-        for key, value in data.items():
-            if isinstance(value, unicode):
-                # 将Unicode转换为UTF-8编码的字符串
-                ascii_safe_data[key] = value.encode(&#39;utf-8&#39;)
-            else:
-                ascii_safe_data[key] = value
-        
-        # 使用 ensure_ascii=False 来支持中文
-        json_str = json.dumps(ascii_safe_data, ensure_ascii=False) + &#39;\n&#39;
-        
-        # 在 Python 2.7 中，需要显式编码为 UTF-8
-        self.ser.write(json_str.encode(&#39;utf-8&#39;))
-        return True
-    except Exception as e:
-        logging.error(&quot;串口发送失败: %s&quot;, str(e))
-        self.serial_available = False
-        self.try_reconnect_serial()
-        return False
-
-def try_reconnect_serial(self):
-    &quot;&quot;&quot;尝试重新连接串口&quot;&quot;&quot;
-    if self.ser:
-        try:
-            self.ser.close()
-        except:
-            pass
-    
-    logging.info(&quot;尝试重新连接串口...&quot;)
-    self.serial_available = self.init_serial()
-
-def handle_esp32_command(self, cmd):
-    &quot;&quot;&quot;处理ESP32命令&quot;&quot;&quot;
-    cmd = cmd.strip().upper()
-    command_urls = &#123;
-        &#39;PLAY&#39;: &#39;http://&#123;&#125;:&#123;&#125;/api/v1/commands/?cmd=play&#39;.format(VOLUMIO_HOST, VOLUMIO_PORT),
-        &#39;PAUSE&#39;: &#39;http://&#123;&#125;:&#123;&#125;/api/v1/commands/?cmd=pause&#39;.format(VOLUMIO_HOST, VOLUMIO_PORT),
-        &#39;NEXT&#39;: &#39;http://&#123;&#125;:&#123;&#125;/api/v1/commands/?cmd=next&#39;.format(VOLUMIO_HOST, VOLUMIO_PORT),
-        &#39;PREV&#39;: &#39;http://&#123;&#125;:&#123;&#125;/api/v1/commands/?cmd=prev&#39;.format(VOLUMIO_HOST, VOLUMIO_PORT)
-    &#125;
-    
-    if cmd in command_urls:
-        # 执行命令后，强制更新队列信息
-        self.safe_volumio_request(command_urls[cmd], timeout=1)
-        # 清除队列缓存，确保下次获取最新数据
-        self.last_queue_data = None
-        self.queue_cache_time = 0
-        # 重置位置跟踪
-        self.last_position = -1
-    else:
-        logging.warning(&quot;未知命令: %s&quot;, cmd)
-
-def read_serial_commands(self):
-    &quot;&quot;&quot;读取串口命令的独立线程&quot;&quot;&quot;
-    while self.running:
-        if self.serial_available and self.ser and self.ser.inWaiting():
-            try:
-                line = self.ser.readline().strip()
-                if line:
-                    # Python 2.7 解码处理
-                    try:
-                        line = line.decode(&#39;utf-8&#39;)
-                    except UnicodeDecodeError:
-                        try:
-                            line = line.decode(&#39;gbk&#39;)
-                        except:
-                            line = line.decode(&#39;latin-1&#39;)
-                    
-                    logging.info(&quot;收到ESP32命令: %s&quot;, line)
-                    self.handle_esp32_command(line)
-            except Exception as e:
-                logging.error(&quot;串口读取错误: %s&quot;, str(e))
-                self.serial_available = False
-        time.sleep(0.1)
-
-def run(self):
-    &quot;&quot;&quot;主运行循环&quot;&quot;&quot;
-    if not self.init_serial():
-        return
-    
-    # 启动串口读取线程
-    serial_thread = Thread(target=self.read_serial_commands)
-    serial_thread.daemon = True
-    serial_thread.start()
-    
-    last_title = &quot;&quot;
-    last_status = &quot;&quot;
-    last_seek_sent = -1
-    last_seek_time = time.time()
-    last_health_check = time.time()
-    last_full_update = 0
-    
-    while self.running:
-        try:
-            current_time = time.time()
-            
-            # 健康检查（减少频率）
-            if current_time - last_health_check &gt; 30:
-                if not self.volumio_available:
-                    logging.info(&quot;尝试恢复Volumio连接...&quot;)
-                    test_data = self.safe_volumio_request(GET_STATE, timeout=1)
-                    if test_data:
-                        logging.info(&quot;Volumio连接已恢复&quot;)
-                last_health_check = current_time
-            
-            # 获取状态并发送
-            song_info = self.get_volumio_status()
-            
-            now = time.time()
-            # 减少完整状态发送频率
-            needs_full_update = (song_info[&#39;title&#39;] != last_title or 
-                               song_info[&#39;status&#39;] != last_status or
-                               now - last_full_update &gt; 30)  # 每30秒强制更新一次
-            
-            if needs_full_update:
-                if self.safe_serial_send(song_info):
-                    last_title = song_info[&#39;title&#39;]
-                    last_status = song_info[&#39;status&#39;]
-                    last_seek_sent = song_info[&#39;seek&#39;]
-                    last_seek_time = now
-                    last_full_update = now
-            # 如果正在播放且 seek 超过更新时间间隔 → 发送 seek 更新
-            elif (song_info[&#39;status&#39;] == &#39;play&#39; and 
-                  (now - last_seek_time &gt;= SEEK_UPDATE_INTERVAL)):
-                if song_info[&#39;seek&#39;] != last_seek_sent:
-                    if self.safe_serial_send(&#123;&quot;seek&quot;: song_info[&#39;seek&#39;]&#125;):
-                        last_seek_sent = song_info[&#39;seek&#39;]
-                last_seek_time = now
-            
-            time.sleep(0.2)  # 增加休眠时间，减少请求频率
-            
-        except Exception as e:
-            logging.error(&quot;主循环发生未预期错误: %s&quot;, str(e))
-            time.sleep(1)
-
-def stop(self):
-    &quot;&quot;&quot;停止运行&quot;&quot;&quot;
-    self.running = False
-    if self.ser:
-        try:
-            self.ser.close()
-        except:
-            pass
-    session.close()
-</code></pre>
-<p>def main():<br>    controller &#x3D; VolumioController()<br>    try:<br>        controller.run()<br>    except KeyboardInterrupt:<br>        logging.info(“收到中断信号，程序退出”)<br>    except Exception as e:<br>        logging.error(“程序运行出错: %s”, str(e))<br>    finally:<br>        controller.stop()</p>
-<p>if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘:<br>    main()</p>
-<p>‘’’</p>
 <p>把这个脚本加入系统服务<br>sudo nano &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;esp32_remote.service</p>
-<p>‘’’</p>
-<p>[Unit]<br>Description&#x3D;ESP32 Volumio Remote Control Service<br>After&#x3D;network.target</p>
-<p>[Service]<br>Type&#x3D;simple<br>User&#x3D;volumio<br>WorkingDirectory&#x3D;&#x2F;home&#x2F;volumio<br>ExecStart&#x3D;&#x2F;usr&#x2F;bin&#x2F;python &#x2F;home&#x2F;volumio&#x2F;remote_esp32.py<br>Restart&#x3D;always<br>RestartSec&#x3D;5</p>
-<p>[Install]<br>WantedBy&#x3D;multi-user.target</p>
-<p>‘’’</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[Unit]</span><br><span class="line">Description=ESP32 Volumio Remote Control Service</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">User=volumio</span><br><span class="line">WorkingDirectory=/home/volumio</span><br><span class="line">ExecStart=/usr/bin/python /home/volumio/remote_esp32.py</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=5</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
 <p>ESP32 那边代码如下,主要部分</p>
-<p>‘’’</p>
-<p>sudo systemctl daemon-reload<br>sudo systemctl start esp32_remote.service<br>sudo systemctl status esp32_remote.service</p>
-<p>&#x2F;&#x2F; 初始化 SH1106，I2C 接口<br>U8G2_SH1106_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, &#x2F;* reset&#x3D;<em>&#x2F; U8X8_PIN_NONE,<br>   &#x2F;</em> SCL&#x3D;<em>&#x2F; 5,  &#x2F;&#x2F; 自定义 SCL 引脚<br>  &#x2F;</em> SDA&#x3D;*&#x2F; 4   &#x2F;&#x2F; 自定义 SDA 引脚<br>  );</p>
-<p>&#x2F;&#x2F; 定义按键引脚<br>#define BUTTON_PAUSE 8   &#x2F;&#x2F; GPIO0 连接按键1（暂停）<br>#define BUTTON_PLAY 20    &#x2F;&#x2F; GPIO1 连接按键2（播放）<br>#define BUTTON_NEXT 21    &#x2F;&#x2F; GPIO2 连接按键3（下一首）<br>#define BUTTON_PREV 1   &#x2F;&#x2F; GPIO3 连接按键4（上一首）</p>
-<p>#define BUTTON_SONG1 2   &#x2F;&#x2F; GPIO4 连接按键5（歌曲1）<br>#define BUTTON_SONG2 10   &#x2F;&#x2F; GPIO5 连接按键6（歌曲2）<br>#define BUTTON_SONG3 6   &#x2F;&#x2F; GPIO6 连接按键7（歌曲3）<br>#define BUTTON_SONG4 7   &#x2F;&#x2F; GPIO7 连接按键8（歌曲4）</p>
-<p>&#x2F;&#x2F; 歌曲信息结构体<br>struct SongInfo {<br>  String title;<br>  String prevSong;  &#x2F;&#x2F; 上一首歌曲<br>  String nextSong;  &#x2F;&#x2F; 下一首歌曲<br>  int duration;<br>  int seek;<br>  String status;<br>};</p>
-<p>&#x2F;&#x2F; 命令定义<br>enum Command {<br>  CMD_PLAY,<br>  CMD_PAUSE,<br>  CMD_NEXT,<br>  CMD_PREV,<br>  CMD_PLAY_SONG<br>};</p>
-<p>&#x2F;&#x2F; 按钮状态跟踪（用于防抖）<br>unsigned long lastPressTime &#x3D; 0;<br>const uint16_t DEBOUNCE_DELAY &#x3D; 600; &#x2F;&#x2F; 防抖延迟(ms)</p>
-<p>&#x2F;&#x2F; 添加全局变量用于息屏控制<br>unsigned long lastActiveTime &#x3D; 0; &#x2F;&#x2F; 最后一次活动时间<br>const unsigned long SCREEN_OFF_DELAY &#x3D; 10 * 60 * 1000; &#x2F;&#x2F; 10分钟（毫秒）<br>bool screenOn &#x3D; true; &#x2F;&#x2F; 屏幕状态<br>SongInfo lastInfo;</p>
-<p>&#x2F;&#x2F; 发送命令到串口<br>void sendCommand(Command cmd, int dataLength &#x3D; 0, byte* data &#x3D; nullptr) {<br>  switch(cmd) {<br>    case CMD_PLAY:<br>      Serial.println(“PLAY”);  &#x2F;&#x2F; 使用println自动添加\r\n</p>
-<pre><code>  break;
-case CMD_PAUSE:
-  Serial.println(&quot;PAUSE&quot;);
-
-  break;
-case CMD_NEXT:
-  Serial.println(&quot;NEXT&quot;);
-
-  break;
-case CMD_PREV:
-  Serial.println(&quot;PREV&quot;);
-
-  break;
-case CMD_PLAY_SONG:
-  if(dataLength &gt; 0 &amp;&amp; data != nullptr) &#123;
-    Serial.print(&quot;SONG:&quot;);
-    Serial.println(data[0]);  // 使用println
-
-  &#125;
-  break;
-</code></pre>
-<p>  }</p>
-<p>  delay(20); &#x2F;&#x2F; 给 Linux 足够时间接收<br>  Serial.flush();<br>}</p>
-<p>&#x2F;&#x2F; 关闭屏幕<br>void turnOffScreen() {<br>  u8g2.clearBuffer();<br>  u8g2.sendBuffer();<br>  screenOn &#x3D; false;<br>}</p>
-<p>&#x2F;&#x2F; 打开屏幕<br>void turnOnScreen() {<br>  screenOn &#x3D; true;<br>  &#x2F;&#x2F; 屏幕内容会在下次updateDisplay调用时刷新<br>}</p>
-<p>&#x2F;&#x2F; 修改按键处理函数，返回是否有按键按下<br>bool handleButtonPress() {<br>  &#x2F;&#x2F; 防抖检查<br>  static unsigned long lastPressTime &#x3D; 0;<br>  if (millis() - lastPressTime &lt; DEBOUNCE_DELAY) return false;</p>
-<p>  bool buttonPressed &#x3D; false;</p>
-<p>  &#x2F;&#x2F; 检测按键按下（低电平触发）<br>  if (digitalRead(BUTTON_PLAY) &#x3D;&#x3D; LOW) {<br>    sendCommand(CMD_PLAY);<br>    lastPressTime &#x3D; millis();<br>    buttonPressed &#x3D; true;<br>  }<br>  else if (digitalRead(BUTTON_PAUSE) &#x3D;&#x3D; LOW) {<br>    sendCommand(CMD_PAUSE);<br>    lastPressTime &#x3D; millis();<br>    buttonPressed &#x3D; true;<br>  }<br>  else if (digitalRead(BUTTON_NEXT) &#x3D;&#x3D; LOW) {<br>    sendCommand(CMD_NEXT);<br>    lastPressTime &#x3D; millis();<br>    buttonPressed &#x3D; true;<br>  }<br>  else if (digitalRead(BUTTON_PREV) &#x3D;&#x3D; LOW) {<br>    sendCommand(CMD_PREV);<br>    lastPressTime &#x3D; millis();<br>    buttonPressed &#x3D; true;<br>  }<br>  #if GATEWAY<br>  else if (digitalRead(BUTTON_SONG1) &#x3D;&#x3D; LOW) {<br>    byte songNum &#x3D; 1;<br>    sendCommand(CMD_PLAY_SONG, 1, &amp;songNum);<br>    lastPressTime &#x3D; millis();<br>    buttonPressed &#x3D; true;<br>  }<br>  else if (digitalRead(BUTTON_SONG2) &#x3D;&#x3D; LOW) {<br>    byte songNum &#x3D; 2;<br>    sendCommand(CMD_PLAY_SONG, 1, &amp;songNum);<br>    lastPressTime &#x3D; millis();<br>    buttonPressed &#x3D; true;<br>  }<br>  else if (digitalRead(BUTTON_SONG3) &#x3D;&#x3D; LOW) {<br>    byte songNum &#x3D; 3;<br>    sendCommand(CMD_PLAY_SONG, 1, &amp;songNum);<br>    lastPressTime &#x3D; millis();<br>    buttonPressed &#x3D; true;<br>  }<br>  else if (digitalRead(BUTTON_SONG4) &#x3D;&#x3D; LOW) {<br>    byte songNum &#x3D; 4;<br>    sendCommand(CMD_PLAY_SONG, 1, &amp;songNum);<br>    lastPressTime &#x3D; millis();<br>    buttonPressed &#x3D; true;<br>  }<br>  #endif</p>
-<p>  if (buttonPressed) {<br>    if (!screenOn) turnOnScreen();<br>    lastActiveTime &#x3D; millis();<br>  }</p>
-<p>  return buttonPressed;<br>}</p>
-<p>void setup() {</p>
-<p>  pinMode(BUTTON_PAUSE, INPUT_PULLUP);<br>  pinMode(BUTTON_PLAY, INPUT_PULLUP);<br>  pinMode(BUTTON_NEXT, INPUT_PULLUP);<br>  pinMode(BUTTON_PREV, INPUT_PULLUP);</p>
-<p>  #if  GATEWAY</p>
-<p>  pinMode(BUTTON_SONG1, INPUT_PULLUP);<br>  pinMode(BUTTON_SONG2, INPUT_PULLUP);<br>  pinMode(BUTTON_SONG3, INPUT_PULLUP);<br>  pinMode(BUTTON_SONG4, INPUT_PULLUP);</p>
-<p>  #endif</p>
-<p>  Serial.begin (115200);</p>
-<p>  &#x2F;&#x2F;Mount FS</p>
-<p>  Serial.println(“Mounting FS…”);<br>   if (!SPIFFS.begin(true)) {<br>    &#x2F;&#x2F;Serial.println(“SPIFFS mount failed”);<br>    return;<br>  }</p>
-<p>  u8g2.begin();  &#x2F;&#x2F; 初始化屏幕<br>  u8g2.clearBuffer(); &#x2F;&#x2F; 清空缓冲区<br>  u8g2.setFont(u8g2_font_wqy12_t_gb2312);<br>  u8g2.setContrast(0); &#x2F;&#x2F; 设置对比度 (0-255)</p>
-<p>  &#x2F;&#x2F; 显示初始化界面<br>  u8g2.drawUTF8(0, 15, “等待 Volumio 数据…”);<br>  u8g2.sendBuffer();</p>
-<p>  lastActiveTime &#x3D; millis();</p>
-<p>}</p>
-<p>SongInfo parseJsonFull(String jsonStr) {<br>  SongInfo info;<br>  DynamicJsonDocument doc(2048);<br>  DeserializationError error &#x3D; deserializeJson(doc, jsonStr);</p>
-<p>  if (error) {<br>    &#x2F;&#x2F; 打印错误信息<br>    info.title &#x3D; “数据错误”;<br>    info.prevSong &#x3D; “未知”;<br>    info.nextSong &#x3D; “未知”;<br>    info.duration &#x3D; 1;<br>    info.seek &#x3D; 0;<br>    info.status &#x3D; “stop”;<br>    return info;<br>  }</p>
-<p>  info.title &#x3D; doc[“title”] | “无歌曲”;<br>  info.prevSong &#x3D; doc[“prevSong”] | “无”;<br>  info.nextSong &#x3D; doc[“nextSong”] | “无”;<br>  info.status &#x3D; doc[“status”] | “stop”;<br>  info.duration &#x3D; doc[“duration”] | 1;<br>  info.seek &#x3D; doc[“seek”] | 0;</p>
-<p>  if (info.duration &lt;&#x3D; 0) info.duration &#x3D; 1;<br>  if (info.seek &lt; 0) info.seek &#x3D; 0;<br>  if (info.seek &gt;&#x3D; info.duration) info.seek &#x3D; info.duration - 1;</p>
-<p>  return info;<br>}</p>
-<p>&#x2F;&#x2F; 解析 JSON 数据<br>SongInfo parseJson(String jsonStr) {<br>  SongInfo info;<br>  DynamicJsonDocument doc(2048);<br>  DeserializationError error &#x3D; deserializeJson(doc, jsonStr);</p>
-<p>  if (error) {<br>    info.title &#x3D; “数据错误”;<br>    info.prevSong &#x3D; “未知”;<br>    info.nextSong &#x3D; “未知”;<br>    return info;<br>  }</p>
-<p>  &#x2F;&#x2F; 安全提取字段 (带默认值)<br>  info.title &#x3D; doc[“title”] | “无歌曲”;<br>  info.prevSong &#x3D; doc[“prevSong”] | “无”;<br>  info.nextSong &#x3D; doc[“nextSong”] | “无”;<br>  info.status &#x3D; doc[“status”] | “stop”;<br>  info.duration &#x3D; doc[“duration”] | 1;  &#x2F;&#x2F; 防止除零<br>  info.seek &#x3D; doc[“seek”] | 0;</p>
-<p>  &#x2F;&#x2F; 强制数据有效性<br>  if (info.duration &lt;&#x3D; 0) info.duration &#x3D; 1;<br>  if (info.seek &lt; 0) info.seek &#x3D; 0;<br>  if (info.seek &gt;&#x3D; info.duration) info.seek &#x3D; info.duration - 1;</p>
-<p>  return info;<br>}</p>
-<p>&#x2F;&#x2F; 安全映射函数 (防止 min&#x3D;&#x3D;max 崩溃)<br>int mapSafe(int value, int in_min, int in_max, int out_min, int out_max) {<br>  if (in_min &#x3D;&#x3D; in_max) return out_min;<br>  value &#x3D; constrain(value, in_min, in_max);<br>  return (value - in_min) * (out_max - out_min) &#x2F; (in_max - in_min) + out_min;<br>}</p>
-<p>&#x2F;&#x2F; 更新 OLED 显示 (完整歌曲名，无按键提示)<br>void updateDisplay(const SongInfo &amp;info) {<br>  &#x2F;&#x2F; 如果屏幕是关闭状态，直接返回<br>  if (!screenOn) {<br>    return;<br>  }</p>
-<p>  u8g2.clearBuffer();</p>
-<p>  &#x2F;&#x2F; 1. 显示当前歌曲标题 (使用中文字体，第一行)<br>  u8g2.setFont(u8g2_font_wqy12_t_gb2312);<br>  String displayTitle &#x3D; info.title;<br>  &#x2F;&#x2F; 不进行截断，直接显示完整歌名<br>  u8g2.drawUTF8(0, 12, displayTitle.c_str());</p>
-<p>  &#x2F;&#x2F; 2. 显示上一首歌曲 (使用中文字体，第二行)<br>  String prevSong &#x3D; “前:” + info.prevSong;<br>  &#x2F;&#x2F; 不进行截断，直接显示完整歌名<br>  u8g2.drawUTF8(0, 24, prevSong.c_str());</p>
-<p>  &#x2F;&#x2F; 3. 显示下一首歌曲 (使用中文字体，第三行)<br>  String nextSong &#x3D; “后:” + info.nextSong;<br>  &#x2F;&#x2F; 不进行截断，直接显示完整歌名<br>  u8g2.drawUTF8(0, 36, nextSong.c_str());</p>
-<p>  &#x2F;&#x2F; 4. 绘制进度条<br>  int progressWidth &#x3D; mapSafe(info.seek, 0, info.duration, 0, 128);<br>  u8g2.drawFrame(0, 44, 128, 6);<br>  u8g2.drawBox(0, 44, progressWidth, 6);</p>
-<p>  &#x2F;&#x2F; 5. 显示时间和状态<br>  u8g2.setFont(u8g2_font_5x7_tf); &#x2F;&#x2F; 使用5x7小字体<br>  char timeStr[16];<br>  snprintf(timeStr, sizeof(timeStr), “%02d:%02d&#x2F;%02d:%02d”,<br>           info.seek &#x2F; 60, info.seek % 60,<br>           info.duration &#x2F; 60, info.duration % 60);<br>  u8g2.drawStr(0, 58, timeStr);</p>
-<p>  &#x2F;&#x2F; 播放状态 (使用中文字体)<br>  u8g2.setFont(u8g2_font_wqy12_t_gb2312);<br>  String statusText &#x3D; (info.status &#x3D;&#x3D; “play”) ? “播放” : “暂停”;<br>  u8g2.drawUTF8(80, 58, statusText.c_str());</p>
-<p>  u8g2.sendBuffer();<br>}</p>
-<p>&#x2F;&#x2F; 仅更新进度条和当前播放时间<br>void updateSeekOnly(int seek, int duration) {<br>  &#x2F;&#x2F; 绘制进度条<br>  int progressWidth &#x3D; mapSafe(seek, 0, duration, 0, 128);<br>  u8g2.drawFrame(0, 44, 128, 6);<br>  u8g2.drawBox(0, 44, progressWidth, 6);</p>
-<p>  &#x2F;&#x2F; 更新时间显示<br>  u8g2.setFont(u8g2_font_5x7_tf); &#x2F;&#x2F; 小字体<br>  char timeStr[16];<br>  snprintf(timeStr, sizeof(timeStr), “%02d:%02d&#x2F;%02d:%02d”,<br>           seek &#x2F; 60, seek % 60,<br>           duration &#x2F; 60, duration % 60);<br>  u8g2.drawStr(0, 58, timeStr);</p>
-<p>  &#x2F;&#x2F; 保留播放状态显示<br>  u8g2.setFont(u8g2_font_wqy12_t_gb2312);<br>  String statusText &#x3D; (lastInfo.status &#x3D;&#x3D; “play”) ? “播放” : “暂停”;<br>  u8g2.drawUTF8(80, 58, statusText.c_str());</p>
-<p>  u8g2.sendBuffer();<br>}</p>
-<p>&#x2F;&#x2F; 修改检查息屏的函数<br>void checkScreenTimeout() {<br>  unsigned long currentTime &#x3D; millis();</p>
-<p>  &#x2F;&#x2F; 如果正在播放，保持屏幕开启<br>  if (lastInfo.status &#x3D;&#x3D; “play”) {<br>    if (!screenOn) turnOnScreen();<br>    return;<br>  }</p>
-<p>  &#x2F;&#x2F; 如果是暂停状态，检查是否超时<br>  if (lastInfo.status &#x3D;&#x3D; “pause” || lastInfo.status &#x3D;&#x3D; “stop”) {<br>    if (screenOn &amp;&amp; (currentTime - lastActiveTime &gt; SCREEN_OFF_DELAY)) {<br>      turnOffScreen();<br>    }<br>  }<br>}</p>
-<p>&#x2F;&#x2F; 修改loop函数中的数据处理逻辑<br>void loop() {<br>  if (Serial.available()) {<br>    String line &#x3D; Serial.readStringUntil(‘\n’);<br>    line.trim();<br>    if (line.length() &gt; 0) {<br>      DynamicJsonDocument doc(2048);<br>      DeserializationError err &#x3D; deserializeJson(doc, line);</p>
-<pre><code>  if (!err &amp;&amp; doc.containsKey(&quot;seek&quot;) &amp;&amp; !doc.containsKey(&quot;title&quot;)) &#123;
-    // 进度更新
-    int seek = doc[&quot;seek&quot;];
-    updateSeekOnly(seek, lastInfo.duration);
-    lastInfo.seek = seek;
-  &#125; else &#123;
-    // 完整状态更新
-    SongInfo newInfo = parseJsonFull(line);
-    
-    // 检查状态是否有重要变化
-    bool significantChange = (newInfo.title != lastInfo.title || 
-                             newInfo.status != lastInfo.status);
-    
-    lastInfo = newInfo;
-    updateDisplay(lastInfo);
-    
-    // 只有重要变化才重置息屏计时器
-    if (significantChange) &#123;
-      lastActiveTime = millis();
-    &#125;
-  &#125;
-&#125;
-</code></pre>
-<p>  }</p>
-<p>  &#x2F;&#x2F; 按键操作重置息屏计时器<br>  if (handleButtonPress()) {<br>    lastActiveTime &#x3D; millis();<br>  }</p>
-<p>  checkScreenTimeout();<br>  delay(50);<br>}</p>
-<p>‘’’</p>
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl start esp32_remote.service</span><br><span class="line">sudo systemctl status esp32_remote.service</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 初始化 SH1106，I2C 接口</span><br><span class="line">U8G2_SH1106_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE, </span><br><span class="line">   /* SCL=*/ 5,  // 自定义 SCL 引脚</span><br><span class="line">  /* SDA=*/ 4   // 自定义 SDA 引脚</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 定义按键引脚</span><br><span class="line">#define BUTTON_PAUSE 8   // GPIO0 连接按键1（暂停）</span><br><span class="line">#define BUTTON_PLAY 20    // GPIO1 连接按键2（播放）</span><br><span class="line">#define BUTTON_NEXT 21    // GPIO2 连接按键3（下一首）</span><br><span class="line">#define BUTTON_PREV 1   // GPIO3 连接按键4（上一首）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#define BUTTON_SONG1 2   // GPIO4 连接按键5（歌曲1）</span><br><span class="line">#define BUTTON_SONG2 10   // GPIO5 连接按键6（歌曲2）</span><br><span class="line">#define BUTTON_SONG3 6   // GPIO6 连接按键7（歌曲3）</span><br><span class="line">#define BUTTON_SONG4 7   // GPIO7 连接按键8（歌曲4）</span><br><span class="line"></span><br><span class="line">// 歌曲信息结构体</span><br><span class="line">struct SongInfo &#123;</span><br><span class="line">  String title;</span><br><span class="line">  String prevSong;  // 上一首歌曲</span><br><span class="line">  String nextSong;  // 下一首歌曲</span><br><span class="line">  int duration;</span><br><span class="line">  int seek;</span><br><span class="line">  String status;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 命令定义</span><br><span class="line">enum Command &#123;</span><br><span class="line">  CMD_PLAY,</span><br><span class="line">  CMD_PAUSE, </span><br><span class="line">  CMD_NEXT,</span><br><span class="line">  CMD_PREV,</span><br><span class="line">  CMD_PLAY_SONG</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 按钮状态跟踪（用于防抖）</span><br><span class="line">unsigned long lastPressTime = 0;</span><br><span class="line">const uint16_t DEBOUNCE_DELAY = 600; // 防抖延迟(ms)</span><br><span class="line"></span><br><span class="line">// 添加全局变量用于息屏控制</span><br><span class="line">unsigned long lastActiveTime = 0; // 最后一次活动时间</span><br><span class="line">const unsigned long SCREEN_OFF_DELAY = 10 * 60 * 1000; // 10分钟（毫秒）</span><br><span class="line">bool screenOn = true; // 屏幕状态</span><br><span class="line">SongInfo lastInfo;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 发送命令到串口</span><br><span class="line">void sendCommand(Command cmd, int dataLength = 0, byte* data = nullptr) &#123;</span><br><span class="line">  switch(cmd) &#123;</span><br><span class="line">    case CMD_PLAY:</span><br><span class="line">      Serial.println(&quot;PLAY&quot;);  // 使用println自动添加\r\n</span><br><span class="line"></span><br><span class="line">      break;</span><br><span class="line">    case CMD_PAUSE:</span><br><span class="line">      Serial.println(&quot;PAUSE&quot;);</span><br><span class="line"></span><br><span class="line">      break;</span><br><span class="line">    case CMD_NEXT:</span><br><span class="line">      Serial.println(&quot;NEXT&quot;);</span><br><span class="line"></span><br><span class="line">      break;</span><br><span class="line">    case CMD_PREV:</span><br><span class="line">      Serial.println(&quot;PREV&quot;);</span><br><span class="line"></span><br><span class="line">      break;</span><br><span class="line">    case CMD_PLAY_SONG:</span><br><span class="line">      if(dataLength &gt; 0 &amp;&amp; data != nullptr) &#123;</span><br><span class="line">        Serial.print(&quot;SONG:&quot;);</span><br><span class="line">        Serial.println(data[0]);  // 使用println</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">      break;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  delay(20); // 给 Linux 足够时间接收</span><br><span class="line">  Serial.flush();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 关闭屏幕</span><br><span class="line">void turnOffScreen() &#123;</span><br><span class="line">  u8g2.clearBuffer();</span><br><span class="line">  u8g2.sendBuffer();</span><br><span class="line">  screenOn = false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 打开屏幕</span><br><span class="line">void turnOnScreen() &#123;</span><br><span class="line">  screenOn = true;</span><br><span class="line">  // 屏幕内容会在下次updateDisplay调用时刷新</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 修改按键处理函数，返回是否有按键按下</span><br><span class="line">bool handleButtonPress() &#123;</span><br><span class="line">  // 防抖检查</span><br><span class="line">  static unsigned long lastPressTime = 0;</span><br><span class="line">  if (millis() - lastPressTime &lt; DEBOUNCE_DELAY) return false;</span><br><span class="line">  </span><br><span class="line">  bool buttonPressed = false;</span><br><span class="line">  </span><br><span class="line">  // 检测按键按下（低电平触发）</span><br><span class="line">  if (digitalRead(BUTTON_PLAY) == LOW) &#123;</span><br><span class="line">    sendCommand(CMD_PLAY);</span><br><span class="line">    lastPressTime = millis();</span><br><span class="line">    buttonPressed = true;</span><br><span class="line">  &#125;</span><br><span class="line">  else if (digitalRead(BUTTON_PAUSE) == LOW) &#123;</span><br><span class="line">    sendCommand(CMD_PAUSE);</span><br><span class="line">    lastPressTime = millis();</span><br><span class="line">    buttonPressed = true;</span><br><span class="line">  &#125;</span><br><span class="line">  else if (digitalRead(BUTTON_NEXT) == LOW) &#123;</span><br><span class="line">    sendCommand(CMD_NEXT);</span><br><span class="line">    lastPressTime = millis();</span><br><span class="line">    buttonPressed = true;</span><br><span class="line">  &#125;</span><br><span class="line">  else if (digitalRead(BUTTON_PREV) == LOW) &#123;</span><br><span class="line">    sendCommand(CMD_PREV);</span><br><span class="line">    lastPressTime = millis();</span><br><span class="line">    buttonPressed = true;</span><br><span class="line">  &#125;</span><br><span class="line">  #if GATEWAY</span><br><span class="line">  else if (digitalRead(BUTTON_SONG1) == LOW) &#123;</span><br><span class="line">    byte songNum = 1;</span><br><span class="line">    sendCommand(CMD_PLAY_SONG, 1, &amp;songNum);</span><br><span class="line">    lastPressTime = millis();</span><br><span class="line">    buttonPressed = true;</span><br><span class="line">  &#125;</span><br><span class="line">  else if (digitalRead(BUTTON_SONG2) == LOW) &#123;</span><br><span class="line">    byte songNum = 2;</span><br><span class="line">    sendCommand(CMD_PLAY_SONG, 1, &amp;songNum);</span><br><span class="line">    lastPressTime = millis();</span><br><span class="line">    buttonPressed = true;</span><br><span class="line">  &#125;</span><br><span class="line">  else if (digitalRead(BUTTON_SONG3) == LOW) &#123;</span><br><span class="line">    byte songNum = 3;</span><br><span class="line">    sendCommand(CMD_PLAY_SONG, 1, &amp;songNum);</span><br><span class="line">    lastPressTime = millis();</span><br><span class="line">    buttonPressed = true;</span><br><span class="line">  &#125;</span><br><span class="line">  else if (digitalRead(BUTTON_SONG4) == LOW) &#123;</span><br><span class="line">    byte songNum = 4;</span><br><span class="line">    sendCommand(CMD_PLAY_SONG, 1, &amp;songNum);</span><br><span class="line">    lastPressTime = millis();</span><br><span class="line">    buttonPressed = true;</span><br><span class="line">  &#125;</span><br><span class="line">  #endif</span><br><span class="line">  </span><br><span class="line">  if (buttonPressed) &#123;</span><br><span class="line">    if (!screenOn) turnOnScreen();</span><br><span class="line">    lastActiveTime = millis();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return buttonPressed;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">void setup() &#123;</span><br><span class="line"></span><br><span class="line">  pinMode(BUTTON_PAUSE, INPUT_PULLUP);</span><br><span class="line">  pinMode(BUTTON_PLAY, INPUT_PULLUP);</span><br><span class="line">  pinMode(BUTTON_NEXT, INPUT_PULLUP);</span><br><span class="line">  pinMode(BUTTON_PREV, INPUT_PULLUP);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  #if  GATEWAY</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  pinMode(BUTTON_SONG1, INPUT_PULLUP);</span><br><span class="line">  pinMode(BUTTON_SONG2, INPUT_PULLUP);</span><br><span class="line">  pinMode(BUTTON_SONG3, INPUT_PULLUP);</span><br><span class="line">  pinMode(BUTTON_SONG4, INPUT_PULLUP);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  #endif</span><br><span class="line"></span><br><span class="line">  Serial.begin (115200);</span><br><span class="line"></span><br><span class="line">  //Mount FS</span><br><span class="line">  </span><br><span class="line">  Serial.println(&quot;Mounting FS...&quot;);</span><br><span class="line">   if (!SPIFFS.begin(true)) &#123;</span><br><span class="line">    //Serial.println(&quot;SPIFFS mount failed&quot;);</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  u8g2.begin();  // 初始化屏幕</span><br><span class="line">  u8g2.clearBuffer(); // 清空缓冲区  </span><br><span class="line">  u8g2.setFont(u8g2_font_wqy12_t_gb2312);</span><br><span class="line">  u8g2.setContrast(0); // 设置对比度 (0-255)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  // 显示初始化界面</span><br><span class="line">  u8g2.drawUTF8(0, 15, &quot;等待 Volumio 数据...&quot;);</span><br><span class="line">  u8g2.sendBuffer();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  lastActiveTime = millis();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SongInfo parseJsonFull(String jsonStr) &#123;</span><br><span class="line">  SongInfo info;</span><br><span class="line">  DynamicJsonDocument doc(2048);</span><br><span class="line">  DeserializationError error = deserializeJson(doc, jsonStr);</span><br><span class="line"></span><br><span class="line">  if (error) &#123;</span><br><span class="line">    // 打印错误信息</span><br><span class="line">    info.title = &quot;数据错误&quot;;</span><br><span class="line">    info.prevSong = &quot;未知&quot;;</span><br><span class="line">    info.nextSong = &quot;未知&quot;;</span><br><span class="line">    info.duration = 1;</span><br><span class="line">    info.seek = 0;</span><br><span class="line">    info.status = &quot;stop&quot;;</span><br><span class="line">    return info;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  info.title = doc[&quot;title&quot;] | &quot;无歌曲&quot;;</span><br><span class="line">  info.prevSong = doc[&quot;prevSong&quot;] | &quot;无&quot;;</span><br><span class="line">  info.nextSong = doc[&quot;nextSong&quot;] | &quot;无&quot;;</span><br><span class="line">  info.status = doc[&quot;status&quot;] | &quot;stop&quot;;</span><br><span class="line">  info.duration = doc[&quot;duration&quot;] | 1;</span><br><span class="line">  info.seek = doc[&quot;seek&quot;] | 0;</span><br><span class="line"></span><br><span class="line">  if (info.duration &lt;= 0) info.duration = 1;</span><br><span class="line">  if (info.seek &lt; 0) info.seek = 0;</span><br><span class="line">  if (info.seek &gt;= info.duration) info.seek = info.duration - 1;</span><br><span class="line"></span><br><span class="line">  return info;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 解析 JSON 数据</span><br><span class="line">SongInfo parseJson(String jsonStr) &#123;</span><br><span class="line">  SongInfo info;</span><br><span class="line">  DynamicJsonDocument doc(2048);</span><br><span class="line">  DeserializationError error = deserializeJson(doc, jsonStr);</span><br><span class="line"></span><br><span class="line">  if (error) &#123;</span><br><span class="line">    info.title = &quot;数据错误&quot;;</span><br><span class="line">    info.prevSong = &quot;未知&quot;;</span><br><span class="line">    info.nextSong = &quot;未知&quot;;</span><br><span class="line">    return info;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 安全提取字段 (带默认值)</span><br><span class="line">  info.title = doc[&quot;title&quot;] | &quot;无歌曲&quot;;</span><br><span class="line">  info.prevSong = doc[&quot;prevSong&quot;] | &quot;无&quot;;</span><br><span class="line">  info.nextSong = doc[&quot;nextSong&quot;] | &quot;无&quot;;</span><br><span class="line">  info.status = doc[&quot;status&quot;] | &quot;stop&quot;;</span><br><span class="line">  info.duration = doc[&quot;duration&quot;] | 1;  // 防止除零</span><br><span class="line">  info.seek = doc[&quot;seek&quot;] | 0;</span><br><span class="line"></span><br><span class="line">  // 强制数据有效性</span><br><span class="line">  if (info.duration &lt;= 0) info.duration = 1;</span><br><span class="line">  if (info.seek &lt; 0) info.seek = 0;</span><br><span class="line">  if (info.seek &gt;= info.duration) info.seek = info.duration - 1;</span><br><span class="line"></span><br><span class="line">  return info;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 安全映射函数 (防止 min==max 崩溃)</span><br><span class="line">int mapSafe(int value, int in_min, int in_max, int out_min, int out_max) &#123;</span><br><span class="line">  if (in_min == in_max) return out_min;</span><br><span class="line">  value = constrain(value, in_min, in_max);</span><br><span class="line">  return (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 更新 OLED 显示 (完整歌曲名，无按键提示)</span><br><span class="line">void updateDisplay(const SongInfo &amp;info) &#123;</span><br><span class="line">  // 如果屏幕是关闭状态，直接返回</span><br><span class="line">  if (!screenOn) &#123;</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  u8g2.clearBuffer();</span><br><span class="line">  </span><br><span class="line">  // 1. 显示当前歌曲标题 (使用中文字体，第一行)</span><br><span class="line">  u8g2.setFont(u8g2_font_wqy12_t_gb2312);</span><br><span class="line">  String displayTitle = info.title;</span><br><span class="line">  // 不进行截断，直接显示完整歌名</span><br><span class="line">  u8g2.drawUTF8(0, 12, displayTitle.c_str());</span><br><span class="line"></span><br><span class="line">  // 2. 显示上一首歌曲 (使用中文字体，第二行)</span><br><span class="line">  String prevSong = &quot;前:&quot; + info.prevSong;</span><br><span class="line">  // 不进行截断，直接显示完整歌名</span><br><span class="line">  u8g2.drawUTF8(0, 24, prevSong.c_str());</span><br><span class="line"></span><br><span class="line">  // 3. 显示下一首歌曲 (使用中文字体，第三行)</span><br><span class="line">  String nextSong = &quot;后:&quot; + info.nextSong;</span><br><span class="line">  // 不进行截断，直接显示完整歌名</span><br><span class="line">  u8g2.drawUTF8(0, 36, nextSong.c_str());</span><br><span class="line"></span><br><span class="line">  // 4. 绘制进度条</span><br><span class="line">  int progressWidth = mapSafe(info.seek, 0, info.duration, 0, 128);</span><br><span class="line">  u8g2.drawFrame(0, 44, 128, 6);</span><br><span class="line">  u8g2.drawBox(0, 44, progressWidth, 6);</span><br><span class="line"></span><br><span class="line">  // 5. 显示时间和状态</span><br><span class="line">  u8g2.setFont(u8g2_font_5x7_tf); // 使用5x7小字体</span><br><span class="line">  char timeStr[16];</span><br><span class="line">  snprintf(timeStr, sizeof(timeStr), &quot;%02d:%02d/%02d:%02d&quot;, </span><br><span class="line">           info.seek / 60, info.seek % 60,</span><br><span class="line">           info.duration / 60, info.duration % 60);</span><br><span class="line">  u8g2.drawStr(0, 58, timeStr);</span><br><span class="line">  </span><br><span class="line">  // 播放状态 (使用中文字体)</span><br><span class="line">  u8g2.setFont(u8g2_font_wqy12_t_gb2312);</span><br><span class="line">  String statusText = (info.status == &quot;play&quot;) ? &quot;播放&quot; : &quot;暂停&quot;;</span><br><span class="line">  u8g2.drawUTF8(80, 58, statusText.c_str());</span><br><span class="line"></span><br><span class="line">  u8g2.sendBuffer();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 仅更新进度条和当前播放时间</span><br><span class="line">void updateSeekOnly(int seek, int duration) &#123;</span><br><span class="line">  // 绘制进度条</span><br><span class="line">  int progressWidth = mapSafe(seek, 0, duration, 0, 128);</span><br><span class="line">  u8g2.drawFrame(0, 44, 128, 6);</span><br><span class="line">  u8g2.drawBox(0, 44, progressWidth, 6);</span><br><span class="line"></span><br><span class="line">  // 更新时间显示</span><br><span class="line">  u8g2.setFont(u8g2_font_5x7_tf); // 小字体</span><br><span class="line">  char timeStr[16];</span><br><span class="line">  snprintf(timeStr, sizeof(timeStr), &quot;%02d:%02d/%02d:%02d&quot;,</span><br><span class="line">           seek / 60, seek % 60,</span><br><span class="line">           duration / 60, duration % 60);</span><br><span class="line">  u8g2.drawStr(0, 58, timeStr);</span><br><span class="line"></span><br><span class="line">  // 保留播放状态显示</span><br><span class="line">  u8g2.setFont(u8g2_font_wqy12_t_gb2312);</span><br><span class="line">  String statusText = (lastInfo.status == &quot;play&quot;) ? &quot;播放&quot; : &quot;暂停&quot;;</span><br><span class="line">  u8g2.drawUTF8(80, 58, statusText.c_str());</span><br><span class="line"></span><br><span class="line">  u8g2.sendBuffer();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 修改检查息屏的函数</span><br><span class="line">void checkScreenTimeout() &#123;</span><br><span class="line">  unsigned long currentTime = millis();</span><br><span class="line">  </span><br><span class="line">  // 如果正在播放，保持屏幕开启</span><br><span class="line">  if (lastInfo.status == &quot;play&quot;) &#123;</span><br><span class="line">    if (!screenOn) turnOnScreen();</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  // 如果是暂停状态，检查是否超时</span><br><span class="line">  if (lastInfo.status == &quot;pause&quot; || lastInfo.status == &quot;stop&quot;) &#123;</span><br><span class="line">    if (screenOn &amp;&amp; (currentTime - lastActiveTime &gt; SCREEN_OFF_DELAY)) &#123;</span><br><span class="line">      turnOffScreen();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 修改loop函数中的数据处理逻辑</span><br><span class="line">void loop() &#123;</span><br><span class="line">  if (Serial.available()) &#123;</span><br><span class="line">    String line = Serial.readStringUntil(&#x27;\n&#x27;);</span><br><span class="line">    line.trim();</span><br><span class="line">    if (line.length() &gt; 0) &#123;</span><br><span class="line">      DynamicJsonDocument doc(2048);</span><br><span class="line">      DeserializationError err = deserializeJson(doc, line);</span><br><span class="line">      </span><br><span class="line">      if (!err &amp;&amp; doc.containsKey(&quot;seek&quot;) &amp;&amp; !doc.containsKey(&quot;title&quot;)) &#123;</span><br><span class="line">        // 进度更新</span><br><span class="line">        int seek = doc[&quot;seek&quot;];</span><br><span class="line">        updateSeekOnly(seek, lastInfo.duration);</span><br><span class="line">        lastInfo.seek = seek;</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        // 完整状态更新</span><br><span class="line">        SongInfo newInfo = parseJsonFull(line);</span><br><span class="line">        </span><br><span class="line">        // 检查状态是否有重要变化</span><br><span class="line">        bool significantChange = (newInfo.title != lastInfo.title || </span><br><span class="line">                                 newInfo.status != lastInfo.status);</span><br><span class="line">        </span><br><span class="line">        lastInfo = newInfo;</span><br><span class="line">        updateDisplay(lastInfo);</span><br><span class="line">        </span><br><span class="line">        // 只有重要变化才重置息屏计时器</span><br><span class="line">        if (significantChange) &#123;</span><br><span class="line">          lastActiveTime = millis();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 按键操作重置息屏计时器</span><br><span class="line">  if (handleButtonPress()) &#123;</span><br><span class="line">    lastActiveTime = millis();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  checkScreenTimeout();</span><br><span class="line">  delay(50);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
         </div>
         
           
@@ -843,10 +365,10 @@ case CMD_PLAY_SONG:
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2025-11-01T07:42:21+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2025-11-01T07:48:44+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>last updated at Nov 1, 2025</p>
+    <p>最後更新於 Nov 1, 2025</p>
   </a>
 </div>
 
@@ -919,7 +441,7 @@ case CMD_PLAY_SONG:
                 
                     <section class="next">
                         <span class="art-item-right" aria-hidden="true">
-                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h6>下一頁&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
                                 <a href="/2025/10/31/volumio-q7/" rel="prev" title="volumio运行在Q7 电视盒上">
                                     
@@ -1025,20 +547,6 @@ case CMD_PLAY_SONG:
           
           
             
-  <section class='widget toc-wrapper'>
-    
-<header class='material'>
-  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;TOC</div>
-  
-    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
-  
-</header>
-
-    <div class='content material'>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#coding-utf-8"><span class="toc-text">-- coding: utf-8 --</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%8D%E6%96%B0%E5%8A%A0%E8%BD%BDsys%E5%B9%B6%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E7%BC%96%E7%A0%81"><span class="toc-text">重新加载sys并设置默认编码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%97%A5%E5%BF%97-%E6%8A%91%E5%88%B6-requests-%E5%92%8C-urllib3-%E7%9A%84%E6%97%A5%E5%BF%97"><span class="toc-text">配置日志 - 抑制 requests 和 urllib3 的日志</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%BC%9A%E8%AF%9D%E5%AF%B9%E8%B1%A1%EF%BC%8C%E6%94%AF%E6%8C%81%E8%BF%9E%E6%8E%A5%E5%A4%8D%E7%94%A8"><span class="toc-text">创建会话对象，支持连接复用</span></a></li></ol>
-    </div>
-  </section>
-
 
           
         
@@ -1114,7 +622,7 @@ case CMD_PLAY_SONG:
   <section class='widget category'>
     
 <header class='material'>
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分類</div>
   
     <a class="rightBtn"
     
@@ -1163,7 +671,7 @@ case CMD_PLAY_SONG:
   <section class='widget tagcloud'>
     
 <header class='material'>
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;熱門標籤</div>
   
     <a class="rightBtn"
     
@@ -1234,19 +742,19 @@ case CMD_PLAY_SONG:
     </div>
   
   <br>
-  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+  <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
 </div>
   <div>
-    Use
+    本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
-    as theme
+    作为主题
     
-      , 
-      total visits
+      ，
+      总访问量为
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      times
+      次
     
-    . 
+    。
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -1356,15 +864,15 @@ case CMD_PLAY_SONG:
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "Copied";
-  let COPY_FAILURE = "Copy failed";
+  let COPY_SUCCESS = "複製成功";
+  let COPY_FAILURE = "複製失敗";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>複製</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
